@@ -98,17 +98,17 @@
         </div>
         <div class="field"><label for="email">Email (for your receipt)</label><input id="email" type="email" placeholder="jamie@example.com"></div>
 
-        <!-- Submit -->
+        <!-- Submit — online giving not switched on yet -->
         <div class="give-summary">
-          <button type="button" id="giveBtn" class="btn btn-give btn-lg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-            Donate <span id="giveAmount">$50</span><span id="giveFreq"></span>
+          <button type="button" id="giveBtn" class="btn btn-give btn-lg" disabled aria-describedby="giveSoon">
+            Online giving opens soon
           </button>
           <p class="give-error" id="giveError">Please enter a valid amount.</p>
-          <div class="give-secure">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            Secure payment powered by Stripe
-          </div>
+          <p class="give-soon" id="giveSoon">
+            We're finishing setup on secure online donations. To give today, email
+            <a href="mailto:hello@tysfuturestars.org?subject=I%20would%20like%20to%20donate">hello@tysfuturestars.org</a>
+            and we'll help you right away.
+          </p>
         </div>
       </div>
     </div>
@@ -136,7 +136,10 @@
   </div>
 </section>
 
-<!-- CONFIG: set your Stripe publishable key + function endpoint here (see README) -->
+<!-- CONFIG for when online giving is switched on (see README):
+     1. paste your Stripe publishable key below
+     2. re-enable the button in the markup above
+     3. restore the two Stripe <script> tags noted below -->
 <script>
   window.TYKEEM_CONFIG = {
     // Your Stripe publishable key (starts with pk_test_ or pk_live_).
@@ -146,7 +149,8 @@
     checkoutEndpoint: "/.netlify/functions/create-checkout-session"
   };
 </script>
-<script src="https://js.stripe.com/v3/"></script>
+<!-- Stripe.js is intentionally not loaded while giving is switched off:
+     <script src="https://js.stripe.com/v3/"></script> -->
 <script src="assets/donate.js"></script>
 <script src="assets/main.js"></script>
 </body>

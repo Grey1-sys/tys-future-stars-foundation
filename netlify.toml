@@ -1,17 +1,37 @@
-# Netlify configuration for the Ty's Future Stars Foundation site
-# The site is plain static HTML at the repo root; the only build step is
-# installing dependencies so the serverless function can require "stripe".
+# Netlify configuration for the Ty's Future Stars Foundation site.
+#
+# The site is plain static HTML at the repo root, and online giving is not
+# switched on yet — so there is no build step and no functions to bundle.
+# Deploys are a straight file upload.
+#
+# WHEN YOU TURN ON STRIPE, restore the build + functions config:
+#   [build]
+#     publish = "."
+#     functions = "netlify/functions"
+#     command = "npm install"
+#   [functions]
+#     node_bundler = "esbuild"
+#   [[redirects]]
+#     from = "/api/create-checkout-session"
+#     to = "/.netlify/functions/create-checkout-session"
+#     status = 200
 
 [build]
   publish = "."
-  functions = "netlify/functions"
-  command = "npm install"
 
-[functions]
-  node_bundler = "esbuild"
-
-# Nice short URL: /api/create-checkout-session -> the function
+# Don't publish source/config that isn't part of the website itself.
 [[redirects]]
-  from = "/api/create-checkout-session"
-  to = "/.netlify/functions/create-checkout-session"
-  status = 200
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/api/*"
+  to = "/404.html"
+  status = 404
+
+# Long-cache the logo and photo; they're content-stable.
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

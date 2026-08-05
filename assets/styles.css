@@ -346,6 +346,15 @@ h2.title   { font-size: clamp(2.1rem, 4.2vw, 3.2rem); }
 .give-secure { margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: .82rem; color: var(--ink-soft); }
 .give-error { margin-top: 12px; color: var(--accent-deep); font-size: .88rem; display: none; }
 .give-error.show { display: block; }
+/* Standing note while online giving is switched off */
+.btn[disabled] { opacity: .6; cursor: not-allowed; }
+.btn[disabled]:hover { transform: none; }
+.give-soon {
+  margin-top: 14px; text-align: center; font-size: .9rem; color: var(--ink-mid, var(--ink-soft));
+  line-height: 1.6;
+}
+.give-soon a { color: var(--brand); font-weight: 600; text-decoration: underline; }
+.give-soon a:hover { color: var(--accent-deep); }
 
 .give-aside { background: var(--brand-deep); color: #D3E2F3; border-radius: var(--radius); padding: 34px; position: sticky; top: 100px; }
 .give-aside h3 { color: #fff; font-size: 1.5rem; }

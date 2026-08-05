@@ -60,10 +60,12 @@
   function render() {
     var amt = currentAmount();
     var label = amt ? "$" + amt : "$0";
-    giveAmount.textContent = label;
-    giveFreq.textContent = state.freq === "monthly" ? " / mo" : "";
-    impactLine.innerHTML = impactFor(amt);
-    giveError.classList.remove("show");
+    // The amount/frequency labels live inside the checkout button, which is
+    // absent while online giving is switched off — so guard each one.
+    if (giveAmount) giveAmount.textContent = label;
+    if (giveFreq) giveFreq.textContent = state.freq === "monthly" ? " / mo" : "";
+    if (impactLine) impactLine.innerHTML = impactFor(amt);
+    if (giveError) giveError.classList.remove("show");
   }
 
   // Amount tiles
@@ -96,7 +98,9 @@
     });
   });
 
-  // Submit -> create Checkout Session -> redirect to Stripe
+  // Submit -> create Checkout Session -> redirect to Stripe.
+  // While online giving is switched off the button is disabled in the markup,
+  // so this never fires; it stays wired up for when Stripe is enabled.
   giveBtn.addEventListener("click", function () {
     var amt = currentAmount();
     if (!amt || amt < 1) {
