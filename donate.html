@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate — Ty's Future Stars Foundation</title>
+<meta name="description" content="Make a secure, tax-deductible donation to Ty's Future Stars Foundation.">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand-lockup">
+      <img src="assets/img/logo.jpg" alt="Ty's Future Stars Foundation logo" class="brand-glyph">
+      <span class="brand-word">
+        <span class="bw-1">Ty's</span>
+        <span class="bw-2">Future Stars</span>
+        <span class="bw-3">Foundation</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html" class="navlink">Home</a>
+      <a href="ty-story.html" class="navlink">Ty's Story</a>
+      <a href="about.html" class="navlink">About</a>
+      <a href="programs.html" class="navlink">Programs</a>
+      <a href="get-involved.html" class="navlink">Get Involved</a>
+      <a href="contact.html" class="navlink">Contact</a>
+      <a href="donate.html" class="btn btn-give nav-cta active">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero donate-hero">
+  <span class="blob blob-1"></span>
+  <span class="blob blob-2"></span>
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Donate</div>
+    <span class="eyebrow">Give today</span>
+    <h1 class="display" style="margin-top:14px;max-width:20ch;">Fund a future star.</h1>
+    <p class="lede">Your gift funds scholarships, mentorship, and basketball opportunities for young student-athletes — carrying Ty's legacy forward. Every gift is tax-deductible.</p>
+    <div class="trust-chips">
+      <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure &amp; encrypted</span>
+      <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>Tax-deductible 501(c)(3)</span>
+      <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg>100% to programs</span>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap donate-wrap">
+    <!-- GIVING FORM -->
+    <div class="reveal">
+      <div class="form-card give-card">
+        <div class="give-card-head">
+          <span class="gch-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+          <div>
+            <div class="gch-t">Make your gift</div>
+            <div class="gch-s">Choose an amount and frequency below.</div>
+          </div>
+        </div>
+        <!-- Frequency -->
+        <div class="freq-toggle" role="group" aria-label="Donation frequency">
+          <button type="button" class="active" data-freq="once">One-time</button>
+          <button type="button" data-freq="monthly">Monthly</button>
+        </div>
+
+        <!-- Amounts -->
+        <div class="amount-grid" role="group" aria-label="Donation amount">
+          <button type="button" class="amount-tile" data-amount="25">$25</button>
+          <button type="button" class="amount-tile active" data-amount="50">$50</button>
+          <button type="button" class="amount-tile" data-amount="100">$100</button>
+          <button type="button" class="amount-tile" data-amount="250">$250</button>
+          <button type="button" class="amount-tile" data-amount="500">$500</button>
+          <button type="button" class="amount-tile" data-amount="custom">Other</button>
+        </div>
+        <div class="amount-custom" id="customWrap">
+          <span class="cur">$</span>
+          <input type="number" min="1" step="1" inputmode="decimal" id="customAmount" placeholder="Enter amount" aria-label="Custom amount">
+        </div>
+
+        <!-- Impact line -->
+        <div class="impact-line">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+          <span id="impactLine">Your <strong>$50</strong> gift helps cover gear and court time for a young athlete.</span>
+        </div>
+
+        <!-- Donor details -->
+        <div class="field-legend">Your details</div>
+        <div class="field-row">
+          <div class="field"><label for="firstName">First name</label><input id="firstName" type="text" placeholder="Jamie"></div>
+          <div class="field"><label for="lastName">Last name</label><input id="lastName" type="text" placeholder="Rivera"></div>
+        </div>
+        <div class="field"><label for="email">Email (for your receipt)</label><input id="email" type="email" placeholder="jamie@example.com"></div>
+
+        <!-- Submit -->
+        <div class="give-summary">
+          <button type="button" id="giveBtn" class="btn btn-give btn-lg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            Donate <span id="giveAmount">$50</span><span id="giveFreq"></span>
+          </button>
+          <p class="give-error" id="giveError">Please enter a valid amount.</p>
+          <div class="give-secure">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Secure payment powered by Stripe
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASIDE -->
+    <aside class="give-aside reveal d1">
+      <h3>Why give to Ty's Future Stars?</h3>
+      <div class="ga-row">
+        <span class="ga-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></span>
+        <div><div class="ga-t">$7,000+ awarded</div><div class="ga-s">In scholarships to student-athletes so far.</div></div>
+      </div>
+      <div class="ga-row">
+        <span class="ga-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+        <div><div class="ga-t">Tax-deductible</div><div class="ga-s">A receipt is emailed instantly.</div></div>
+      </div>
+      <div class="ga-row">
+        <span class="ga-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <div><div class="ga-t">Secure &amp; private</div><div class="ga-s">Card details never touch our servers.</div></div>
+      </div>
+      <div class="ga-row">
+        <span class="ga-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span>
+        <div><div class="ga-t">In Ty's honor</div><div class="ga-s">Every gift carries his legacy forward.</div></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- CONFIG: set your Stripe publishable key + function endpoint here (see README) -->
+<script>
+  window.TYKEEM_CONFIG = {
+    // Your Stripe publishable key (starts with pk_test_ or pk_live_).
+    stripePublishableKey: "pk_test_REPLACE_ME",
+    // Endpoint that creates a Checkout Session. Default works on Netlify.
+    // For Vercel use "/api/create-checkout-session".
+    checkoutEndpoint: "/.netlify/functions/create-checkout-session"
+  };
+</script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="assets/donate.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>

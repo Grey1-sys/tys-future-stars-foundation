@@ -1,0 +1,13 @@
+{
+  "name": "tys-future-stars-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing site for Ty's Future Stars Foundation with Stripe Checkout donations.",
+  "scripts": {
+    "dev": "netlify dev",
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "stripe": "^16.0.0"
+  }
+}

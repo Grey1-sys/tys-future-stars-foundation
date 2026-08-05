@@ -1,0 +1,17 @@
+# Netlify configuration for the Ty's Future Stars Foundation site
+# The site is plain static HTML at the repo root; the only build step is
+# installing dependencies so the serverless function can require "stripe".
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+  command = "npm install"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Nice short URL: /api/create-checkout-session -> the function
+[[redirects]]
+  from = "/api/create-checkout-session"
+  to = "/.netlify/functions/create-checkout-session"
+  status = 200
