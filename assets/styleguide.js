@@ -102,7 +102,11 @@
       ["--color-accent",             "--color-surface-page", 3.0],
       ["--color-accent-hover"],
       ["--color-accent-strong",      "--color-surface-page", 4.5],
-      ["--color-accent-soft"]
+      ["--color-accent-soft"],
+      // Dark sections are gradients; worst case is the lightest stop,
+      // which equals --color-brand. These are checked against it.
+      ["--color-accent-on-dark",      "--color-brand", 4.5],
+      ["--color-accent-on-dark-warm", "--color-brand", 3.0]
     ],
     support: [
       ["--color-border"], ["--color-border-subtle"], ["--color-border-strong"],
@@ -119,13 +123,14 @@
     "--palette-navy-abyss", "--palette-navy-deep", "--palette-navy-ink",
     "--palette-navy-mid", "--palette-navy-well", "--palette-navy-rule",
     "--palette-navy-border",
-    "--palette-blue-700", "--palette-blue-600", "--palette-blue-500", "--palette-blue-100",
+    "--palette-blue-700", "--palette-blue-600", "--palette-blue-500", "--palette-blue-300", "--palette-blue-100",
     "--palette-slate-700", "--palette-slate-500", "--palette-slate-450",
     "--palette-slate-400", "--palette-slate-350", "--palette-slate-300",
     "--palette-slate-250", "--palette-slate-200", "--palette-slate-150",
     "--palette-slate-100", "--palette-slate-80", "--palette-slate-60", "--palette-slate-40",
     "--palette-orange-700", "--palette-orange-600", "--palette-orange-500",
-    "--palette-orange-400", "--palette-orange-300", "--palette-orange-150",
+    "--palette-orange-400", "--palette-orange-300", "--palette-orange-250",
+    "--palette-orange-150",
     "--palette-orange-120", "--palette-orange-100",
     "--palette-gold-500", "--palette-gold-700",
     "--palette-white", "--palette-gray-50", "--palette-gray-100",

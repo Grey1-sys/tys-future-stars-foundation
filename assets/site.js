@@ -245,11 +245,11 @@
           '</div>' +
 
           '<div class="footer-col">' +
-            '<h4>Explore</h4>' + explore +
+            '<h2>Explore</h2>' + explore +
           '</div>' +
 
           '<div class="footer-col footer-contact">' +
-            '<h4>Contact</h4>' +
+            '<h2>Contact</h2>' +
             '<a href="mailto:' + esc(ORG.email) + '">' + esc(ORG.email) + '</a>' +
             phoneRow +
             '<address>' + esc(ORG.city) + '</address>' +
@@ -257,7 +257,7 @@
           '</div>' +
 
           '<div class="footer-col">' +
-            '<h4>Newsletter</h4>' +
+            '<h2>Newsletter</h2>' +
             '<p class="footer-about">Occasional updates on scholarships, ' +
               'events, and the young people you help support.</p>' +
             '<form class="footer-news" data-demo-form>' +

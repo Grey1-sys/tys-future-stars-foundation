@@ -43,6 +43,7 @@
   --palette-blue-700:     #1B4F9C;
   --palette-blue-600:     #1F75B7;
   --palette-blue-500:     #4A9FE0;
+  --palette-blue-300:     #A8D1F0;
   --palette-blue-100:     #E8F1FB;
 
   /* Slate — the tint ladder used for text on navy */
@@ -66,6 +67,7 @@
   --palette-orange-500:   #D14E10;
   --palette-orange-400:   #F26522;
   --palette-orange-300:   #F79557;
+  --palette-orange-250:   #F9B595;
   --palette-orange-150:   #FCE7DE;
   --palette-orange-120:   #FDE6D9;
   --palette-orange-100:   #FBDFCE;
@@ -141,6 +143,11 @@
   --color-brand-light:         var(--palette-blue-500);
   /* Light-blue is AA-failing on white (2.87:1) — use -strong there */
   --color-brand-light-strong:  var(--palette-blue-600);
+  /* Dark sections are gradients whose LIGHTEST stop is --palette-blue-700.
+     --color-brand-light only reaches 2.77:1 there, so small text and
+     accents over a gradient use these lifted tints instead. */
+  --color-accent-on-dark:      var(--palette-blue-300);
+  --color-accent-on-dark-warm: var(--palette-orange-250);
 
   /* ---- Accent / giving ---- */
   --color-accent:              var(--palette-orange-400);

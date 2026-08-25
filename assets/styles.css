@@ -155,9 +155,21 @@ button { cursor: pointer; }
   .split.flip .split-media { order: -1; }
 }
 
-/* ---------- Type helpers ---------- */
-h1.display { font-size: var(--text-display-xl); }
-h2.title   { font-size: var(--text-display-md); }
+/* ---------- Type helpers ----------
+   .display and .title carry the heading look without requiring a
+   specific tag, so heading LEVEL can follow document structure while
+   SIZE follows the design. */
+.display, .title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-normal);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+}
+.display { font-size: var(--text-display-xl); }
+.title   { font-size: var(--text-display-md); }
 
 .lede {
   font-size: var(--text-3xl);
@@ -193,7 +205,8 @@ h2.title   { font-size: var(--text-display-md); }
   border-radius: var(--space-0-5);
 }
 .brand-fill .eyebrow,
-.hero.dark .eyebrow { color: var(--color-brand-light); }
+.hero.dark .eyebrow,
+.cta-band .eyebrow { color: var(--color-accent-on-dark); }
 
 /* ---------- Buttons ----------
    .btn-primary   solid orange, the giving / conversion action
@@ -319,7 +332,9 @@ h2.title   { font-size: var(--text-display-md); }
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: var(--color-text-accent-strong);
+  /* --color-text-accent-strong on this surface measures 4.09:1, under
+     AA. The deepest orange clears it at 5.21:1. */
+  color: var(--color-danger);
   background: var(--color-accent-soft);
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-pill);
@@ -751,7 +766,7 @@ body.nav-open { overflow: hidden; }
   font-size: var(--text-lg);
   max-width: var(--measure-tight);
 }
-.footer h4 {
+.footer h4, .footer-col h2 {
   font-family: var(--font-body);
   font-weight: var(--weight-bold);
   font-size: var(--text-sm);
@@ -1255,7 +1270,7 @@ body.nav-open { overflow: hidden; }
   position: sticky;
   top: calc(var(--nav-height) + var(--space-3-5));
 }
-.give-aside h3 { color: var(--color-text-on-dark-strong); font-size: var(--text-5xl); }
+.give-aside h3, .give-aside h2 { color: var(--color-text-on-dark-strong); font-size: var(--text-5xl); }
 .give-aside .ga-row {
   display: flex;
   gap: var(--space-3-5);
@@ -1504,7 +1519,7 @@ body.nav-open { overflow: hidden; }
 .serif-accent { color: var(--color-brand-light-strong); }
 .hero.dark .serif-accent,
 .brand-fill .serif-accent,
-.cta-band .serif-accent { color: var(--color-accent); }
+.cta-band .serif-accent { color: var(--color-accent-on-dark-warm); }
 
 /* Script-style motto line */
 .motto {
@@ -1515,4 +1530,4 @@ body.nav-open { overflow: hidden; }
 }
 .hero.dark .motto,
 .brand-fill .motto,
-.cta-band .motto { color: var(--color-brand-light); }
+.cta-band .motto { color: var(--color-accent-on-dark); }
