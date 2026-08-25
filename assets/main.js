@@ -1,29 +1,12 @@
-/* Ty's Future Stars Foundation — shared interactions */
+/* ===================================================================
+   TY'S FUTURE STARS FOUNDATION — Page interactions
+   ===================================================================
+   Header, footer, and all navigation behavior live in assets/site.js.
+   This file handles page-level behavior only. Load it after site.js
+   so the injected chrome is present in the DOM.
+=================================================================== */
 (function () {
-  // ---- Sticky nav shadow on scroll ----
-  var nav = document.querySelector('.nav');
-  if (nav) {
-    var onScroll = function () {
-      nav.classList.toggle('scrolled', window.scrollY > 12);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  // ---- Mobile menu ----
-  var toggle = document.querySelector('.nav-toggle');
-  var links = document.querySelector('.nav-links');
-  if (toggle && links) {
-    toggle.addEventListener('click', function () {
-      links.classList.toggle('open');
-    });
-    links.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { links.classList.remove('open'); });
-    });
-    document.addEventListener('click', function (e) {
-      if (!links.contains(e.target) && !toggle.contains(e.target)) links.classList.remove('open');
-    });
-  }
+  "use strict";
 
   // ---- Reveal on scroll ----
   var revealEls = document.querySelectorAll('.reveal');
@@ -41,20 +24,22 @@
     revealEls.forEach(function (el) { el.classList.add('visible'); });
   }
 
-  // ---- Footer year ----
-  var y = document.querySelector('[data-year]');
-  if (y) y.textContent = new Date().getFullYear();
-
-  // ---- Simple non-backend forms (contact / newsletter / volunteer) ----
+  // ---- Front-end-only forms (contact / volunteer / newsletter) ----
+  // These have no backend yet. Rather than claiming a message was sent,
+  // say plainly that the form isn't live and give a route that works.
+  // Remove this handler once the forms POST somewhere real.
   document.querySelectorAll('form[data-demo-form]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var note = form.querySelector('[data-form-note]');
       if (note) {
-        note.textContent = 'Thanks — this is a demo form. Wire it to your email service or backend to receive submissions.';
-        note.style.color = 'var(--color-brand-deep)';
+        note.innerHTML =
+          'This form isn’t connected yet — your message was not sent. ' +
+          'Please email <a href="mailto:hello@tysfuturestars.org">' +
+          'hello@tysfuturestars.org</a> and we’ll reply within 1–2 business days.';
+        note.setAttribute('role', 'alert');
+        note.style.color = 'var(--color-danger)';
       }
-      form.reset();
     });
   });
 })();

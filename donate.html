@@ -14,28 +14,10 @@
 </head>
 <body>
 
-<nav class="nav">
-  <div class="wrap">
-    <a href="index.html" class="brand-lockup">
-      <img src="assets/img/logo.jpg" alt="Ty's Future Stars Foundation logo" class="brand-glyph">
-      <span class="brand-word">
-        <span class="bw-1">Ty's</span>
-        <span class="bw-2">Future Stars</span>
-        <span class="bw-3">Foundation</span>
-      </span>
-    </a>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    <div class="nav-links">
-      <a href="index.html" class="navlink">Home</a>
-      <a href="ty-story.html" class="navlink">Ty's Story</a>
-      <a href="about.html" class="navlink">About</a>
-      <a href="programs.html" class="navlink">Programs</a>
-      <a href="get-involved.html" class="navlink">Get Involved</a>
-      <a href="contact.html" class="navlink">Contact</a>
-      <a href="donate.html" class="btn btn-primary nav-cta active">Donate</a>
-    </div>
-  </div>
-</nav>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header"></div>
+
+<main id="main">
 
 <header class="page-hero donate-hero">
   <span class="blob blob-1"></span>
@@ -137,6 +119,10 @@
   </div>
 </section>
 
+</main>
+
+<div id="site-footer"></div>
+
 <!-- CONFIG for when online giving is switched on (see README):
      1. paste your Stripe publishable key below
      2. re-enable the button in the markup above
@@ -153,6 +139,7 @@
 <!-- Stripe.js is intentionally not loaded while giving is switched off:
      <script src="https://js.stripe.com/v3/"></script> -->
 <script src="assets/donate.js"></script>
+<script src="assets/site.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>

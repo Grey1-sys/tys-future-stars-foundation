@@ -559,11 +559,13 @@ h2.title   { font-size: var(--text-display-md); }
 }
 /* Current page indicator — color plus an underline bar, so the cue
    does not rely on color alone. */
-.navlink[aria-current="page"] {
+.navlink[aria-current="page"],
+.navlink.is-current-section {
   color: var(--color-brand-deep);
   font-weight: var(--weight-semibold);
 }
-.navlink[aria-current="page"]::after {
+.navlink[aria-current="page"]::after,
+.navlink.is-current-section::after {
   content: "";
   position: absolute;
   left: var(--space-3-5);
@@ -573,7 +575,8 @@ h2.title   { font-size: var(--text-display-md); }
   border-radius: var(--space-0-5);
   background: var(--color-accent);
 }
-.nav-item > .navlink[aria-current="page"] { position: relative; }
+.nav-item > .navlink[aria-current="page"],
+.nav-item > .navlink.is-current-section { position: relative; }
 
 .navlink .chev {
   width: var(--space-3-5);
@@ -700,7 +703,8 @@ body.nav-open { overflow: hidden; }
     padding: var(--space-3) var(--space-3-5);
     font-size: var(--text-2xl);
   }
-  .navlink[aria-current="page"]::after {
+  .navlink[aria-current="page"]::after,
+  .navlink.is-current-section::after {
     left: var(--space-3-5);
     right: auto;
     width: var(--space-6);
