@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Styleguide — Ty's Future Stars Foundation</title>
+<meta name="description" content="Internal design system reference: every token and every component primitive.">
+<!-- Internal reference page. Not linked from the site and not indexed. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styleguide.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header"></div>
+
+<main id="main">
+
+<header class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Internal reference</span>
+    <h1 class="display mt-1">Design system</h1>
+    <p class="lede mt-2">Every design token and every component primitive on one page.
+      Build new pages from what is shown here — if something you need is missing,
+      add it to <code>assets/tokens.css</code> and document it below rather than
+      writing a one-off value.</p>
+  </div>
+</header>
+
+<nav class="sg-nav" aria-label="Styleguide sections">
+  <div class="wrap">
+    <a href="#color">Color</a>
+    <a href="#type">Typography</a>
+    <a href="#space">Spacing</a>
+    <a href="#radius">Radius</a>
+    <a href="#shadow">Shadow</a>
+    <a href="#layout">Layout</a>
+    <a href="#buttons">Buttons</a>
+    <a href="#cards">Cards</a>
+    <a href="#eyebrow">Eyebrow</a>
+    <a href="#stats">Stats</a>
+    <a href="#badges">Badges</a>
+    <a href="#forms">Forms</a>
+    <a href="#sections">Sections</a>
+  </div>
+</nav>
+
+<!-- ============================== COLOR ============================== -->
+<section class="sg-section" id="color">
+  <div class="wrap">
+    <h2>Color</h2>
+    <p class="sg-lede">Three layers. Components reference <strong>semantic aliases only</strong> —
+      the raw palette carries a value but no meaning. Contrast ratios below are
+      measured live in the browser against the surface each token is designed to sit on.</p>
+
+    <h3 class="sg-sub">Semantic — text</h3>
+    <div class="sg-swatches" data-swatches="text"></div>
+
+    <h3 class="sg-sub">Semantic — surfaces</h3>
+    <div class="sg-swatches" data-swatches="surface"></div>
+
+    <h3 class="sg-sub">Semantic — brand &amp; accent</h3>
+    <div class="sg-swatches" data-swatches="brand"></div>
+
+    <h3 class="sg-sub">Semantic — borders &amp; feedback</h3>
+    <div class="sg-swatches" data-swatches="support"></div>
+
+    <div class="sg-note">
+      <strong>Accent rule.</strong> <code>--color-accent</code> (#F26522) measures 3.15:1 on
+      white — it clears AA for large text only (24px+, or 19px+ bold) and for
+      non-text surfaces. Any control with a white label, and any accent text at
+      body size, must use <code>--color-accent-strong</code> (4.91:1). The same split
+      applies to <code>--color-brand-light</code> vs <code>--color-brand-light-strong</code>.
+    </div>
+
+    <h3 class="sg-sub">Raw palette</h3>
+    <div class="sg-swatches" data-swatches="palette"></div>
+  </div>
+</section>
+
+<!-- ============================== TYPE ============================== -->
+<section class="sg-section" id="type">
+  <div class="wrap">
+    <h2>Typography</h2>
+    <p class="sg-lede">Two families and a 12-step scale. Headings are Anton and always
+      uppercase; body copy is Inter at <code>--text-2xl</code> (17px).</p>
+
+    <h3 class="sg-sub">Families</h3>
+    <div class="sg-row">
+      <div class="sg-token">--font-display</div>
+      <div style="font-family:var(--font-display);font-size:var(--text-6xl);line-height:1.1;">Building Futures</div>
+    </div>
+    <div class="sg-row">
+      <div class="sg-token">--font-body</div>
+      <div style="font-family:var(--font-body);font-size:var(--text-4xl);">Building futures through basketball</div>
+    </div>
+    <div class="sg-row">
+      <div class="sg-token">--font-quote</div>
+      <div style="font-family:var(--font-quote);font-style:italic;font-size:var(--text-4xl);">Together, we can be the change.</div>
+    </div>
+
+    <h3 class="sg-sub">Scale</h3>
+    <div data-typescale></div>
+
+    <h3 class="sg-sub">Fluid display sizes</h3>
+    <div data-displayscale></div>
+
+    <h3 class="sg-sub">Headings in context</h3>
+    <div class="sg-demo sg-demo-block">
+      <h1 class="display">Heading level one</h1>
+      <h2 class="title" style="margin-top:var(--space-5);">Heading level two</h2>
+      <h3 style="margin-top:var(--space-5);font-size:var(--text-4xl);">Heading level three</h3>
+      <p class="lede" style="margin-top:var(--space-5);">A lede paragraph introduces the section and
+        sits at <code>--text-3xl</code> in secondary ink.</p>
+      <p style="margin-top:var(--space-4);">Body copy runs at <code>--text-2xl</code> with
+        <code>--leading-body</code>, constrained to <code>--measure-body</code> for readability.</p>
+    </div>
+
+    <h3 class="sg-sub">Weight, leading, tracking</h3>
+    <div data-typemeta></div>
+  </div>
+</section>
+
+<!-- ============================== SPACING ============================== -->
+<section class="sg-section" id="space">
+  <div class="wrap">
+    <h2>Spacing</h2>
+    <p class="sg-lede">A 4px grid. Every margin, padding, and gap comes from this scale —
+      no ad-hoc values.</p>
+    <div data-spacescale></div>
+
+    <h3 class="sg-sub">Fluid spacing</h3>
+    <div data-fluidspace></div>
+  </div>
+</section>
+
+<!-- ============================== RADIUS ============================== -->
+<section class="sg-section" id="radius">
+  <div class="wrap">
+    <h2>Radius</h2>
+    <div class="sg-boxes" data-radius></div>
+  </div>
+</section>
+
+<!-- ============================== SHADOW ============================== -->
+<section class="sg-section" id="shadow">
+  <div class="wrap">
+    <h2>Shadow</h2>
+    <div class="sg-boxes" data-shadow></div>
+  </div>
+</section>
+
+<!-- ============================== LAYOUT ============================== -->
+<section class="sg-section" id="layout">
+  <div class="wrap">
+    <h2>Layout &amp; motion</h2>
+    <div data-layout></div>
+  </div>
+</section>
+
+<!-- ============================== BUTTONS ============================== -->
+<section class="sg-section" id="buttons">
+  <div class="wrap">
+    <h2>Buttons</h2>
+    <p class="sg-lede"><code>.btn</code> plus one variant. <code>.btn-primary</code> is the giving
+      and conversion action and should appear once per view; <code>.btn-secondary</code> is the
+      standard action; <code>.btn-ghost</code> is low emphasis.</p>
+
+    <h3 class="sg-sub">On light surfaces</h3>
+    <div class="sg-demo">
+      <a href="#buttons" class="btn btn-primary">Donate now</a>
+      <a href="#buttons" class="btn btn-secondary">Read Ty's story</a>
+      <a href="#buttons" class="btn btn-ghost">Learn more</a>
+      <button type="button" class="btn btn-primary" disabled>Disabled</button>
+    </div>
+    <p class="sg-caption">.btn-primary · .btn-secondary · .btn-ghost · [disabled]</p>
+
+    <h3 class="sg-sub">Large</h3>
+    <div class="sg-demo">
+      <a href="#buttons" class="btn btn-primary btn-lg">Donate now</a>
+      <a href="#buttons" class="btn btn-secondary btn-lg">Get involved</a>
+    </div>
+    <p class="sg-caption">.btn-lg</p>
+
+    <h3 class="sg-sub">On navy surfaces</h3>
+    <div class="sg-demo sg-demo-dark">
+      <a href="#buttons" class="btn btn-primary">Donate now</a>
+      <a href="#buttons" class="btn btn-on-dark">Our programs</a>
+      <a href="#buttons" class="btn btn-ghost-inverse">Volunteer</a>
+    </div>
+    <p class="sg-caption">.btn-on-dark · .btn-ghost-inverse</p>
+
+    <h3 class="sg-sub">With an icon</h3>
+    <div class="sg-demo">
+      <a href="#buttons" class="btn btn-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Continue
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CARDS ============================== -->
+<section class="sg-section" id="cards">
+  <div class="wrap">
+    <h2>Card</h2>
+    <p class="sg-lede">Add <code>.hover</code> for the lift-and-shadow interaction. Use it only
+      when the whole card leads somewhere.</p>
+    <div class="grid grid-3" style="margin-top:var(--space-6);">
+      <div class="card hover">
+        <div class="card-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <h3>Scholarships</h3>
+        <p>Direct financial support for student-athletes pursuing education beyond high school.</p>
+        <a class="card-link" href="#cards">Learn more
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="card">
+        <div class="card-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        <h3>Mentorship</h3>
+        <p>Pairing young people with adults who show up consistently, on and off the court.</p>
+      </div>
+      <div class="card">
+        <div class="card-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20M2 12h20"/></svg>
+        </div>
+        <h3>Development</h3>
+        <p>Skills clinics, court time, and gear for athletes who would otherwise go without.</p>
+      </div>
+    </div>
+    <p class="sg-caption">.card / .card.hover — .card-ic, .card-link</p>
+  </div>
+</section>
+
+<!-- ============================== EYEBROW ============================== -->
+<section class="sg-section" id="eyebrow">
+  <div class="wrap">
+    <h2>Eyebrow label</h2>
+    <p class="sg-lede">A short kicker that always immediately precedes a heading. Never use it alone.</p>
+    <div class="sg-demo sg-demo-block">
+      <span class="eyebrow">Our mission</span>
+      <h2 class="title" style="margin-top:var(--space-3);">Empowering youth through basketball.</h2>
+    </div>
+    <div class="sg-demo sg-demo-dark sg-demo-block" style="margin-top:var(--space-4);">
+      <span class="eyebrow">What we do</span>
+      <h2 class="title" style="margin-top:var(--space-3);color:var(--color-text-on-dark-strong);">Educate. Empower. Inspire.</h2>
+    </div>
+    <p class="sg-caption">.eyebrow — recolors automatically inside .brand-fill and .hero.dark</p>
+  </div>
+</section>
+
+<!-- ============================== STATS ============================== -->
+<section class="sg-section" id="stats">
+  <div class="wrap">
+    <h2>Stat block</h2>
+    <div class="sg-note">
+      <strong>Figures must be real.</strong> Never place an invented number in a stat block.
+      The values below are shape-only placeholders for this reference page.
+    </div>
+    <div class="sg-demo sg-demo-block" style="margin-top:var(--space-5);">
+      <div class="stat-band">
+        <div class="stat"><div class="stat-n">000</div><div class="stat-l">Athletes supported</div></div>
+        <div class="stat"><div class="stat-n">000</div><div class="stat-l">Scholarships awarded</div></div>
+        <div class="stat"><div class="stat-n">000</div><div class="stat-l">Volunteer hours</div></div>
+        <div class="stat"><div class="stat-n">000</div><div class="stat-l">Events hosted</div></div>
+      </div>
+    </div>
+    <div class="sg-demo sg-demo-dark sg-demo-block" style="margin-top:var(--space-4);">
+      <div class="stat-band">
+        <div class="stat"><div class="stat-n">000</div><div class="stat-l">Athletes supported</div></div>
+        <div class="stat"><div class="stat-n">000</div><div class="stat-l">Scholarships awarded</div></div>
+        <div class="stat"><div class="stat-n">000</div><div class="stat-l">Volunteer hours</div></div>
+        <div class="stat"><div class="stat-n">000</div><div class="stat-l">Events hosted</div></div>
+      </div>
+    </div>
+    <p class="sg-caption">.stat-band > .stat — .stat-n, .stat-l</p>
+  </div>
+</section>
+
+<!-- ============================== BADGES ============================== -->
+<section class="sg-section" id="badges">
+  <div class="wrap">
+    <h2>Badge</h2>
+    <div class="sg-demo">
+      <span class="badge">Program 01</span>
+      <span class="badge badge-brand">Scholarship</span>
+      <span class="badge-solid">Stop the Gun Violence</span>
+    </div>
+    <p class="sg-caption">.badge · .badge.badge-brand · .badge-solid</p>
+  </div>
+</section>
+
+<!-- ============================== FORMS ============================== -->
+<section class="sg-section" id="forms">
+  <div class="wrap">
+    <h2>Form field</h2>
+    <p class="sg-lede">Every control has a real <code>&lt;label&gt;</code>. Errors are conveyed by
+      text and an icon, never by color alone, and the control carries
+      <code>aria-invalid="true"</code> with <code>aria-describedby</code> pointing at the message.</p>
+
+    <div class="split" style="align-items:start;margin-top:var(--space-6);">
+
+      <div class="form-card">
+        <div class="field-legend">Default state</div>
+        <div class="field-row">
+          <div class="field">
+            <label for="sg-first">First name</label>
+            <input id="sg-first" type="text" placeholder="Jamie">
+          </div>
+          <div class="field">
+            <label for="sg-last">Last name</label>
+            <input id="sg-last" type="text" placeholder="Rivera">
+          </div>
+        </div>
+        <div class="field">
+          <label for="sg-email">Email</label>
+          <input id="sg-email" type="email" placeholder="jamie@example.com">
+        </div>
+        <div class="field">
+          <label for="sg-subject">Subject</label>
+          <select id="sg-subject">
+            <option>General question</option>
+            <option>Scholarship inquiry</option>
+            <option>Partnership</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="sg-msg">Message</label>
+          <textarea id="sg-msg" placeholder="How can we help?"></textarea>
+        </div>
+        <p class="form-note">Typical reply time: 1–2 business days.</p>
+      </div>
+
+      <div class="form-card">
+        <div class="field-legend">Error state</div>
+        <div class="field is-error">
+          <label for="sg-email-err">Email</label>
+          <input id="sg-email-err" type="email" value="jamie@example"
+                 aria-invalid="true" aria-describedby="sg-email-err-msg">
+          <p class="field-error" id="sg-email-err-msg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16h.01"/></svg>
+            Enter a complete email address, like jamie@example.com.
+          </p>
+        </div>
+        <div class="field is-error">
+          <label for="sg-msg-err">Message</label>
+          <textarea id="sg-msg-err" aria-invalid="true" aria-describedby="sg-msg-err-msg"></textarea>
+          <p class="field-error" id="sg-msg-err-msg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16h.01"/></svg>
+            Tell us a little about what you need.
+          </p>
+        </div>
+        <button type="button" class="btn btn-secondary mt-2" style="width:100%;">Send message</button>
+      </div>
+
+    </div>
+    <p class="sg-caption">.form-card · .field · .field-row · .field-legend · .field.is-error · .field-error · .form-note</p>
+  </div>
+</section>
+
+<!-- ============================== SECTIONS ============================== -->
+<section class="sg-section" id="sections">
+  <div class="wrap">
+    <h2>Section wrapper</h2>
+    <p class="sg-lede"><code>.section</code> supplies the vertical rhythm; <code>.wrap</code> supplies
+      the max width and gutters. Three surface variants.</p>
+  </div>
+
+  <div class="section" style="border:1px dashed var(--color-border);margin-top:var(--space-6);">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Default surface</span>
+        <h2 class="title">.section</h2>
+        <p class="lede" style="margin-inline:auto;">White page surface with standard vertical rhythm.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section soft" style="margin-top:var(--space-4);">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Subtle surface</span>
+        <h2 class="title">.section.soft</h2>
+        <p class="lede" style="margin-inline:auto;">Light wash, used to separate adjacent sections.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section brand-fill" style="margin-top:var(--space-4);">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Dark surface</span>
+        <h2 class="title">.section.brand-fill</h2>
+        <p class="lede" style="margin-inline:auto;color:var(--color-text-on-dark-soft);">Navy fill. Text colors and eyebrows invert automatically.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="margin-top:var(--space-10);">
+    <h3 class="sg-sub">CTA band</h3>
+    <div class="cta-band">
+      <span class="eyebrow">Foundation motto</span>
+      <h2 class="title mt-1">Building Futures Through Basketball.</h2>
+      <p>Every scholarship awarded and every young person mentored reflects the values Ty embodied.</p>
+      <div class="hero-actions">
+        <a href="#sections" class="btn btn-primary btn-lg">Donate today</a>
+        <a href="#sections" class="btn btn-ghost-inverse btn-lg">Join our mission</a>
+      </div>
+      <p class="motto" style="margin-top:var(--space-6-5);">Together, we can be the change.</p>
+    </div>
+    <p class="sg-caption">.cta-band</p>
+  </div>
+</section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/site.js"></script>
+<script src="assets/main.js"></script>
+<script src="assets/styleguide.js"></script>
+</body>
+</html>
