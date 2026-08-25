@@ -52,7 +52,7 @@
       var note = form.querySelector('[data-form-note]');
       if (note) {
         note.textContent = 'Thanks — this is a demo form. Wire it to your email service or backend to receive submissions.';
-        note.style.color = 'var(--brand-deep)';
+        note.style.color = 'var(--color-brand-deep)';
       }
       form.reset();
     });

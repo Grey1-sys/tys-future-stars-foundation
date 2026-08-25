@@ -1,0 +1,329 @@
+/* ===================================================================
+   TY'S FUTURE STARS FOUNDATION — DESIGN TOKENS
+   ===================================================================
+   Single source of truth for every color, size, space, radius, and
+   shadow on the site. Nothing below this file should contain a raw
+   hex code, a one-off px font-size, or an ad-hoc spacing value.
+
+   HOW TO USE THIS FILE
+   --------------------
+   Layer 1  RAW PALETTE      Named pigments. Never reference these
+                             directly from a component — they carry no
+                             meaning, only a value.
+   Layer 2  SEMANTIC ALIASES Intent-based names (--color-text-primary).
+                             THIS is what components reference.
+   Layer 3  SCALES           Type, spacing, radius, shadow, layout,
+                             motion. Pick a step; never invent a value.
+
+   Adding a page? You should be able to build it referencing only
+   Layer 2 and Layer 3. If you find yourself needing a raw hex, the
+   token set is missing something — add it here, not inline.
+
+   Brand: deep navy + basketball orange + light blue, from the
+   foundation logo. "Building Futures Through Basketball."
+=================================================================== */
+
+:root {
+
+  /* =================================================================
+     LAYER 1 — RAW PALETTE
+     Pigments only. Do not reference outside this file.
+     ================================================================= */
+
+  /* Navy — the foundation's primary darks */
+  --palette-navy-abyss:   #061428;
+  --palette-navy-deep:    #0A1E3F;
+  --palette-navy-ink:     #0E1E3A;
+  --palette-navy-mid:     #123566;
+  --palette-navy-well:    #15294A;
+  --palette-navy-rule:    #22375C;
+  --palette-navy-border:  #25406B;
+
+  /* Blue — brand and logo accent */
+  --palette-blue-700:     #1B4F9C;
+  --palette-blue-600:     #1F75B7;
+  --palette-blue-500:     #4A9FE0;
+  --palette-blue-100:     #E8F1FB;
+
+  /* Slate — the tint ladder used for text on navy */
+  --palette-slate-700:    #5A6B85;
+  --palette-slate-500:    #7C90AC;
+  --palette-slate-450:    #8496B0;
+  --palette-slate-400:    #9FB6D4;
+  --palette-slate-350:    #A9BBD3;
+  --palette-slate-300:    #A9C4E4;
+  --palette-slate-250:    #B3C2D6;
+  --palette-slate-200:    #B3C7E2;
+  --palette-slate-150:    #C3D0E2;
+  --palette-slate-100:    #C7D9EF;
+  --palette-slate-80:     #D3E2F3;
+  --palette-slate-60:     #DCE8F7;
+  --palette-slate-40:     #E4EDF9;
+
+  /* Orange — basketball accent, giving and CTA */
+  --palette-orange-700:   #A93D0A;
+  --palette-orange-600:   #C5470C;
+  --palette-orange-500:   #D14E10;
+  --palette-orange-400:   #F26522;
+  --palette-orange-300:   #F79557;
+  --palette-orange-150:   #FCE7DE;
+  --palette-orange-120:   #FDE6D9;
+  --palette-orange-100:   #FBDFCE;
+
+  /* Gold — tertiary, team/avatar variation only */
+  --palette-gold-500:     #E0A73C;
+  --palette-gold-700:     #B67D1E;
+
+  /* Neutrals */
+  --palette-white:        #FFFFFF;
+  --palette-gray-50:      #F2F5FA;
+  --palette-gray-100:     #EDF1F7;
+  --palette-gray-200:     #DFE6EF;
+  --palette-silver:       #C9D3DF;
+
+  /* Alpha overlays — for glass and scrim effects */
+  --palette-white-a90:    rgba(255, 255, 255, 0.90);
+  --palette-white-a75:    rgba(255, 255, 255, 0.75);
+  --palette-white-a55:    rgba(255, 255, 255, 0.55);
+  --palette-white-a25:    rgba(255, 255, 255, 0.25);
+  --palette-white-a18:    rgba(255, 255, 255, 0.18);
+  --palette-white-a12:    rgba(255, 255, 255, 0.12);
+  --palette-white-a05:    rgba(255, 255, 255, 0.05);
+  --palette-navy-a92:     rgba(6, 20, 40, 0.92);
+  --palette-navy-a70:     rgba(10, 30, 63, 0.70);
+  --palette-navy-a32:     rgba(10, 30, 63, 0.32);
+  --palette-navy-a28:     rgba(10, 30, 63, 0.28);
+
+
+  /* =================================================================
+     LAYER 2 — SEMANTIC COLOR ALIASES
+     Reference these from components. They describe intent, so a
+     palette change here propagates everywhere correctly.
+     ================================================================= */
+
+  /* ---- Text ---- */
+  --color-text-primary:        var(--palette-navy-ink);
+  --color-text-secondary:      var(--palette-slate-700);
+  --color-text-inverse:        var(--palette-white);
+  --color-text-link:           var(--palette-blue-700);
+  --color-text-link-hover:     var(--palette-navy-deep);
+
+  /* Accent text on LIGHT backgrounds must use -strong (AA 4.91:1).
+     --color-text-accent is AA Large only (3.15:1) — 24px+/19px-bold. */
+  --color-text-accent:         var(--palette-orange-400);
+  --color-text-accent-strong:  var(--palette-orange-600);
+
+  /* Text sitting on navy surfaces */
+  --color-text-on-dark:        var(--palette-slate-60);
+  --color-text-on-dark-strong: var(--palette-white);
+  --color-text-on-dark-soft:   var(--palette-slate-100);
+  --color-text-on-dark-muted:  var(--palette-slate-400);
+
+  /* Footer has its own slightly cooler ladder */
+  --color-text-footer:         var(--palette-slate-150);
+  --color-text-footer-link:    var(--palette-slate-250);
+  --color-text-footer-muted:   var(--palette-slate-450);
+  --color-text-footer-label:   var(--palette-slate-500);
+
+  /* ---- Surfaces ---- */
+  --color-surface-page:        var(--palette-white);
+  --color-surface-subtle:      var(--palette-gray-50);
+  --color-surface-card:        var(--palette-white);
+  --color-surface-tint:        var(--palette-blue-100);
+  --color-surface-dark:        var(--palette-navy-deep);
+  --color-surface-darkest:     var(--palette-navy-ink);
+  --color-surface-well:        var(--palette-navy-well);
+  --color-surface-glass:       var(--palette-white-a90);
+
+  /* ---- Brand ---- */
+  --color-brand:               var(--palette-blue-700);
+  --color-brand-deep:          var(--palette-navy-deep);
+  --color-brand-light:         var(--palette-blue-500);
+  /* Light-blue is AA-failing on white (2.87:1) — use -strong there */
+  --color-brand-light-strong:  var(--palette-blue-600);
+
+  /* ---- Accent / giving ---- */
+  --color-accent:              var(--palette-orange-400);
+  --color-accent-hover:        var(--palette-orange-500);
+  --color-accent-strong:       var(--palette-orange-600);
+  --color-accent-soft:         var(--palette-orange-120);
+
+  /* ---- Borders ---- */
+  --color-border:              var(--palette-gray-200);
+  --color-border-subtle:       var(--palette-gray-100);
+  --color-border-strong:       var(--palette-blue-700);
+  --color-border-on-dark:      var(--palette-navy-border);
+  --color-border-rule-dark:    var(--palette-navy-rule);
+
+  /* ---- Feedback ---- */
+  --color-danger:              var(--palette-orange-700);
+  --color-danger-surface:      var(--palette-orange-150);
+  --color-success-surface:     var(--palette-blue-100);
+  --color-success-text:        var(--palette-navy-deep);
+
+  /* ---- Focus ---- */
+  --color-focus-ring:          var(--palette-blue-700);
+  --color-focus-ring-inverse:  var(--palette-white);
+  --color-focus-halo:          var(--palette-blue-100);
+
+
+  /* =================================================================
+     LAYER 3a — TYPOGRAPHY
+     ================================================================= */
+
+  --font-display: "Anton", "Arial Narrow", Impact, sans-serif;
+  --font-body:    "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-quote:   Georgia, "Times New Roman", serif;
+
+  /* Type scale — 12 fixed steps. Pick the nearest; do not interpolate. */
+  --text-2xs:   0.5625rem;  /*  9px — micro labels, wordmark line 3   */
+  --text-xs:    0.6875rem;  /* 11px — eyebrow, badge, legend          */
+  --text-sm:    0.75rem;    /* 12px — captions, tags                  */
+  --text-md:    0.8125rem;  /* 13px — small meta, footer bottom       */
+  --text-base:  0.875rem;   /* 14px — form labels, secondary UI       */
+  --text-lg:    0.9375rem;  /* 15px — card body, nav links            */
+  --text-xl:    1rem;       /* 16px — buttons, emphasized body        */
+  --text-2xl:   1.0625rem;  /* 17px — DEFAULT BODY SIZE               */
+  --text-3xl:   1.1875rem;  /* 19px — h3 small, lede                  */
+  --text-4xl:   1.3125rem;  /* 21px — h3, card headings               */
+  --text-5xl:   1.5rem;     /* 24px — h3 large, aside headings        */
+  --text-6xl:   2rem;       /* 32px — stat numerals                   */
+
+  /* Fluid display sizes — headlines and figures only */
+  --text-display-xs: clamp(1.2rem, 2.4vw, 1.7rem);
+  --text-display-sm: clamp(1.35rem, 2.6vw, 1.95rem);
+  --text-display-md: clamp(2.1rem, 4.2vw, 3.2rem);
+  --text-display-lg: clamp(2.6rem, 6vw, 4rem);
+  --text-display-xl: clamp(2.7rem, 6.4vw, 4.8rem);
+
+  /* Line height */
+  --leading-none:    1;
+  --leading-display: 1.06;
+  --leading-tight:   1.2;
+  --leading-snug:    1.4;
+  --leading-normal:  1.55;
+  --leading-body:    1.65;
+  --leading-relaxed: 1.8;
+
+  /* Letter spacing */
+  --tracking-tight:  0.005em;
+  --tracking-normal: 0.01em;
+  --tracking-wide:   0.04em;
+  --tracking-wider:  0.06em;
+  --tracking-caps:   0.12em;
+  --tracking-widest: 0.16em;
+  --tracking-brand:  0.26em;
+
+  /* Weight */
+  --weight-normal:   400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+
+  /* =================================================================
+     LAYER 3b — SPACING
+     4px base grid. Every margin, padding, and gap comes from here.
+     ================================================================= */
+
+  --space-0:    0;
+  --space-px:   1px;
+  --space-0-5:  2px;
+  --space-1:    4px;
+  --space-1-5:  6px;
+  --space-2:    8px;
+  --space-2-5:  10px;
+  --space-3:    12px;
+  --space-3-5:  14px;
+  --space-4:    16px;
+  --space-4-5:  18px;
+  --space-5:    20px;
+  --space-5-5:  22px;
+  --space-6:    24px;
+  --space-6-5:  26px;
+  --space-7:    28px;
+  --space-7-5:  30px;
+  --space-8:    32px;
+  --space-9:    36px;
+  --space-10:   40px;
+  --space-11:   44px;
+  --space-12:   48px;
+  --space-13:   54px;
+  --space-14:   56px;
+  --space-16:   64px;
+  --space-18:   72px;
+  --space-20:   80px;
+
+  /* Fluid spacing — responsive rhythm */
+  --space-section:     clamp(64px, 9vw, 118px);
+  --space-section-sm:  clamp(48px, 7vw, 84px);
+  --space-gutter:      26px;
+  --space-gap-lg:      clamp(32px, 5vw, 72px);
+  --space-gap-md:      clamp(32px, 5vw, 64px);
+  --space-card-pad:    clamp(26px, 4vw, 40px);
+  --space-band-pad:    clamp(40px, 6vw, 72px);
+
+
+  /* =================================================================
+     LAYER 3c — RADIUS
+     ================================================================= */
+
+  --radius-xs:     8px;
+  --radius-sm:     12px;
+  --radius-md:     14px;
+  --radius-lg:     18px;
+  --radius-xl:     22px;
+  --radius-2xl:    26px;
+  --radius-3xl:    28px;
+  --radius-pill:   100px;
+  --radius-circle: 50%;
+
+
+  /* =================================================================
+     LAYER 3d — SHADOW
+     ================================================================= */
+
+  --shadow-sm:     0 8px 24px -14px var(--palette-navy-a28);
+  --shadow-md:     0 20px 50px -24px var(--palette-navy-a32);
+  --shadow-nav:    0 2px 20px -14px var(--palette-navy-a70);
+  --shadow-accent: 0 10px 24px -12px var(--palette-orange-500);
+  --shadow-ring:   inset 0 0 0 2px var(--palette-white-a18);
+  --shadow-focus:  0 0 0 4px var(--color-focus-halo);
+
+
+  /* =================================================================
+     LAYER 3e — LAYOUT
+     ================================================================= */
+
+  --max-content:   1160px;
+  --max-narrow:    720px;
+  --max-prose:     640px;
+  --nav-height:    86px;
+  --measure-body:  56ch;
+  --measure-prose: 62ch;
+  --measure-tight: 34ch;
+
+  --z-below:   -1;
+  --z-base:    0;
+  --z-raised:  1;
+  --z-nav:     100;
+  --z-overlay: 200;
+  --z-skip:    300;
+
+
+  /* =================================================================
+     LAYER 3f — MOTION
+     ================================================================= */
+
+  --dur-fast:   0.18s;
+  --dur-base:   0.2s;
+  --dur-slow:   0.3s;
+  --dur-reveal: 0.7s;
+  --ease-out:   ease;
+  --ease-reveal: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Breakpoint reference (documentation only — CSS cannot use vars in
+     media queries). Keep these in sync with the @media rules:
+       --bp-sm: 560px;  --bp-md: 760px;
+       --bp-nav: 900px; --bp-lg: 1024px;                              */
+}

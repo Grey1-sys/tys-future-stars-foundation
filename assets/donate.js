@@ -14,8 +14,8 @@
     banner.setAttribute("role", "status");
     banner.style.cssText =
       "margin-bottom:22px;padding:16px 18px;border-radius:14px;display:flex;gap:12px;align-items:flex-start;" +
-      (ok ? "background:var(--brand-tint);color:var(--brand-deep);"
-          : "background:#FCE7DE;color:var(--accent-deep);");
+      (ok ? "background:var(--color-success-surface);color:var(--color-success-text);"
+          : "background:var(--color-danger-surface);color:var(--color-danger);");
     banner.innerHTML =
       (ok
         ? '<strong>Thank you! 💚</strong>&nbsp;Your donation was received. A receipt is on its way to your email.'
