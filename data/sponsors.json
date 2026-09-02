@@ -1,0 +1,28 @@
+[
+  {
+    "_comment": "PLACEHOLDER — confirm the partnership in writing before publishing a logo.",
+    "published": false,
+    "id": "placeholder-sponsor-one",
+    "name": "PLACEHOLDER — Sponsor name",
+    "logo": {
+      "src": "assets/images/sponsor-placeholder-one-logo.svg",
+      "alt": "PLACEHOLDER — Sponsor name logo"
+    },
+    "website": "",
+    "tier": "Gold",
+    "sinceYear": null
+  },
+  {
+    "_comment": "PLACEHOLDER — confirm the partnership in writing before publishing a logo.",
+    "published": false,
+    "id": "placeholder-sponsor-two",
+    "name": "PLACEHOLDER — Second sponsor name",
+    "logo": {
+      "src": "assets/images/sponsor-placeholder-two-logo.svg",
+      "alt": "PLACEHOLDER — Second sponsor name logo"
+    },
+    "website": "",
+    "tier": "Community",
+    "sinceYear": null
+  }
+]

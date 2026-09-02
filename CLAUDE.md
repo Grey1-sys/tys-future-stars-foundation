@@ -24,9 +24,12 @@ Pages are hand-written `.html` at the repo root.
 | `assets/site.js` | Shared header + footer, injected into every page. Nav config lives here. |
 | `assets/main.js` | Page-level behavior (scroll reveals, form handling). |
 | `assets/donate.js` | Donation form state. Dormant while giving is off. |
+| `assets/data.js` | Loads `/data/*.json`. Applies the publish + consent gates. |
+| `assets/render.js` | Turns a collection into DOM from a template. |
 | `assets/styleguide.{css,js}` | Internal reference page only. |
 
 Load order on every page: `tokens.css` -> `styles.css`, then `site.js` -> `main.js`.
+A page that renders content adds `data.js` -> `render.js` between them.
 
 Hosted on **Netlify** at **tysfuturestars.org**. `netlify.toml` sets `publish = "."` and
 nothing else — deploys are a straight file upload, triggered automatically on push to
@@ -89,6 +92,7 @@ are defined but not rendered, so the nav never links to a page that doesn't exis
 | `privacy.html` | Nav · Page hero · Interim privacy statement · Footer |
 | `terms.html` | Nav · Page hero · Interim terms statement · Footer |
 | `styleguide.html` | **Internal.** Every token + component. `noindex`, unlinked. |
+| `data-preview.html` | **Internal.** Every `/data` collection rendered live. `noindex`, unlinked. |
 
 Nav order: Home · About (Foundation, Ty's Story) · Programs (dropdown) · Get Involved
 (dropdown) · Contact · **Donate** (CTA button). Impact, Events, and News are staged in
@@ -168,6 +172,220 @@ Raw pigments live behind `--palette-*` and must not be referenced from component
 
 ---
 
+## Content data layer
+
+**All page content lives in `/data/*.json`, never in page markup.** A page declares
+where content goes; `assets/render.js` fills it in. Never paste a program description,
+an event, or a story into an `.html` file.
+
+### Putting content on a page
+
+```html
+<div data-tfsf="programs"></div>
+<div data-tfsf="events" data-view="upcoming"></div>
+<div data-tfsf="posts"  data-limit="3"></div>
+<div data-tfsf="team"   data-filter="boardMember:true"></div>
+<div data-tfsf="program-detail"></div>   <!-- one program, read from ?slug= -->
+```
+
+| Attribute | Meaning |
+|---|---|
+| `data-tfsf` | Collection name, or `program-detail` / `post-detail` |
+| `data-view` | Events only: `upcoming` (default), `past`, `all` |
+| `data-limit` | Maximum entries to render |
+| `data-filter` | `field:value`; `true`/`false` are read as booleans |
+| `data-empty` | Message shown when nothing is published |
+
+Programmatic use: `TFSF.render.into(el, "programs", { limit: 3 })`.
+
+### Rules the layer enforces for you
+
+Applied inside `data.js` and `render.js`, so no page can forget them.
+
+1. **`"published": true` is required.** Anything else never renders. This is the switch
+   the director uses to hide an entry without deleting it.
+2. **Stories need consent.** `consent` must be `true`. If `isMinor` is `true`, the entry
+   *also* needs `mediaReleaseOnFile: true`. A story about a minor without a signed
+   release on file will not render, whatever else is set.
+3. **No empty `alt`.** An image renders only with both `src` and a non-blank `alt`. If
+   the alt is missing the `<img>` is omitted entirely and the surrounding card still
+   renders. Never `alt=""`.
+4. **A stat with a `null` value is skipped.** Per the no-placeholder-figures rule, an
+   unconfirmed number stays `null` and simply does not appear.
+5. **Everything is escaped.** JSON is authored by a non-developer, so all values are
+   treated as text. `javascript:` URLs are stripped and the item renders unlinked.
+
+### Images
+
+Every image path is `assets/images/<collection>-<slug>-<variant>.<ext>`:
+
+```
+assets/images/program-skills-clinic-hero.jpg
+assets/images/event-spring-classic-hero.jpg
+assets/images/story-jordan-portrait.jpg
+assets/images/post-season-recap-hero.jpg
+assets/images/team-lasonya-adams-portrait.jpg
+assets/images/sponsor-acme-logo.svg
+```
+
+Variants: `hero` (16:10), `portrait` (1:1), `logo` (transparent SVG or PNG).
+Downloadable files go in `assets/files/`.
+
+> **Note:** `assets/img/` still holds `logo.jpg` and `ty.jpg` from before this layer
+> existed. New content images go in `assets/images/`. Worth consolidating.
+
+### Collection shapes
+
+Every entry takes `"published": <boolean>`. `_comment` is optional and ignored by the
+renderer. Copy an example below and edit it.
+
+**`programs.json`**
+
+```json
+{
+  "published": true,
+  "slug": "saturday-skills-clinic",
+  "name": "Saturday Skills Clinic",
+  "category": "Basketball & Athletic Development",
+  "shortDescription": "One or two sentences that stand alone in a card.",
+  "hero": { "src": "assets/images/program-saturday-skills-clinic-hero.jpg", "alt": "Describe the photo." },
+  "whatWeDo": "Paragraphs.\n\nSeparated by a blank line.",
+  "whoWeServe": "Who this is for, in plain language.",
+  "impactStats": [ { "label": "Athletes per session", "value": 24, "suffix": "" } ],
+  "cta": { "text": "Register for the clinic", "href": "contact.html" },
+  "ageRange": "Ages 12-18",
+  "schedule": "Saturdays, 9:00-11:00 AM",
+  "location": "Venue name, Smyrna, Tennessee",
+  "cost": "Free"
+}
+```
+
+**`events.json`** - `date`/`endDate` are ISO days (`YYYY-MM-DD`). Upcoming vs past is
+computed against today; an event stays upcoming through the end of `endDate`, so a
+multi-day event does not vanish on its opening morning.
+
+```json
+{
+  "published": true,
+  "id": "spring-classic-2026",
+  "title": "Spring Classic Fundraiser",
+  "date": "2026-04-18",
+  "endDate": "2026-04-18",
+  "time": "10:00 AM - 4:00 PM",
+  "locationName": "Venue name",
+  "address": "Street address, Smyrna, TN 37167",
+  "description": "What it is and who it is for.",
+  "category": "Fundraiser",
+  "registrationUrl": "https://example.com/tickets",
+  "image": { "src": "assets/images/event-spring-classic-hero.jpg", "alt": "Describe the photo." },
+  "featured": true
+}
+```
+
+**`stories.json`** - read rule 2 above before adding one.
+
+```json
+{
+  "published": true,
+  "id": "jordan-2026",
+  "name": "Jordan",
+  "ageOrRole": "Age 16",
+  "programSlug": "saturday-skills-clinic",
+  "headline": "One line, in their own framing.",
+  "body": "The story, in their words wherever possible.",
+  "quote": "A short direct quote you have on record.",
+  "photo": { "src": "assets/images/story-jordan-portrait.jpg", "alt": "Describe the photo." },
+  "consent": true,
+  "isMinor": true,
+  "mediaReleaseOnFile": true
+}
+```
+
+**`posts.json`** - sorted newest first.
+
+```json
+{
+  "published": true,
+  "slug": "season-recap-2026",
+  "title": "Season Recap",
+  "date": "2026-03-02",
+  "author": "Author name",
+  "category": "News",
+  "excerpt": "One or two sentences that stand alone in a card.",
+  "body": "Full post body.\n\nParagraphs separated by a blank line.",
+  "hero": { "src": "assets/images/post-season-recap-hero.jpg", "alt": "Describe the photo." },
+  "tags": ["scholarships", "community"]
+}
+```
+
+**`sponsors.json`**
+
+```json
+{
+  "published": true,
+  "id": "acme-supply",
+  "name": "Acme Supply Co.",
+  "logo": { "src": "assets/images/sponsor-acme-logo.svg", "alt": "Acme Supply Co. logo" },
+  "website": "https://example.com",
+  "tier": "Gold",
+  "sinceYear": 2024
+}
+```
+
+**`stats.json`** - leave `value` as `null` until the figure is confirmed **in writing**.
+A `null` value is not rendered.
+
+```json
+{
+  "published": true,
+  "id": "scholarships-awarded",
+  "label": "Awarded in scholarships",
+  "value": "$7,000",
+  "suffix": "+",
+  "icon": "award",
+  "asOf": "March 2026",
+  "sourceNote": "Confirmed by the foundation by email, 2026-03-01."
+}
+```
+
+**`resources.json`** - set `external: true` for an off-site link (opens in a new tab).
+
+```json
+{
+  "published": true,
+  "id": "scholarship-application",
+  "title": "Scholarship Application Form",
+  "category": "Scholarships",
+  "description": "What this document is and who needs it.",
+  "url": "assets/files/scholarship-application.pdf",
+  "fileType": "PDF",
+  "external": false
+}
+```
+
+**`team.json`**
+
+```json
+{
+  "published": true,
+  "id": "lasonya-adams",
+  "name": "LaSonya Adams",
+  "role": "President & Founder",
+  "bio": "Approved bio, supplied by the foundation.",
+  "photo": { "src": "assets/images/team-lasonya-adams-portrait.jpg", "alt": "Describe the photo." },
+  "boardMember": true
+}
+```
+
+### Checking your work
+
+Open **`/data-preview.html`** - it renders every collection through the same layer the
+real pages use. If an entry does not appear there, it will not appear on the site.
+
+`fetch()` needs HTTP, so preview over `npx serve .`, not by opening the file directly.
+
+---
+
 ## Coding conventions
 
 **Files.** Lowercase kebab-case (`get-involved.html`, `ty-story.html`). Pages at repo
@@ -237,6 +455,9 @@ them when the state changes.
 - **No pushing to `main` casually** — `main` is production. Confirm before any push.
 - **No new placeholder contact details.** Don't propagate `(000) 000-0000` or
   `Madison, Alabama` into new markup (see Known defects).
+- **No hardcoding content into HTML.** Programs, events, stories, posts, sponsors,
+  stats, resources, and team members come from `/data/*.json` through
+  `assets/render.js`. If you are typing content into an `.html` file, stop.
 - **No touching Ty's biography facts** — dates, schools, hometown, the circumstances of
   his death — without client confirmation. Gadsden and Madison, Alabama are *Ty's*
   personal history and are correct as written; they are not the foundation's location.

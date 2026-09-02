@@ -1,0 +1,24 @@
+[
+  {
+    "_comment": "PLACEHOLDER. Per CLAUDE.md, never publish a figure the client has not confirmed in writing. value is null on purpose.",
+    "published": false,
+    "id": "placeholder-scholarships-awarded",
+    "label": "PLACEHOLDER — Awarded in scholarships",
+    "value": null,
+    "suffix": "",
+    "icon": "award",
+    "asOf": "",
+    "sourceNote": "PLACEHOLDER — who confirmed this figure, in writing, and when."
+  },
+  {
+    "_comment": "PLACEHOLDER. value is null on purpose — see CLAUDE.md, 'No placeholder financial figures'.",
+    "published": false,
+    "id": "placeholder-athletes-supported",
+    "label": "PLACEHOLDER — Athletes supported",
+    "value": null,
+    "suffix": "+",
+    "icon": "users",
+    "asOf": "",
+    "sourceNote": "PLACEHOLDER — who confirmed this figure, in writing, and when."
+  }
+]

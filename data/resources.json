@@ -1,0 +1,24 @@
+[
+  {
+    "_comment": "PLACEHOLDER — replace with a real resource, then set published to true.",
+    "published": false,
+    "id": "placeholder-scholarship-application",
+    "title": "PLACEHOLDER — Scholarship Application Form",
+    "category": "Scholarships",
+    "description": "PLACEHOLDER — What this document is and who needs it.",
+    "url": "assets/files/placeholder-scholarship-application.pdf",
+    "fileType": "PDF",
+    "external": false
+  },
+  {
+    "_comment": "PLACEHOLDER — replace with a real resource, then set published to true.",
+    "published": false,
+    "id": "placeholder-media-release",
+    "title": "PLACEHOLDER — Photo & Media Release",
+    "category": "Forms",
+    "description": "PLACEHOLDER — Required before any photograph of a participant is published.",
+    "url": "assets/files/placeholder-media-release.pdf",
+    "fileType": "PDF",
+    "external": false
+  }
+]

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content preview — Ty's Future Stars Foundation</title>
+<meta name="description" content="Internal: renders every /data collection through the shared rendering layer.">
+<!-- Internal QA page. Not linked from the site and not indexed. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header"></div>
+
+<main id="main">
+
+<header class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Internal reference</span>
+    <h1 class="display mt-1">Content preview</h1>
+    <p class="lede mt-2">Every collection in <code>/data</code>, rendered through the shared
+      layer exactly as a real page would render it. Anything with
+      <code>"published": false</code> is absent by design — that is the switch the
+      director uses to hide an entry without deleting it.</p>
+  </div>
+</header>
+
+<!-- ===== PROGRAMS ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">programs.json</span>
+      <h2 class="title">Programs</h2>
+    </div>
+    <div data-tfsf="programs" data-empty="No published programs. Set published to true in data/programs.json."></div>
+  </div>
+</section>
+
+<!-- ===== EVENTS ===== -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">events.json</span>
+      <h2 class="title">Upcoming events</h2>
+      <p>Split from past events automatically, against today's date.</p>
+    </div>
+    <div data-tfsf="events" data-view="upcoming" data-empty="No upcoming published events."></div>
+
+    <h3 class="title mt-3">Past events</h3>
+    <div class="mt-2" data-tfsf="events" data-view="past" data-empty="No past published events."></div>
+  </div>
+</section>
+
+<!-- ===== STORIES ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">stories.json</span>
+      <h2 class="title">Stories</h2>
+      <p>A story renders only with <code>consent: true</code>. A story about a minor
+        additionally requires <code>mediaReleaseOnFile: true</code>.</p>
+    </div>
+    <div data-tfsf="stories" data-empty="No stories cleared for publication."></div>
+  </div>
+</section>
+
+<!-- ===== POSTS ===== -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">posts.json</span>
+      <h2 class="title">News posts</h2>
+      <p>Sorted newest first.</p>
+    </div>
+    <div data-tfsf="posts" data-empty="No published posts."></div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="section brand-fill">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">stats.json</span>
+      <h2 class="title">Impact counter</h2>
+      <p>A stat with no confirmed value is never rendered.</p>
+    </div>
+    <div data-tfsf="stats" data-empty="No confirmed figures. Values stay null until the client confirms them in writing."></div>
+  </div>
+</section>
+
+<!-- ===== TEAM ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">team.json</span>
+      <h2 class="title">Board &amp; team</h2>
+    </div>
+    <div data-tfsf="team" data-filter="boardMember:true" data-empty="No published board members."></div>
+  </div>
+</section>
+
+<!-- ===== SPONSORS ===== -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">sponsors.json</span>
+      <h2 class="title">Sponsors</h2>
+    </div>
+    <div data-tfsf="sponsors" data-empty="No published sponsors."></div>
+  </div>
+</section>
+
+<!-- ===== RESOURCES ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">resources.json</span>
+      <h2 class="title">Resources</h2>
+    </div>
+    <div data-tfsf="resources" data-empty="No published resources."></div>
+  </div>
+</section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/site.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/render.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>

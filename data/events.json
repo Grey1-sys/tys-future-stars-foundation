@@ -1,0 +1,40 @@
+[
+  {
+    "_comment": "PLACEHOLDER — replace with a real event, then set published to true.",
+    "published": false,
+    "id": "placeholder-spring-classic",
+    "title": "PLACEHOLDER — Spring Classic Fundraiser",
+    "date": "2026-04-18",
+    "endDate": "2026-04-18",
+    "time": "10:00 AM – 4:00 PM",
+    "locationName": "PLACEHOLDER — Venue name",
+    "address": "PLACEHOLDER — Street address, Smyrna, TN 37167",
+    "description": "PLACEHOLDER — What the event is, who it is for, and why someone should come.",
+    "category": "Fundraiser",
+    "registrationUrl": "",
+    "image": {
+      "src": "assets/images/event-placeholder-spring-classic-hero.jpg",
+      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+    },
+    "featured": true
+  },
+  {
+    "_comment": "PLACEHOLDER — a past-dated entry, so the upcoming/past split is visible in dev.",
+    "published": false,
+    "id": "placeholder-scholarship-night",
+    "title": "PLACEHOLDER — Scholarship Awards Night",
+    "date": "2025-11-08",
+    "endDate": "2025-11-08",
+    "time": "6:00 PM – 8:00 PM",
+    "locationName": "PLACEHOLDER — Venue name",
+    "address": "PLACEHOLDER — Street address, Smyrna, TN 37167",
+    "description": "PLACEHOLDER — What the event is, who it is for, and why someone should come.",
+    "category": "Community",
+    "registrationUrl": "",
+    "image": {
+      "src": "assets/images/event-placeholder-scholarship-night-hero.jpg",
+      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+    },
+    "featured": false
+  }
+]

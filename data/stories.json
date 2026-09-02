@@ -1,0 +1,38 @@
+[
+  {
+    "_comment": "PLACEHOLDER. consent MUST be true to render. A story about a minor ALSO requires mediaReleaseOnFile true.",
+    "published": false,
+    "id": "placeholder-story-1",
+    "name": "PLACEHOLDER — First name only, or full name with written permission",
+    "ageOrRole": "PLACEHOLDER — e.g. Age 16, or Parent, or Volunteer coach",
+    "programSlug": "placeholder-skills-clinic",
+    "headline": "PLACEHOLDER — One line, in the storyteller's own framing.",
+    "body": "PLACEHOLDER — The story in their words wherever possible. Do not dramatize and do not invent detail.",
+    "quote": "PLACEHOLDER — A short direct quote you have on record.",
+    "photo": {
+      "src": "assets/images/story-placeholder-story-1-portrait.jpg",
+      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+    },
+    "consent": false,
+    "isMinor": true,
+    "mediaReleaseOnFile": false
+  },
+  {
+    "_comment": "PLACEHOLDER. consent MUST be true to render.",
+    "published": false,
+    "id": "placeholder-story-2",
+    "name": "PLACEHOLDER — Storyteller name",
+    "ageOrRole": "PLACEHOLDER — Volunteer coach",
+    "programSlug": "placeholder-mentorship-circle",
+    "headline": "PLACEHOLDER — One line, in the storyteller's own framing.",
+    "body": "PLACEHOLDER — The story in their words wherever possible.",
+    "quote": "PLACEHOLDER — A short direct quote you have on record.",
+    "photo": {
+      "src": "assets/images/story-placeholder-story-2-portrait.jpg",
+      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+    },
+    "consent": false,
+    "isMinor": false,
+    "mediaReleaseOnFile": false
+  }
+]

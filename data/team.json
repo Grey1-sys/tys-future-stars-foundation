@@ -1,0 +1,28 @@
+[
+  {
+    "_comment": "PLACEHOLDER — an approved photo and bio for LaSonya Adams are still outstanding (see CLAUDE.md).",
+    "published": false,
+    "id": "placeholder-lasonya-adams",
+    "name": "PLACEHOLDER — LaSonya Adams",
+    "role": "President & Founder",
+    "bio": "PLACEHOLDER — Approved bio, supplied by the foundation.",
+    "photo": {
+      "src": "assets/images/team-placeholder-lasonya-adams-portrait.jpg",
+      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+    },
+    "boardMember": true
+  },
+  {
+    "_comment": "PLACEHOLDER — replace with a real team member, then set published to true.",
+    "published": false,
+    "id": "placeholder-board-member",
+    "name": "PLACEHOLDER — Board member name",
+    "role": "PLACEHOLDER — Board role",
+    "bio": "PLACEHOLDER — Approved bio, supplied by the foundation.",
+    "photo": {
+      "src": "assets/images/team-placeholder-board-member-portrait.jpg",
+      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+    },
+    "boardMember": false
+  }
+]

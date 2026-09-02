@@ -1,0 +1,70 @@
+[
+  {
+    "_comment": "PLACEHOLDER — replace with a real program, then set published to true.",
+    "published": false,
+    "slug": "placeholder-skills-clinic",
+    "name": "PLACEHOLDER — Saturday Skills Clinic",
+    "category": "Basketball & Athletic Development",
+    "shortDescription": "PLACEHOLDER — A weekly skills session for middle and high school athletes, focused on fundamentals, conditioning, and teamwork.",
+    "hero": {
+      "src": "assets/images/program-placeholder-skills-clinic-hero.jpg",
+      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+    },
+    "whatWeDo": "PLACEHOLDER — Two or three paragraphs describing what actually happens in this program: who runs it, what a session looks like, and what an athlete walks away with.",
+    "whoWeServe": "PLACEHOLDER — Who this program is for, in plain language a parent can check themselves against. Grade range, experience level, and any eligibility requirements.",
+    "impactStats": [
+      {
+        "label": "PLACEHOLDER — Athletes per session",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Sessions per season",
+        "value": null,
+        "suffix": ""
+      }
+    ],
+    "cta": {
+      "text": "Register for the clinic",
+      "href": "contact.html"
+    },
+    "ageRange": "PLACEHOLDER — Ages 12–18",
+    "schedule": "PLACEHOLDER — Saturdays, 9:00–11:00 AM, September through March",
+    "location": "PLACEHOLDER — Venue name, Smyrna, Tennessee",
+    "cost": "PLACEHOLDER — Free, or state the fee and whether scholarships cover it"
+  },
+  {
+    "_comment": "PLACEHOLDER — replace with a real program, then set published to true.",
+    "published": false,
+    "slug": "placeholder-mentorship-circle",
+    "name": "PLACEHOLDER — Mentorship Circle",
+    "category": "Mentorship & Leadership",
+    "shortDescription": "PLACEHOLDER — Small-group mentoring that pairs student-athletes with adults who show up consistently, on and off the court.",
+    "hero": {
+      "src": "assets/images/program-placeholder-mentorship-circle-hero.jpg",
+      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+    },
+    "whatWeDo": "PLACEHOLDER — What the mentoring relationship actually involves: how often they meet, what they work on, and how mentors are screened.",
+    "whoWeServe": "PLACEHOLDER — Who this program is for and how a family applies.",
+    "impactStats": [
+      {
+        "label": "PLACEHOLDER — Youth mentored",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Active mentors",
+        "value": null,
+        "suffix": ""
+      }
+    ],
+    "cta": {
+      "text": "Become a mentor",
+      "href": "get-involved.html#volunteer"
+    },
+    "ageRange": "PLACEHOLDER — Ages 14–18",
+    "schedule": "PLACEHOLDER — Every other Tuesday, 6:00–7:30 PM",
+    "location": "PLACEHOLDER — Venue name, Smyrna, Tennessee",
+    "cost": "PLACEHOLDER — Free"
+  }
+]
