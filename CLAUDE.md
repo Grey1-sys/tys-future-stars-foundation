@@ -26,6 +26,7 @@ Pages are hand-written `.html` at the repo root.
 | `assets/donate.js` | Donation form state. Dormant while giving is off. |
 | `assets/data.js` | Loads `/data/*.json`. Applies the publish + consent gates. |
 | `assets/render.js` | Turns a collection into DOM from a template. |
+| `assets/programs.js` | Programs index (filters) and the program detail template. |
 | `assets/styleguide.{css,js}` | Internal reference page only. |
 
 Load order on every page: `tokens.css` -> `styles.css`, then `site.js` -> `main.js`.
@@ -84,7 +85,8 @@ are defined but not rendered, so the nav never links to a page that doesn't exis
 | `index.html` | Nav · Hero (dark) · Mission · Four Pillars (Educate/Empower/Inspire/Transform) · Ty's Story teaser · Scholarship Impact band · Founder · Motto CTA · Footer |
 | `ty-story.html` | Nav · Hero (dark) · Biography prose · A Life of Purpose (Education / Basketball / Character) · Legacy CTA · Footer |
 | `about.html` | Nav · Page hero · Mission + Vision · Purpose · Core Values (Leadership, Education, Discipline, Community, Opportunity, Legacy) · Meet LaSonya Adams · CTA · Footer |
-| `programs.html` | Nav · Page hero · Scholarships · Mentorship & Leadership · Basketball & Athletic Development · Gun Violence Prevention · FAQ · CTA · Footer |
+| `programs.html` | Nav · Hero · Filters (category + age) · Four category groups from `programs.json` · FAQ · CTA · Footer |
+| `program.html?slug=` | Nav · Hero · What We Do · Who We Serve · Impact · Details · Gallery + lightbox · Get Involved · Related · Footer |
 | `get-involved.html` | Nav · Page hero · Volunteer / Partner / Fundraise · 3-step process · Sign-up form (`#volunteer`) · Donate CTA · Footer |
 | `contact.html` | Nav · Page hero · Contact info (Email / Phone / Location / Hours) + Contact form · Footer |
 | `donate.html` | Nav · Page hero + trust chips · Giving form + "Why give" aside · Footer |
@@ -94,7 +96,7 @@ are defined but not rendered, so the nav never links to a page that doesn't exis
 | `styleguide.html` | **Internal.** Every token + component. `noindex`, unlinked. |
 | `data-preview.html` | **Internal.** Every `/data` collection rendered live. `noindex`, unlinked. |
 
-Nav order: Home · About (Foundation, Ty's Story) · Programs (dropdown) · Get Involved
+Nav order: Home · About (Foundation, Ty's Story) · Programs (dropdown, one entry per category) · Get Involved
 (dropdown) · Contact · **Donate** (CTA button). Impact, Events, and News are staged in
 the config as `ready: false`.
 
@@ -251,12 +253,33 @@ renderer. Copy an example below and edit it.
   "hero": { "src": "assets/images/program-saturday-skills-clinic-hero.jpg", "alt": "Describe the photo." },
   "whatWeDo": "Paragraphs.\n\nSeparated by a blank line.",
   "whoWeServe": "Who this is for, in plain language.",
+  "summary": "One line that sits under the program name in the detail hero.",
+  "metaDescription": "Up to 150 characters, used as the page description in search results.",
+  "eligibility": "Any requirements to take part.",
+  "serviceArea": "Smyrna, Tennessee and surrounding Rutherford County",
+  "ageMin": 12,
+  "ageMax": 18,
+  "gallery": [ { "src": "assets/images/program-saturday-skills-clinic-1.jpg", "alt": "Describe the photo." } ],
   "impactStats": [ { "label": "Athletes per session", "value": 24, "suffix": "" } ],
-  "cta": { "text": "Register for the clinic", "href": "contact.html" },
+  "ctaPrimary": { "text": "Apply or enroll", "href": "contact.html" },
+  "ctaSecondary": { "text": "Volunteer for this program", "href": "get-involved.html#volunteer" },
   "ageRange": "Ages 12-18",
   "schedule": "Saturdays, 9:00-11:00 AM",
   "location": "Venue name, Smyrna, Tennessee",
   "cost": "Free"
+}
+```
+
+**`program-categories.json`** - drives the grouping and the nav dropdown. The `id` is
+the URL token; `order` sets the sequence on the index.
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "id": "youth-development",
+  "name": "Youth Development",
+  "description": "One or two sentences on what this category covers."
 }
 ```
 
@@ -376,6 +399,45 @@ A `null` value is not rendered.
   "boardMember": true
 }
 ```
+
+### Programs: two pages, one template
+
+`programs.html` is the index. `program.html?slug=<slug>` renders **any** program from
+the same template -- there is no per-program HTML file, and there should never be one.
+
+**Index.** Groups programs under the four categories in
+`data/program-categories.json`, in their `order`. Two filters, category and age range,
+update the grid in place and write themselves into the query string, so a filtered
+view can be copied out of the address bar and shared:
+
+```
+programs.html?category=community-support&age=19%2B
+```
+
+The nav dropdown uses exactly this -- one entry per category, each opening a
+pre-filtered index. **Category `id` values in the nav, in the JSON, and in the URL must
+match.** A category with nothing to show is hidden; if every category empties, the page
+shows a single empty state with a reset button.
+
+**Age filtering.** Each program carries numeric `ageMin`/`ageMax` alongside the display
+string. A program matches a bucket when the two ranges **overlap** -- a 9-16 programme
+appears under both "Under 12" and "16 to 18", because it genuinely serves children in
+each. Buckets live in `assets/programs.js`.
+
+**Detail.** Sections run in a fixed order: hero, What We Do, Who We Serve, Impact,
+Details, Gallery, Get Involved, Related. The page sets its own `<title>` and
+`description` from the entry and injects `Service` JSON-LD. `offers.price` is only
+emitted when `cost` is literally "Free". A missing or unknown `?slug=` redirects to
+`programs.html` (with `?notfound=`, which the index explains) rather than leaving an
+empty shell.
+
+**Impact stats.** `impactStats` values stay `null` until a figure is confirmed in
+writing. The Impact section then says the figures are being confirmed. It never renders
+an invented or empty counter -- see the "no placeholder financial figures" rule.
+
+**Extra fields** `programs.json` carries for these pages, beyond the shape documented
+above: `summary`, `metaDescription`, `eligibility`, `serviceArea`, `ageMin`, `ageMax`,
+`gallery[]`, `ctaPrimary`, `ctaSecondary`.
 
 ### Checking your work
 
@@ -501,6 +563,11 @@ history is visible — do not re-introduce them.
 - ~~Donate button failed AA (3.15:1)~~ — and four other contrast failures. All fixed.
 - ~~No skip link, no `<main>`, no focus states~~ — all present, 0 elements uncovered.
 - ~~Heading-level skips~~ — none remain; exactly one `h1` per page.
+- ~~Mobile nav panel widened every page~~ — the closed off-canvas panel added 360px of
+  horizontal scroll below 900px on every page. It is now `visibility: hidden` when
+  closed, and the root clips sideways overflow with `overflow-x: clip` (`clip`, not
+  `hidden`, which would break the sticky nav).
+- ~~`programs.html` was hardcoded~~ — now rendered from `data/programs.json`.
 
 ## Content the client still owes us
 

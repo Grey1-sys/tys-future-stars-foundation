@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Programs — Ty's Future Stars Foundation</title>
-<meta name="description" content="Scholarships, mentorship, basketball development, and gun violence prevention programs from Ty's Future Stars Foundation.">
+<meta name="description" content="Youth development, sports and recreation, community support, and education programs from Ty's Future Stars Foundation in Smyrna, Tennessee.">
 <link rel="icon" href="assets/img/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,88 +19,42 @@
 
 <main id="main">
 
-<header class="page-hero">
+<!-- ===== HERO ===== -->
+<header class="page-hero programs-hero">
   <div class="wrap">
     <div class="breadcrumb"><a href="index.html">Home</a> / Programs</div>
-    <span class="eyebrow">What we do</span>
-    <h1 class="display" style="margin-top:14px;max-width:20ch;">Programs that build future stars.</h1>
-    <p class="lede">We provide scholarships, mentorship, and positive opportunities that encourage youth to pursue success in academics, athletics, and life.</p>
+    <div class="programs-hero-grid">
+      <div>
+        <span class="eyebrow">What we do</span>
+        <h1 class="display mt-1">Programs that build future stars.</h1>
+        <p class="lede mt-2">We provide scholarships, mentorship, and positive opportunities
+          that encourage young people to pursue success in academics, athletics, and life —
+          across Smyrna, Tennessee and the surrounding community.</p>
+      </div>
+      <img class="programs-hero-media"
+           src="assets/images/programs-index-hero.svg"
+           alt="Placeholder graphic showing a stylized basketball court in the foundation's navy and orange."
+           width="1600" height="1000" decoding="async">
+    </div>
   </div>
 </header>
 
-<!-- PROGRAM 1 — SCHOLARSHIPS -->
-<section class="section" id="scholarships">
-  <div class="wrap split">
-    <div class="photo-frame ratio-45 reveal">
-      <img src="assets/img/ty.jpg" alt="Young basketball player">
-      <div class="frame-cap"><strong>Scholarships</strong><span>$7,000+ awarded to date</span></div>
-    </div>
-    <div class="reveal d1">
-      <span class="badge">Program 01</span>
-      <h2 class="title mt-2">Scholarships</h2>
-      <p class="lede mt-2">We support academic achievement by providing scholarships and resources to student-athletes, because education creates opportunities and empowers youth to build successful futures beyond athletics.</p>
-      <ul class="mt-2 muted" style="padding-left:1.1rem;line-height:2;">
-        <li>Annual scholarship fundraiser</li>
-        <li>Over $7,000 awarded since inception</li>
-        <li>Support for continuing education</li>
-      </ul>
-      <a href="donate.html" class="btn btn-secondary mt-2">Fund a scholarship</a>
-    </div>
-  </div>
-</section>
-
-<!-- PROGRAM 2 — MENTORSHIP -->
-<section class="section soft" id="mentorship">
-  <div class="wrap split flip">
-    <div class="split-media tone-b reveal"><span class="media-tag">Mentorship</span></div>
-    <div class="reveal d1">
-      <span class="badge">Program 02</span>
-      <h2 class="title mt-2">Mentorship &amp; leadership</h2>
-      <p class="lede mt-2">We build confidence, leadership, and life skills through sports and mentorship — encouraging young people to lead with confidence, integrity, and purpose.</p>
-      <ul class="mt-2 muted" style="padding-left:1.1rem;line-height:2;">
-        <li>One-on-one mentor matching</li>
-        <li>Leadership development</li>
-        <li>Life skills workshops</li>
-      </ul>
-      <a href="get-involved.html" class="btn btn-secondary mt-2">Become a mentor</a>
-    </div>
-  </div>
-</section>
-
-<!-- PROGRAM 3 — BASKETBALL -->
-<section class="section" id="basketball">
-  <div class="wrap split">
-    <div class="split-media reveal"><span class="media-tag">Basketball</span></div>
-    <div class="reveal d1">
-      <span class="badge">Program 03</span>
-      <h2 class="title mt-2">Basketball &amp; athletic development</h2>
-      <p class="lede mt-2">Basketball taught Ty discipline, resilience, teamwork, and perseverance. We pass those same lessons on — helping student-athletes reach their full potential on and off the court.</p>
-      <ul class="mt-2 muted" style="padding-left:1.1rem;line-height:2;">
-        <li>Skills clinics &amp; camps</li>
-        <li>Tournament &amp; league support</li>
-        <li>Pathways to advance basketball careers</li>
-      </ul>
-      <a href="donate.html" class="btn btn-secondary mt-2">Support the program</a>
-    </div>
-  </div>
-</section>
-
-<!-- PROGRAM 4 — GUN VIOLENCE PREVENTION -->
-<section class="section brand-fill" id="prevention">
+<!-- ===== FILTERS ===== -->
+<section class="section filter-section">
   <div class="wrap">
-    <div class="section-head center reveal">
-      <span class="badge-solid">Stop the Gun Violence</span>
-      <h2 class="title" style="margin-top:18px;">Advocating for communities free from gun violence.</h2>
-      <p class="lede" style="margin-left:auto;margin-right:auto;color:#C7D9EF;">Ty's life was taken by an act of gun violence. We advocate for safer communities and challenge young people to choose compassion over violence, purpose over fear, and service over self.</p>
-    </div>
-    <div class="center">
-      <a href="get-involved.html" class="btn btn-primary btn-lg">Join the movement</a>
-    </div>
+    <div id="program-notice"></div>
+    <div id="program-filters"></div>
+    <p class="filter-count" id="program-count" role="status" aria-live="polite"></p>
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="section">
+<!-- ===== CATEGORY GROUPS (rendered from data/programs.json) ===== -->
+<div id="program-results"></div>
+
+<!-- ===== FAQ ===== -->
+<!-- TODO: this copy is still hardcoded. Migrate to /data when an faq
+     collection exists — see the "no hardcoding content" rule. -->
+<section class="section soft">
   <div class="wrap narrow">
     <div class="section-head reveal">
       <span class="eyebrow">Good to know</span>
@@ -115,8 +69,8 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section class="section soft">
+<!-- ===== CTA ===== -->
+<section class="section">
   <div class="wrap">
     <div class="cta-band reveal">
       <h2 class="title">Fund a future star today.</h2>
@@ -125,11 +79,15 @@
     </div>
   </div>
 </section>
+
 </main>
 
 <div id="site-footer"></div>
 
 <script src="assets/site.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/render.js"></script>
+<script src="assets/programs.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>

@@ -1,70 +1,404 @@
 [
   {
-    "_comment": "PLACEHOLDER — replace with a real program, then set published to true.",
-    "published": false,
-    "slug": "placeholder-skills-clinic",
-    "name": "PLACEHOLDER — Saturday Skills Clinic",
-    "category": "Basketball & Athletic Development",
-    "shortDescription": "PLACEHOLDER — A weekly skills session for middle and high school athletes, focused on fundamentals, conditioning, and teamwork.",
+    "_comment": "Name, age range and cost are client-supplied. Everything marked PLACEHOLDER still needs copy. impactStats values stay null until confirmed in writing.",
+    "published": true,
+    "slug": "future-stars",
+    "name": "Future Stars Program",
+    "category": "Sports & Recreation",
+    "summary": "PLACEHOLDER — One line that sits under the program name in the hero.",
+    "shortDescription": "PLACEHOLDER — One line that stands alone in a card on the programs index.",
+    "metaDescription": "PLACEHOLDER — Future Stars Program at Ty’s Future Stars Foundation. Replace with a 150-character description for search results.",
     "hero": {
-      "src": "assets/images/program-placeholder-skills-clinic-hero.jpg",
-      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+      "src": "assets/images/program-future-stars-hero.svg",
+      "alt": "PLACEHOLDER — placeholder graphic. Replace with a photograph and describe it here."
     },
-    "whatWeDo": "PLACEHOLDER — Two or three paragraphs describing what actually happens in this program: who runs it, what a session looks like, and what an athlete walks away with.",
-    "whoWeServe": "PLACEHOLDER — Who this program is for, in plain language a parent can check themselves against. Grade range, experience level, and any eligibility requirements.",
+    "gallery": [
+      {
+        "src": "assets/images/placeholder-gallery-1.svg",
+        "alt": "PLACEHOLDER — gallery image 1 for Future Stars Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-2.svg",
+        "alt": "PLACEHOLDER — gallery image 2 for Future Stars Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-3.svg",
+        "alt": "PLACEHOLDER — gallery image 3 for Future Stars Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-4.svg",
+        "alt": "PLACEHOLDER — gallery image 4 for Future Stars Program. Describe the photograph here."
+      }
+    ],
+    "whatWeDo": "PLACEHOLDER — Two or three paragraphs describing what actually happens in this program: who runs it, what a session looks like, and what a participant walks away with.\n\nPLACEHOLDER — Second paragraph. Replace all of this with approved copy.",
+    "whoWeServe": "PLACEHOLDER — Who this program is for, in plain language a parent or participant can check themselves against.",
+    "eligibility": "PLACEHOLDER — Any requirements to take part: residency, school enrolment, referral, paperwork.",
+    "serviceArea": "Smyrna, Tennessee and surrounding Rutherford County",
+    "ageRange": "Ages 9–16",
+    "ageMin": 9,
+    "ageMax": 16,
+    "schedule": "PLACEHOLDER — Days, times, and season. Replace with the real schedule.",
+    "location": "PLACEHOLDER — Venue name and address, Smyrna, Tennessee.",
+    "cost": "Free",
     "impactStats": [
       {
-        "label": "PLACEHOLDER — Athletes per session",
+        "label": "PLACEHOLDER — Participants served",
         "value": null,
         "suffix": ""
       },
       {
-        "label": "PLACEHOLDER — Sessions per season",
+        "label": "PLACEHOLDER — Sessions per year",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Volunteer hours",
         "value": null,
         "suffix": ""
       }
     ],
-    "cta": {
-      "text": "Register for the clinic",
+    "ctaPrimary": {
+      "text": "Apply or enroll",
       "href": "contact.html"
     },
-    "ageRange": "PLACEHOLDER — Ages 12–18",
-    "schedule": "PLACEHOLDER — Saturdays, 9:00–11:00 AM, September through March",
-    "location": "PLACEHOLDER — Venue name, Smyrna, Tennessee",
-    "cost": "PLACEHOLDER — Free, or state the fee and whether scholarships cover it"
+    "ctaSecondary": {
+      "text": "Volunteer for this program",
+      "href": "get-involved.html#volunteer"
+    }
   },
   {
-    "_comment": "PLACEHOLDER — replace with a real program, then set published to true.",
-    "published": false,
-    "slug": "placeholder-mentorship-circle",
-    "name": "PLACEHOLDER — Mentorship Circle",
-    "category": "Mentorship & Leadership",
-    "shortDescription": "PLACEHOLDER — Small-group mentoring that pairs student-athletes with adults who show up consistently, on and off the court.",
+    "_comment": "Name, age range and cost are client-supplied. Everything marked PLACEHOLDER still needs copy. impactStats values stay null until confirmed in writing.",
+    "published": true,
+    "slug": "academic-success",
+    "name": "Academic Success Program",
+    "category": "Education",
+    "summary": "PLACEHOLDER — One line that sits under the program name in the hero.",
+    "shortDescription": "PLACEHOLDER — One line that stands alone in a card on the programs index.",
+    "metaDescription": "PLACEHOLDER — Academic Success Program at Ty’s Future Stars Foundation. Replace with a 150-character description for search results.",
     "hero": {
-      "src": "assets/images/program-placeholder-mentorship-circle-hero.jpg",
-      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+      "src": "assets/images/program-academic-success-hero.svg",
+      "alt": "PLACEHOLDER — placeholder graphic. Replace with a photograph and describe it here."
     },
-    "whatWeDo": "PLACEHOLDER — What the mentoring relationship actually involves: how often they meet, what they work on, and how mentors are screened.",
-    "whoWeServe": "PLACEHOLDER — Who this program is for and how a family applies.",
+    "gallery": [
+      {
+        "src": "assets/images/placeholder-gallery-1.svg",
+        "alt": "PLACEHOLDER — gallery image 1 for Academic Success Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-2.svg",
+        "alt": "PLACEHOLDER — gallery image 2 for Academic Success Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-3.svg",
+        "alt": "PLACEHOLDER — gallery image 3 for Academic Success Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-4.svg",
+        "alt": "PLACEHOLDER — gallery image 4 for Academic Success Program. Describe the photograph here."
+      }
+    ],
+    "whatWeDo": "PLACEHOLDER — Two or three paragraphs describing what actually happens in this program: who runs it, what a session looks like, and what a participant walks away with.\n\nPLACEHOLDER — Second paragraph. Replace all of this with approved copy.",
+    "whoWeServe": "PLACEHOLDER — Who this program is for, in plain language a parent or participant can check themselves against.",
+    "eligibility": "PLACEHOLDER — Any requirements to take part: residency, school enrolment, referral, paperwork.",
+    "serviceArea": "Smyrna, Tennessee and surrounding Rutherford County",
+    "ageRange": "Grades K–12",
+    "ageMin": 5,
+    "ageMax": 18,
+    "schedule": "PLACEHOLDER — Days, times, and season. Replace with the real schedule.",
+    "location": "PLACEHOLDER — Venue name and address, Smyrna, Tennessee.",
+    "cost": "Free",
     "impactStats": [
       {
-        "label": "PLACEHOLDER — Youth mentored",
+        "label": "PLACEHOLDER — Participants served",
         "value": null,
         "suffix": ""
       },
       {
-        "label": "PLACEHOLDER — Active mentors",
+        "label": "PLACEHOLDER — Sessions per year",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Volunteer hours",
         "value": null,
         "suffix": ""
       }
     ],
-    "cta": {
-      "text": "Become a mentor",
-      "href": "get-involved.html#volunteer"
+    "ctaPrimary": {
+      "text": "Apply or enroll",
+      "href": "contact.html"
     },
-    "ageRange": "PLACEHOLDER — Ages 14–18",
-    "schedule": "PLACEHOLDER — Every other Tuesday, 6:00–7:30 PM",
-    "location": "PLACEHOLDER — Venue name, Smyrna, Tennessee",
-    "cost": "PLACEHOLDER — Free"
+    "ctaSecondary": {
+      "text": "Volunteer for this program",
+      "href": "get-involved.html#volunteer"
+    }
+  },
+  {
+    "_comment": "Name, age range and cost are client-supplied. Everything marked PLACEHOLDER still needs copy. impactStats values stay null until confirmed in writing.",
+    "published": true,
+    "slug": "volunteer-program",
+    "name": "Volunteer Program",
+    "category": "Community Support",
+    "summary": "PLACEHOLDER — One line that sits under the program name in the hero.",
+    "shortDescription": "PLACEHOLDER — One line that stands alone in a card on the programs index.",
+    "metaDescription": "PLACEHOLDER — Volunteer Program at Ty’s Future Stars Foundation. Replace with a 150-character description for search results.",
+    "hero": {
+      "src": "assets/images/program-volunteer-program-hero.svg",
+      "alt": "PLACEHOLDER — placeholder graphic. Replace with a photograph and describe it here."
+    },
+    "gallery": [
+      {
+        "src": "assets/images/placeholder-gallery-1.svg",
+        "alt": "PLACEHOLDER — gallery image 1 for Volunteer Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-2.svg",
+        "alt": "PLACEHOLDER — gallery image 2 for Volunteer Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-3.svg",
+        "alt": "PLACEHOLDER — gallery image 3 for Volunteer Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-4.svg",
+        "alt": "PLACEHOLDER — gallery image 4 for Volunteer Program. Describe the photograph here."
+      }
+    ],
+    "whatWeDo": "PLACEHOLDER — Two or three paragraphs describing what actually happens in this program: who runs it, what a session looks like, and what a participant walks away with.\n\nPLACEHOLDER — Second paragraph. Replace all of this with approved copy.",
+    "whoWeServe": "PLACEHOLDER — Who this program is for, in plain language a parent or participant can check themselves against.",
+    "eligibility": "PLACEHOLDER — Any requirements to take part: residency, school enrolment, referral, paperwork.",
+    "serviceArea": "Smyrna, Tennessee and surrounding Rutherford County",
+    "ageRange": "All ages",
+    "ageMin": 0,
+    "ageMax": 120,
+    "schedule": "PLACEHOLDER — Days, times, and season. Replace with the real schedule.",
+    "location": "PLACEHOLDER — Venue name and address, Smyrna, Tennessee.",
+    "cost": "Free",
+    "impactStats": [
+      {
+        "label": "PLACEHOLDER — Participants served",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Sessions per year",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Volunteer hours",
+        "value": null,
+        "suffix": ""
+      }
+    ],
+    "ctaPrimary": {
+      "text": "Apply or enroll",
+      "href": "contact.html"
+    },
+    "ctaSecondary": {
+      "text": "Volunteer for this program",
+      "href": "get-involved.html#volunteer"
+    }
+  },
+  {
+    "_comment": "Name, age range and cost are client-supplied. Everything marked PLACEHOLDER still needs copy. impactStats values stay null until confirmed in writing.",
+    "published": true,
+    "slug": "community-outreach",
+    "name": "Community Outreach Program",
+    "category": "Community Support",
+    "summary": "PLACEHOLDER — One line that sits under the program name in the hero.",
+    "shortDescription": "PLACEHOLDER — One line that stands alone in a card on the programs index.",
+    "metaDescription": "PLACEHOLDER — Community Outreach Program at Ty’s Future Stars Foundation. Replace with a 150-character description for search results.",
+    "hero": {
+      "src": "assets/images/program-community-outreach-hero.svg",
+      "alt": "PLACEHOLDER — placeholder graphic. Replace with a photograph and describe it here."
+    },
+    "gallery": [
+      {
+        "src": "assets/images/placeholder-gallery-1.svg",
+        "alt": "PLACEHOLDER — gallery image 1 for Community Outreach Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-2.svg",
+        "alt": "PLACEHOLDER — gallery image 2 for Community Outreach Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-3.svg",
+        "alt": "PLACEHOLDER — gallery image 3 for Community Outreach Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-4.svg",
+        "alt": "PLACEHOLDER — gallery image 4 for Community Outreach Program. Describe the photograph here."
+      }
+    ],
+    "whatWeDo": "PLACEHOLDER — Two or three paragraphs describing what actually happens in this program: who runs it, what a session looks like, and what a participant walks away with.\n\nPLACEHOLDER — Second paragraph. Replace all of this with approved copy.",
+    "whoWeServe": "PLACEHOLDER — Who this program is for, in plain language a parent or participant can check themselves against.",
+    "eligibility": "PLACEHOLDER — Any requirements to take part: residency, school enrolment, referral, paperwork.",
+    "serviceArea": "Smyrna, Tennessee and surrounding Rutherford County",
+    "ageRange": "Ages 16+",
+    "ageMin": 16,
+    "ageMax": 120,
+    "schedule": "PLACEHOLDER — Days, times, and season. Replace with the real schedule.",
+    "location": "PLACEHOLDER — Venue name and address, Smyrna, Tennessee.",
+    "cost": "Free",
+    "impactStats": [
+      {
+        "label": "PLACEHOLDER — Participants served",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Sessions per year",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Volunteer hours",
+        "value": null,
+        "suffix": ""
+      }
+    ],
+    "ctaPrimary": {
+      "text": "Apply or enroll",
+      "href": "contact.html"
+    },
+    "ctaSecondary": {
+      "text": "Volunteer for this program",
+      "href": "get-involved.html#volunteer"
+    }
+  },
+  {
+    "_comment": "Name, age range and cost are client-supplied. Everything marked PLACEHOLDER still needs copy. impactStats values stay null until confirmed in writing.",
+    "published": true,
+    "slug": "grief-support-healing",
+    "name": "Grief Support and Healing Program",
+    "category": "Community Support",
+    "summary": "PLACEHOLDER — One line that sits under the program name in the hero.",
+    "shortDescription": "PLACEHOLDER — One line that stands alone in a card on the programs index.",
+    "metaDescription": "PLACEHOLDER — Grief Support and Healing Program at Ty’s Future Stars Foundation. Replace with a 150-character description for search results.",
+    "hero": {
+      "src": "assets/images/program-grief-support-healing-hero.svg",
+      "alt": "PLACEHOLDER — placeholder graphic. Replace with a photograph and describe it here."
+    },
+    "gallery": [
+      {
+        "src": "assets/images/placeholder-gallery-1.svg",
+        "alt": "PLACEHOLDER — gallery image 1 for Grief Support and Healing Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-2.svg",
+        "alt": "PLACEHOLDER — gallery image 2 for Grief Support and Healing Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-3.svg",
+        "alt": "PLACEHOLDER — gallery image 3 for Grief Support and Healing Program. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-4.svg",
+        "alt": "PLACEHOLDER — gallery image 4 for Grief Support and Healing Program. Describe the photograph here."
+      }
+    ],
+    "whatWeDo": "PLACEHOLDER — Two or three paragraphs describing what actually happens in this program: who runs it, what a session looks like, and what a participant walks away with.\n\nPLACEHOLDER — Second paragraph. Replace all of this with approved copy.",
+    "whoWeServe": "PLACEHOLDER — Who this program is for, in plain language a parent or participant can check themselves against.",
+    "eligibility": "PLACEHOLDER — Any requirements to take part: residency, school enrolment, referral, paperwork.",
+    "serviceArea": "Smyrna, Tennessee and surrounding Rutherford County",
+    "ageRange": "All ages",
+    "ageMin": 0,
+    "ageMax": 120,
+    "schedule": "PLACEHOLDER — Days, times, and season. Replace with the real schedule.",
+    "location": "PLACEHOLDER — Venue name and address, Smyrna, Tennessee.",
+    "cost": "Free",
+    "impactStats": [
+      {
+        "label": "PLACEHOLDER — Participants served",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Sessions per year",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Volunteer hours",
+        "value": null,
+        "suffix": ""
+      }
+    ],
+    "ctaPrimary": {
+      "text": "Apply or enroll",
+      "href": "contact.html"
+    },
+    "ctaSecondary": {
+      "text": "Volunteer for this program",
+      "href": "get-involved.html#volunteer"
+    }
+  },
+  {
+    "_comment": "Name, age range and cost are client-supplied. Everything marked PLACEHOLDER still needs copy. impactStats values stay null until confirmed in writing.",
+    "published": true,
+    "slug": "stop-the-violence",
+    "name": "Stop the Violence Youth Initiative",
+    "category": "Youth Development",
+    "summary": "PLACEHOLDER — One line that sits under the program name in the hero.",
+    "shortDescription": "PLACEHOLDER — One line that stands alone in a card on the programs index.",
+    "metaDescription": "PLACEHOLDER — Stop the Violence Youth Initiative at Ty’s Future Stars Foundation. Replace with a 150-character description for search results.",
+    "hero": {
+      "src": "assets/images/program-stop-the-violence-hero.svg",
+      "alt": "PLACEHOLDER — placeholder graphic. Replace with a photograph and describe it here."
+    },
+    "gallery": [
+      {
+        "src": "assets/images/placeholder-gallery-1.svg",
+        "alt": "PLACEHOLDER — gallery image 1 for Stop the Violence Youth Initiative. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-2.svg",
+        "alt": "PLACEHOLDER — gallery image 2 for Stop the Violence Youth Initiative. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-3.svg",
+        "alt": "PLACEHOLDER — gallery image 3 for Stop the Violence Youth Initiative. Describe the photograph here."
+      },
+      {
+        "src": "assets/images/placeholder-gallery-4.svg",
+        "alt": "PLACEHOLDER — gallery image 4 for Stop the Violence Youth Initiative. Describe the photograph here."
+      }
+    ],
+    "whatWeDo": "PLACEHOLDER — Two or three paragraphs describing what actually happens in this program: who runs it, what a session looks like, and what a participant walks away with.\n\nPLACEHOLDER — Second paragraph. Replace all of this with approved copy.",
+    "whoWeServe": "PLACEHOLDER — Who this program is for, in plain language a parent or participant can check themselves against.",
+    "eligibility": "PLACEHOLDER — Any requirements to take part: residency, school enrolment, referral, paperwork.",
+    "serviceArea": "Smyrna, Tennessee and surrounding Rutherford County",
+    "ageRange": "Ages 14–21",
+    "ageMin": 14,
+    "ageMax": 21,
+    "schedule": "PLACEHOLDER — Days, times, and season. Replace with the real schedule.",
+    "location": "PLACEHOLDER — Venue name and address, Smyrna, Tennessee.",
+    "cost": "Free",
+    "impactStats": [
+      {
+        "label": "PLACEHOLDER — Participants served",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Sessions per year",
+        "value": null,
+        "suffix": ""
+      },
+      {
+        "label": "PLACEHOLDER — Volunteer hours",
+        "value": null,
+        "suffix": ""
+      }
+    ],
+    "ctaPrimary": {
+      "text": "Apply or enroll",
+      "href": "contact.html"
+    },
+    "ctaSecondary": {
+      "text": "Volunteer for this program",
+      "href": "get-involved.html#volunteer"
+    }
   }
 ]

@@ -56,12 +56,14 @@
     },
     {
       label: "Programs", ready: true,
+      // These mirror data/program-categories.json. The index reads
+      // ?category= on load, so each link opens a pre-filtered view.
       children: [
-        { label: "All Programs",           href: "programs.html",              ready: true },
-        { label: "Scholarships",           href: "programs.html#scholarships", ready: true },
-        { label: "Mentorship & Leadership", href: "programs.html#mentorship",  ready: true },
-        { label: "Basketball Development", href: "programs.html#basketball",   ready: true },
-        { label: "Gun Violence Prevention", href: "programs.html#prevention",  ready: true }
+        { label: "All Programs",      href: "programs.html",                                ready: true },
+        { label: "Youth Development", href: "programs.html?category=youth-development",     ready: true },
+        { label: "Sports & Recreation", href: "programs.html?category=sports-recreation", ready: true },
+        { label: "Community Support", href: "programs.html?category=community-support",     ready: true },
+        { label: "Education",         href: "programs.html?category=education",             ready: true }
       ]
     },
     {

@@ -1,0 +1,30 @@
+[
+  {
+    "published": true,
+    "order": 1,
+    "id": "youth-development",
+    "name": "Youth Development",
+    "description": "PLACEHOLDER — One or two sentences on what this category covers and who it is for."
+  },
+  {
+    "published": true,
+    "order": 2,
+    "id": "sports-recreation",
+    "name": "Sports & Recreation",
+    "description": "PLACEHOLDER — One or two sentences on what this category covers and who it is for."
+  },
+  {
+    "published": true,
+    "order": 3,
+    "id": "community-support",
+    "name": "Community Support",
+    "description": "PLACEHOLDER — One or two sentences on what this category covers and who it is for."
+  },
+  {
+    "published": true,
+    "order": 4,
+    "id": "education",
+    "name": "Education",
+    "description": "PLACEHOLDER — One or two sentences on what this category covers and who it is for."
+  }
+]

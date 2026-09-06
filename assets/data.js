@@ -35,7 +35,7 @@ window.TFSF = window.TFSF || {};
   /* Collections that exist. Guards against a typo'd name silently
      resolving to a 404 page rendered as JSON. */
   var COLLECTIONS = [
-    "programs", "events", "stories", "posts",
+    "programs", "program-categories", "events", "stories", "posts",
     "sponsors", "stats", "resources", "team"
   ];
 
