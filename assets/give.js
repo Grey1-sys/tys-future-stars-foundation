@@ -45,17 +45,13 @@
     frequencyParam: "frequency"
   };
 
-  /* Shirt sizes are UI options, not editorial content. */
-  var SHIRT_SIZES = ["YS", "YM", "YL", "S", "M", "L", "XL", "2XL", "3XL"];
-
-  var CUSTOM_MINIMUM = 35;
+  var CUSTOM_MINIMUM = 15;
 
   /* ---------------- State ---------------- */
   var state = {
     frequency: "monthly",   // monthly is preselected: it is the option that helps most
     amount: null,
-    isCustom: false,
-    shirtSize: ""
+    isCustom: false
   };
 
   var levels = [];
@@ -126,7 +122,6 @@
     host.innerHTML = levels.map(function (l) {
       return '<button type="button" class="amount-tile give-tile" ' +
         'data-amount="' + l.amount + '" ' +
-        'data-shirt="' + (l.includesShirt ? "1" : "0") + '" ' +
         'aria-pressed="false">' +
         '<span class="give-tile-amount">' + esc(money(l.amount)) + "</span>" +
         '<span class="give-tile-impact">' + esc(l.impact || "") + "</span>" +
@@ -141,41 +136,6 @@
         if (input) input.value = "";
         sync();
       });
-    });
-  }
-
-  function renderShirt() {
-    var host = document.getElementById("give-shirt");
-    if (!host) return;
-    host.innerHTML =
-      '<div class="give-shirt">' +
-        '<img class="give-shirt-img" src="assets/images/giving-tshirt-placeholder.svg" ' +
-          'alt="Placeholder graphic standing in for a photograph of the supporter t-shirt." ' +
-          'width="800" height="600" loading="lazy" decoding="async">' +
-        '<div class="give-shirt-body">' +
-          "<h3>First gift? A shirt is on us.</h3>" +
-          "<p>First-time donors receive a supporter t-shirt. Pick a size and we will " +
-            "confirm it with you by email after your gift.</p>" +
-          '<div class="field give-shirt-field">' +
-            '<label for="give-shirt-size">T-shirt size</label>' +
-            '<select id="give-shirt-size">' +
-              '<option value="">Choose a size</option>' +
-              SHIRT_SIZES.map(function (s) {
-                return '<option value="' + esc(s) + '">' + esc(s) + "</option>";
-              }).join("") +
-            "</select>" +
-          "</div>" +
-          /* Honest: shirt size cannot ride Givebutter's prefill params,
-             which carry amount and frequency only. */
-          '<p class="form-note">Your size is not sent with the payment. ' +
-            "We will email to confirm it.</p>" +
-        "</div>" +
-      "</div>";
-
-    var sel = document.getElementById("give-shirt-size");
-    if (sel) sel.addEventListener("change", function () {
-      state.shirtSize = sel.value;
-      sync();
     });
   }
 
@@ -305,8 +265,10 @@
       var n = parseInt(raw, 10);
       if (n < CUSTOM_MINIMUM) {
         if (showError && error) {
-          error.textContent = "Custom gifts start at " + money(CUSTOM_MINIMUM) +
-            ". Use a tile above for a smaller amount.";
+          // $15 is the floor everywhere, tiles included -- so there is
+          // no "pick a smaller tile" escape hatch to point at.
+          error.textContent = "The smallest gift we can accept is " +
+            money(CUSTOM_MINIMUM) + ".";
           error.classList.add("show");
         }
         input.setAttribute("aria-invalid", "true");
@@ -485,7 +447,6 @@
         units = res[1].slice().sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
 
         renderLevels();
-        renderShirt();
         initCustom();
         initFrequency();
         sync();

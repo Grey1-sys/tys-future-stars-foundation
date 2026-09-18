@@ -63,10 +63,9 @@ Amount and frequency ride across as query parameters, so nobody retypes them
 https://givebutter.com/<campaign>?amount=20&frequency=monthly
 ```
 
-**T-shirt size does not ride along.** Givebutter's prefill supports amount and
-frequency only. The size menu is collected on our page for the donor's benefit and the
-copy says plainly that we will confirm it by email. To capture it properly, add a
-custom question on the Givebutter form.
+Only amount and frequency cross the handoff. If a future perk or question needs to
+travel with the gift, add it as a custom question on the Givebutter form rather than
+trying to encode it in the URL.
 
 The old Stripe flow is gone: `assets/donate.js` was deleted. The two serverless
 functions are now dead in a second sense -- they were already 404-redirected, and
@@ -111,7 +110,7 @@ are defined but not rendered, so the nav never links to a page that doesn't exis
 | `program.html?slug=` | Nav · Hero · What We Do · Who We Serve · Impact · Details · Gallery + lightbox · Get Involved · Related · Footer |
 | `get-involved.html` | Nav · Page hero · Volunteer / Partner / Fundraise · 3-step process · Sign-up form (`#volunteer`) · Donate CTA · Footer |
 | `contact.html` | Nav · Page hero · Contact info (Email / Phone / Location / Hours) + Contact form · Footer |
-| `donate.html` | Nav · Hero + 501(c)(3)/EIN trust line · Frequency + amounts + t-shirt · Your Donation in Action · Goal meter · Sponsorship · Other ways to give · FAQ · Footer |
+| `donate.html` | Nav · Hero + 501(c)(3)/EIN trust line · Frequency + amount tiles + custom · Your Donation in Action · Goal meter · Sponsorship · Other ways to give · FAQ · Footer |
 | `404.html` | Nav · Hero · Footer |
 | `privacy.html` | Nav · Page hero · Interim privacy statement · Footer |
 | `terms.html` | Nav · Page hero · Interim terms statement · Footer |
@@ -422,16 +421,17 @@ A `null` value is not rendered.
 }
 ```
 
-**`giving-levels.json`** - the amount tiles on donate.html.
+**`giving-levels.json`** - the amount tiles on donate.html. **$15 is the floor across
+the whole page**, tiles and custom entry alike (`CUSTOM_MINIMUM` in `assets/give.js`).
+Do not add a tile below it: the custom field would reject an amount the tiles offer.
 
 ```json
 {
   "published": true,
   "order": 1,
-  "id": "level-20",
-  "amount": 20,
-  "impact": "One line shown under the dollar figure on the tile.",
-  "includesShirt": true
+  "id": "level-15",
+  "amount": 15,
+  "impact": "One line shown under the dollar figure on the tile."
 }
 ```
 
@@ -716,7 +716,6 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Confirmed campaign raised total and goal, to switch on the goal meter
 - [ ] Sponsor a Child and Sponsor a Program dollar amounts
 - [ ] Mailing address, DAF details, and brokerage details for "Other ways to give"
-- [ ] Whether the t-shirt offer is genuinely first-gift-only, and how sizes get fulfilled
 
 ### Received
 

@@ -2041,28 +2041,6 @@ body.lightbox-open { overflow: hidden; }
 .give-custom-error { display: none; }
 .give-custom-error.show { display: flex; }
 
-/* ---------- First-gift shirt ---------- */
-.give-shirt {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: var(--space-5);
-  align-items: start;
-  margin-top: var(--space-6);
-  padding: var(--space-5);
-  background: var(--color-surface-subtle);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-}
-.give-shirt-img {
-  width: 100%;
-  border-radius: var(--radius-md);
-  background: var(--color-surface-dark);
-}
-.give-shirt-body h3 { font-size: var(--text-4xl); }
-.give-shirt-body p { margin-top: var(--space-2); font-size: var(--text-lg); color: var(--color-text-secondary); }
-.give-shirt-field { margin-top: var(--space-4); max-width: 220px; }
-@media (max-width: 560px) { .give-shirt { grid-template-columns: 1fr; } }
-
 /* ---------- Your donation in action ---------- */
 .give-action-panel { padding: var(--space-8); }
 .give-action-panel h2 {
