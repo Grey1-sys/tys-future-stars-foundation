@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Donate — Ty's Future Stars Foundation</title>
-<meta name="description" content="Make a secure, tax-deductible donation to Ty's Future Stars Foundation.">
+<meta name="description" content="Make a secure, tax-deductible donation to Ty's Future Stars Foundation, a registered 501(c)(3) nonprofit serving Smyrna, Tennessee.">
 <link rel="icon" href="assets/img/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,103 +19,112 @@
 
 <main id="main">
 
+<!-- ===== HERO ===== -->
 <header class="page-hero donate-hero">
   <span class="blob blob-1"></span>
   <span class="blob blob-2"></span>
   <div class="wrap">
     <div class="breadcrumb"><a href="index.html">Home</a> / Donate</div>
     <span class="eyebrow">Give today</span>
-    <h1 class="display" style="margin-top:14px;max-width:20ch;">Fund a future star.</h1>
-    <p class="lede">Your gift funds scholarships, mentorship, and basketball opportunities for young student-athletes — carrying Ty's legacy forward. Every gift is tax-deductible.</p>
-    <div class="trust-chips">
-      <span class="trust-chip"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure &amp; encrypted</span>
-      <span class="trust-chip"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>Tax-deductible 501(c)(3)</span>
-      <span class="trust-chip"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg>100% to programs</span>
-    </div>
+    <h1 class="display mt-1">Fund a future star.</h1>
+    <p class="lede mt-2">Every gift puts a young person from Smyrna on a court, in a
+      classroom, and next to an adult who shows up for them.</p>
+    <p class="trust-line">Ty's Future Stars Foundation is a registered 501(c)(3)
+      nonprofit organization. <strong>EIN 42-2398737.</strong> Your gift is
+      tax-deductible to the extent allowed by law.</p>
   </div>
 </header>
 
+<!-- ===== GIVING FORM ===== -->
 <section class="section">
   <div class="wrap donate-wrap">
-    <!-- GIVING FORM -->
-    <div class="reveal">
-      <div class="form-card give-card">
-        <div class="give-card-head">
-          <span class="gch-ic"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-          <div>
-            <div class="gch-t">Make your gift</div>
-            <div class="gch-s">Choose an amount and frequency below.</div>
-          </div>
-        </div>
-        <!-- Frequency -->
-        <div class="freq-toggle" role="group" aria-label="Donation frequency">
-          <button type="button" class="active" data-freq="once">One-time</button>
-          <button type="button" data-freq="monthly">Monthly</button>
-        </div>
 
-        <!-- Amounts -->
-        <div class="amount-grid" role="group" aria-label="Donation amount">
-          <button type="button" class="amount-tile" data-amount="25">$25</button>
-          <button type="button" class="amount-tile active" data-amount="50">$50</button>
-          <button type="button" class="amount-tile" data-amount="100">$100</button>
-          <button type="button" class="amount-tile" data-amount="250">$250</button>
-          <button type="button" class="amount-tile" data-amount="500">$500</button>
-          <button type="button" class="amount-tile" data-amount="custom">Other</button>
-        </div>
-        <div class="amount-custom" id="customWrap">
-          <span class="cur">$</span>
-          <input type="number" min="1" step="1" inputmode="decimal" id="customAmount" placeholder="Enter amount" aria-label="Custom amount">
-        </div>
-
-        <!-- Impact line -->
-        <div class="impact-line">
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
-          <span id="impactLine">Your <strong>$50</strong> gift helps cover gear and court time for a young athlete.</span>
-        </div>
-
-        <!-- Donor details -->
-        <div class="field-legend">Your details</div>
-        <div class="field-row">
-          <div class="field"><label for="firstName">First name</label><input id="firstName" type="text" placeholder="Jamie"></div>
-          <div class="field"><label for="lastName">Last name</label><input id="lastName" type="text" placeholder="Rivera"></div>
-        </div>
-        <div class="field"><label for="email">Email (for your receipt)</label><input id="email" type="email" placeholder="jamie@example.com"></div>
-
-        <!-- Submit — online giving not switched on yet -->
-        <div class="give-summary">
-          <button type="button" id="giveBtn" class="btn btn-primary btn-lg" disabled aria-describedby="giveSoon">
-            Online giving opens soon
-          </button>
-          <p class="give-error" id="giveError">Please enter a valid amount.</p>
-          <p class="give-soon" id="giveSoon">
-            We're finishing setup on secure online donations. To give today, email
-            <a href="mailto:hello@tysfuturestars.org?subject=I%20would%20like%20to%20donate">hello@tysfuturestars.org</a>
-            and we'll help you right away.
-          </p>
+    <div class="form-card give-card">
+      <div class="give-card-head">
+        <span class="gch-ic">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        </span>
+        <div>
+          <div class="gch-t">Make your gift</div>
+          <div class="gch-s">Choose a frequency and an amount.</div>
         </div>
       </div>
+
+      <!-- Frequency: monthly preselected -->
+      <div class="freq-toggle" role="group" aria-label="Donation frequency">
+        <button type="button" data-freq="once" aria-pressed="false">One-time</button>
+        <button type="button" data-freq="monthly" class="active" aria-pressed="true">
+          Monthly
+          <span class="freq-flag">Helps most</span>
+        </button>
+      </div>
+      <p class="freq-note">Monthly gifts are what let us commit to a season, not just a week.</p>
+
+      <!-- Amount tiles (from data/giving-levels.json) -->
+      <div class="amount-grid give-grid" id="give-levels" role="group" aria-label="Donation amount"></div>
+
+      <!-- Custom amount -->
+      <div class="field give-custom-field">
+        <label for="give-custom">Or enter another amount</label>
+        <input id="give-custom" type="text" inputmode="numeric" autocomplete="off"
+               placeholder="$35 minimum" aria-describedby="give-custom-error">
+        <p class="field-error give-custom-error" id="give-custom-error" role="alert"></p>
+      </div>
+
+      <!-- First-gift t-shirt -->
+      <div id="give-shirt"></div>
+
+      <!-- Handoff to Givebutter -->
+      <div class="give-summary" id="give-submit"></div>
     </div>
 
-    <!-- ASIDE -->
-    <aside class="give-aside reveal d1">
-      <h2>Why give to Ty's Future Stars?</h2>
-      <div class="ga-row">
-        <span class="ga-ic"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></span>
-        <div><div class="ga-t">$7,000+ awarded</div><div class="ga-s">In scholarships to student-athletes so far.</div></div>
-      </div>
-      <div class="ga-row">
-        <span class="ga-ic"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-        <div><div class="ga-t">Tax-deductible</div><div class="ga-s">A receipt is emailed instantly.</div></div>
-      </div>
-      <div class="ga-row">
-        <span class="ga-ic"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-        <div><div class="ga-t">Secure &amp; private</div><div class="ga-s">Card details never touch our servers.</div></div>
-      </div>
-      <div class="ga-row">
-        <span class="ga-ic"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span>
-        <div><div class="ga-t">In Ty's honor</div><div class="ga-s">Every gift carries his legacy forward.</div></div>
-      </div>
+    <!-- Your Donation in Action -->
+    <aside class="give-aside give-action-panel" aria-live="polite">
+      <h2>Your donation in action</h2>
+      <div id="give-action"></div>
     </aside>
+
+  </div>
+</section>
+
+<!-- ===== GOAL METER ===== -->
+<section class="section soft">
+  <div class="wrap narrow">
+    <div id="give-goal"></div>
+  </div>
+</section>
+
+<!-- ===== SPONSORSHIP ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Go further</span>
+      <h2 class="title">Sponsorship</h2>
+      <p>Two ways to back something specific rather than the general fund.</p>
+    </div>
+    <div id="give-options"></div>
+  </div>
+</section>
+
+<!-- ===== OTHER WAYS TO GIVE ===== -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Other ways to give</span>
+      <h2 class="title">Not everything happens on a card.</h2>
+    </div>
+    <div id="give-other"></div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section">
+  <div class="wrap narrow">
+    <div class="section-head">
+      <span class="eyebrow">Good to know</span>
+      <h2 class="title">Questions about giving.</h2>
+    </div>
+    <div id="give-faq" data-faq-page="donate"></div>
   </div>
 </section>
 
@@ -123,23 +132,10 @@
 
 <div id="site-footer"></div>
 
-<!-- CONFIG for when online giving is switched on (see README):
-     1. paste your Stripe publishable key below
-     2. re-enable the button in the markup above
-     3. restore the two Stripe <script> tags noted below -->
-<script>
-  window.TYKEEM_CONFIG = {
-    // Your Stripe publishable key (starts with pk_test_ or pk_live_).
-    stripePublishableKey: "pk_test_REPLACE_ME",
-    // Endpoint that creates a Checkout Session. Default works on Netlify.
-    // For Vercel use "/api/create-checkout-session".
-    checkoutEndpoint: "/.netlify/functions/create-checkout-session"
-  };
-</script>
-<!-- Stripe.js is intentionally not loaded while giving is switched off:
-     <script src="https://js.stripe.com/v3/"></script> -->
-<script src="assets/donate.js"></script>
 <script src="assets/site.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/render.js"></script>
+<script src="assets/give.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>

@@ -36,7 +36,9 @@ window.TFSF = window.TFSF || {};
      resolving to a 404 page rendered as JSON. */
   var COLLECTIONS = [
     "programs", "program-categories", "events", "stories", "posts",
-    "sponsors", "stats", "resources", "team"
+    "sponsors", "stats", "resources", "team",
+    "giving-levels", "impact-units", "giving-options",
+    "other-ways-to-give", "faq"
   ];
 
   var cache = {};

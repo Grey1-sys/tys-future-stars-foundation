@@ -20,5 +20,17 @@
     "icon": "users",
     "asOf": "",
     "sourceNote": "PLACEHOLDER — who confirmed this figure, in writing, and when."
+  },
+  {
+    "_comment": "Donation goal meter on donate.html. Set BOTH value and goal to confirmed figures, then flip published to true. The meter hides itself until then.",
+    "published": false,
+    "id": "campaign-goal",
+    "label": "PLACEHOLDER — 2026 campaign",
+    "value": null,
+    "goal": null,
+    "suffix": "",
+    "icon": "target",
+    "asOf": "",
+    "sourceNote": "PLACEHOLDER — who confirmed the raised total and the goal, in writing, and when."
   }
 ]

@@ -1,0 +1,74 @@
+[
+  {
+    "published": true,
+    "order": 1,
+    "page": "donate",
+    "id": "tax-deductible",
+    "question": "Is my gift tax-deductible?",
+    "answer": "Yes. Ty’s Future Stars Foundation is a registered 501(c)(3) nonprofit organization, EIN 42-2398737, so your donation is tax-deductible to the extent allowed by law."
+  },
+  {
+    "published": true,
+    "order": 2,
+    "page": "donate",
+    "id": "receipt",
+    "question": "Will I get a receipt?",
+    "answer": "Yes. Our payment partner emails a receipt as soon as your gift is processed. If it has not arrived within a few minutes, check your spam folder, then email us and we will resend it."
+  },
+  {
+    "published": true,
+    "order": 3,
+    "page": "donate",
+    "id": "cancel-monthly",
+    "question": "Can I cancel a monthly gift?",
+    "answer": "Any time, with no penalty and no awkward conversation. Use the link in your receipt email to manage or cancel your recurring gift, or email us and we will take care of it for you."
+  },
+  {
+    "published": true,
+    "order": 4,
+    "page": "donate",
+    "id": "where-money-goes",
+    "question": "Where does my money go?",
+    "answer": "PLACEHOLDER — a plain-language breakdown of how gifts are used across programs, scholarships, and operating costs. Do not publish a percentage split until it is confirmed in writing."
+  },
+  {
+    "published": true,
+    "order": 5,
+    "page": "donate",
+    "id": "secure",
+    "question": "Is this secure?",
+    "answer": "Yes. Donations are processed on our payment partner’s own secure, PCI-compliant pages. Card details are never entered on this website and never reach our servers."
+  },
+  {
+    "published": true,
+    "order": 1,
+    "page": "programs",
+    "id": "programs-donation-use",
+    "question": "Where does my donation go?",
+    "answer": "Your gift funds scholarships, mentorship, and basketball development for young student-athletes, along with community events that advocate for a future free from gun violence."
+  },
+  {
+    "published": true,
+    "order": 2,
+    "page": "programs",
+    "id": "programs-tax-deductible",
+    "question": "Is my gift tax-deductible?",
+    "answer": "Yes. Ty’s Future Stars Foundation is a registered 501(c)(3) nonprofit, EIN 42-2398737, so your donation is tax-deductible and a receipt is emailed to you right away."
+  },
+  {
+    "published": true,
+    "order": 3,
+    "page": "programs",
+    "id": "programs-eligibility",
+    "question": "Who is eligible for a scholarship?",
+    "answer": "Our scholarships support student-athletes pursuing their education and basketball aspirations. Contact us for current eligibility criteria and application dates."
+  },
+  {
+    "published": true,
+    "order": 4,
+    "page": "programs",
+    "id": "programs-get-involved",
+    "question": "How can I get involved beyond giving?",
+    "answer": "You can volunteer, mentor, coach, partner with us as a sponsor, or start your own fundraiser. Visit our Get Involved page to sign up."
+  }
+]

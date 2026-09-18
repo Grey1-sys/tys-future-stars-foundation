@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Placeholder graphic">
+<rect width="800" height="600" fill="#0A1E3F"/>
+<g fill="none" stroke="#A8D1F0" stroke-width="3" opacity="0.22">
+<circle cx="400" cy="300" r="180"/><path d="M0 300h800"/></g>
+<g transform="translate(400 285)">
+<path d="M-150 -95 l70 -35 a55 40 0 0 0 160 0 l70 35 l-30 85 l-50 -18 l0 145 a12 12 0 0 1 -12 12 l-116 0 a12 12 0 0 1 -12 -12 l0 -145 l-50 18 z"
+ fill="#1B4F9C" stroke="#A8D1F0" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="0" cy="25" r="38" fill="#F26522" opacity="0.92"/>
+<path d="M-38 25h76M0 -13v76" stroke="#0A1E3F" stroke-width="4" opacity="0.6"/>
+</g>
+<text x="400" y="540" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" letter-spacing="6" fill="#A8D1F0">PLACEHOLDER GRAPHIC</text>
+</svg>

@@ -23,10 +23,11 @@ Pages are hand-written `.html` at the repo root.
 | `assets/styles.css` | Every component and page style. Contains **zero** raw colors. |
 | `assets/site.js` | Shared header + footer, injected into every page. Nav config lives here. |
 | `assets/main.js` | Page-level behavior (scroll reveals, form handling). |
-| `assets/donate.js` | Donation form state. Dormant while giving is off. |
+| `assets/give.js` | Donate page: amounts, frequency, impact estimator, Givebutter handoff. |
 | `assets/data.js` | Loads `/data/*.json`. Applies the publish + consent gates. |
 | `assets/render.js` | Turns a collection into DOM from a template. |
 | `assets/programs.js` | Programs index (filters) and the program detail template. |
+| `assets/give.js` | Donate page: amounts, frequency, impact estimator, Givebutter handoff. |
 | `assets/styleguide.{css,js}` | Internal reference page only. |
 
 Load order on every page: `tokens.css` -> `styles.css`, then `site.js` -> `main.js`.
@@ -38,17 +39,38 @@ nothing else — deploys are a straight file upload, triggered automatically on 
 
 The only external runtime dependency is **Google Fonts** (Anton + Inter).
 
-### Online giving is currently OFF
+### Online giving: Givebutter, not Stripe
 
-- `donate.html` renders the full giving UI, but the submit button is `disabled` and reads
-  "Online giving opens soon." Donors are directed to email instead.
-- Stripe.js is commented out; the publishable key is still `pk_test_REPLACE_ME`.
-- `netlify/functions/create-checkout-session.js` (Netlify) and
-  `api/create-checkout-session.js` (Vercel) both exist but **are not deployed** —
-  `netlify.toml` 404-redirects `/netlify/*` and `/api/*`, and the `[functions]` block is
-  commented out. `stripe` is in `package.json` but is never installed at deploy time.
-- To switch giving on, follow the restore block at the top of `netlify.toml`, then the
-  Stripe steps in `README.md`.
+Donations hand off to **Givebutter's hosted checkout**. There is no payment form on
+this site and there must never be one -- no card data touches these pages.
+
+**To switch it on:** put the foundation's public Givebutter campaign URL in
+`GIVEBUTTER.campaignUrl` at the top of `assets/give.js`, e.g.
+`"https://givebutter.com/tys-future-stars"`. That is the only value needed and it is
+public by design. **Never put a Givebutter password or API key in this repo.**
+
+Until it is set, every give button stays disabled and the page directs donors to email.
+
+Amount and frequency ride across as query parameters, so nobody retypes them
+(documented at docs.givebutter.com, "URL Prefill Parameters"):
+
+| Parameter | Value |
+|---|---|
+| `amount` | dollars, e.g. `25` |
+| `frequency` | `monthly`, `quarterly`, or `yearly`. **Omitted entirely for one-time.** |
+
+```
+https://givebutter.com/<campaign>?amount=20&frequency=monthly
+```
+
+**T-shirt size does not ride along.** Givebutter's prefill supports amount and
+frequency only. The size menu is collected on our page for the donor's benefit and the
+copy says plainly that we will confirm it by email. To capture it properly, add a
+custom question on the Givebutter form.
+
+The old Stripe flow is gone: `assets/donate.js` was deleted. The two serverless
+functions are now dead in a second sense -- they were already 404-redirected, and
+nothing references them at all.
 
 ### Local preview
 
@@ -89,7 +111,7 @@ are defined but not rendered, so the nav never links to a page that doesn't exis
 | `program.html?slug=` | Nav · Hero · What We Do · Who We Serve · Impact · Details · Gallery + lightbox · Get Involved · Related · Footer |
 | `get-involved.html` | Nav · Page hero · Volunteer / Partner / Fundraise · 3-step process · Sign-up form (`#volunteer`) · Donate CTA · Footer |
 | `contact.html` | Nav · Page hero · Contact info (Email / Phone / Location / Hours) + Contact form · Footer |
-| `donate.html` | Nav · Page hero + trust chips · Giving form + "Why give" aside · Footer |
+| `donate.html` | Nav · Hero + 501(c)(3)/EIN trust line · Frequency + amounts + t-shirt · Your Donation in Action · Goal meter · Sponsorship · Other ways to give · FAQ · Footer |
 | `404.html` | Nav · Hero · Footer |
 | `privacy.html` | Nav · Page hero · Interim privacy statement · Footer |
 | `terms.html` | Nav · Page hero · Interim terms statement · Footer |
@@ -400,6 +422,99 @@ A `null` value is not rendered.
 }
 ```
 
+**`giving-levels.json`** - the amount tiles on donate.html.
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "id": "level-20",
+  "amount": 20,
+  "impact": "One line shown under the dollar figure on the tile.",
+  "includesShirt": true
+}
+```
+
+**`impact-units.json`** - drives "Your Donation in Action". `unitCost` stays `null`
+until the cost is confirmed in writing. While **every** unitCost is null the panel says
+the figures are being confirmed instead of estimating; set one and the estimator turns
+itself on. `singular` reads as "a team jersey" (with the article, no count prefix);
+`plural` reads as "team jerseys".
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "id": "jersey",
+  "unitCost": 25,
+  "singular": "a team jersey",
+  "plural": "team jerseys"
+}
+```
+
+**`giving-options.json`** - the Sponsor a Child / Sponsor a Program blocks. A block with
+`amount: null` shows "Amount being confirmed" and links to contact instead of checkout.
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "id": "sponsor-a-child",
+  "title": "Sponsor a Child",
+  "summary": "One or two sentences.",
+  "body": "A fuller explanation.",
+  "amount": 45,
+  "frequency": "monthly",
+  "cta": "Sponsor a child"
+}
+```
+
+**`other-ways-to-give.json`**
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "id": "check-by-mail",
+  "title": "Check by mail",
+  "body": "What the donor does.",
+  "detail": "The specifics: address, account numbers, needs list.",
+  "icon": "mail"
+}
+```
+
+**`faq.json`** - one collection, several pages. `page` selects which; the host element
+carries `data-faq-page`. Currently `donate` and `programs`.
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "page": "donate",
+  "id": "tax-deductible",
+  "question": "Is my gift tax-deductible?",
+  "answer": "Yes. ..."
+}
+```
+
+**Campaign goal meter** lives in `stats.json` under the id `campaign-goal` and takes an
+extra `goal` field alongside `value` (the amount raised). **Both must be confirmed
+numbers or the meter renders nothing at all** -- a goal bar showing an invented total is
+exactly the claim the no-figures rule exists for. The fill animates once on scroll and
+is set instantly under `prefers-reduced-motion`.
+
+```json
+{
+  "published": true,
+  "id": "campaign-goal",
+  "label": "2026 campaign",
+  "value": 12500,
+  "goal": 50000,
+  "asOf": "September 2026",
+  "sourceNote": "Confirmed by the foundation by email, 2026-09-01."
+}
+```
+
 ### Programs: two pages, one template
 
 `programs.html` is the index. `program.html?slug=<slug>` renders **any** program from
@@ -563,11 +678,19 @@ history is visible — do not re-introduce them.
 - ~~Donate button failed AA (3.15:1)~~ — and four other contrast failures. All fixed.
 - ~~No skip link, no `<main>`, no focus states~~ — all present, 0 elements uncovered.
 - ~~Heading-level skips~~ — none remain; exactly one `h1` per page.
-- ~~Mobile nav panel widened every page~~ — the closed off-canvas panel added 360px of
-  horizontal scroll below 900px on every page. It is now `visibility: hidden` when
-  closed, and the root clips sideways overflow with `overflow-x: clip` (`clip`, not
-  `hidden`, which would break the sticky nav).
+- ~~Mobile nav panel widened every page~~ — the closed off-canvas panel added ~360px of
+  horizontal scroll below 900px on every page. **The first fix for this did not work**
+  and was reported as fixed in error. `visibility: hidden` and `overflow-x: clip` on the
+  root are both in place but neither clips a `position: fixed` element on its own. The
+  actual cause was `backdrop-filter` on `.nav`: it makes `.nav` a *containing block* for
+  fixed descendants, so the panel stopped being viewport-fixed and began contributing to
+  the document's scrollable width. Dropping the blur below 900px fixes it. Verified with
+  a real scroll attempt at 375/639/900/1200 on index, programs, and donate.
 - ~~`programs.html` was hardcoded~~ — now rendered from `data/programs.json`.
+- ~~The FAQ on `programs.html` was hardcoded~~ — moved into `faq.json` under
+  `page: "programs"`, alongside the donate FAQ.
+- ~~No EIN despite 501(c)(3) claims~~ — EIN 42-2398737 supplied 2026-09-17 and now
+  published in the footer and on the donate page.
 
 ## Content the client still owes us
 
@@ -576,7 +699,6 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 
 - [ ] Correct foundation mailing address / service area wording for Smyrna, Tennessee
 - [ ] Real phone number (set `ORG.phone` + `ORG.phoneHref` in `assets/site.js`)
-- [ ] EIN for the 501(c)(3) disclosure (set `ORG.ein` in `assets/site.js`)
 - [ ] Written confirmation of the "$7,000+ awarded in scholarships" figure, with as-of date
 - [ ] Written confirmation of the "100% to programs" claim, or replacement wording
 - [ ] Real social media URLs (set `ORG.social[].url` in `assets/site.js`)
@@ -589,7 +711,14 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Go/no-go and Stripe account credentials for switching online giving on
 - [ ] Reviewed Privacy Policy and Terms of Use copy (interim statements are live now)
 - [ ] Content for Impact, Events, and News (nav entries staged, `ready: false`)
+- [ ] Public Givebutter campaign URL (set `GIVEBUTTER.campaignUrl` in `assets/give.js`)
+- [ ] Confirmed impact unit costs, to switch on "Your Donation in Action"
+- [ ] Confirmed campaign raised total and goal, to switch on the goal meter
+- [ ] Sponsor a Child and Sponsor a Program dollar amounts
+- [ ] Mailing address, DAF details, and brokerage details for "Other ways to give"
+- [ ] Whether the t-shirt offer is genuinely first-gift-only, and how sizes get fulfilled
 
 ### Received
 
-_(nothing yet)_
+- **2026-09-17** — EIN `42-2398737`. Published in the footer 501(c)(3) line and in the
+  donate page trust line.

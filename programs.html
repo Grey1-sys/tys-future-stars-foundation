@@ -51,21 +51,14 @@
 <!-- ===== CATEGORY GROUPS (rendered from data/programs.json) ===== -->
 <div id="program-results"></div>
 
-<!-- ===== FAQ ===== -->
-<!-- TODO: this copy is still hardcoded. Migrate to /data when an faq
-     collection exists — see the "no hardcoding content" rule. -->
+<!-- ===== FAQ (from data/faq.json, page: programs) ===== -->
 <section class="section soft">
   <div class="wrap narrow">
     <div class="section-head reveal">
       <span class="eyebrow">Good to know</span>
       <h2 class="title">Frequently asked questions.</h2>
     </div>
-    <div class="faq reveal">
-      <details open><summary>Where does my donation go? <span class="chev">+</span></summary><p>Your gift funds scholarships, mentorship, and basketball development for young student-athletes, along with community events that advocate for a future free from gun violence.</p></details>
-      <details><summary>Is my gift tax-deductible? <span class="chev">+</span></summary><p>Yes. Ty's Future Stars Foundation is a registered 501(c)(3) nonprofit, so your donation is tax-deductible and a receipt is emailed to you right away.</p></details>
-      <details><summary>Who is eligible for a scholarship? <span class="chev">+</span></summary><p>Our scholarships support student-athletes pursuing their education and basketball aspirations. Contact us for current eligibility criteria and application dates.</p></details>
-      <details><summary>How can I get involved beyond giving? <span class="chev">+</span></summary><p>You can volunteer, mentor, coach, partner with us as a sponsor, or start your own fundraiser. Visit our Get Involved page to sign up.</p></details>
-    </div>
+    <div id="give-faq" data-faq-page="programs"></div>
   </div>
 </section>
 
@@ -87,6 +80,7 @@
 <script src="assets/site.js"></script>
 <script src="assets/data.js"></script>
 <script src="assets/render.js"></script>
+<script src="assets/give.js"></script>
 <script src="assets/programs.js"></script>
 <script src="assets/main.js"></script>
 </body>

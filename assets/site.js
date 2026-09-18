@@ -17,10 +17,11 @@
      never links to a page that doesn't exist yet.
 
    CONTENT MARKED "client owes us"
-     ORG.phone and ORG.ein are null on purpose. Publishing a made-up
-     phone number or federal tax ID would be worse than omitting the
-     row, so each renders only once a real value is supplied. See the
-     checklist in CLAUDE.md.
+     ORG.phone is null on purpose. Publishing a made-up phone number
+     would be worse than omitting the row, so it renders only once a
+     real value is supplied. ORG.ein was supplied on 2026-09-17 and now
+     appears in the footer 501(c)(3) line. See the checklist in
+     CLAUDE.md.
 =================================================================== */
 (function () {
   "use strict";
@@ -34,7 +35,7 @@
     phone: null,                       // TODO(client): real number
     phoneHref: null,
     city: "Smyrna, Tennessee",
-    ein: null,                         // TODO(client): federal EIN
+    ein: "42-2398737",                 // client-supplied 2026-09-17
     social: [
       { label: "Instagram", url: null },   // TODO(client): real profile URLs
       { label: "Facebook",  url: null },
