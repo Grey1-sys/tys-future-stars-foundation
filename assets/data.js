@@ -38,7 +38,7 @@ window.TFSF = window.TFSF || {};
     "programs", "program-categories", "events", "stories", "posts",
     "sponsors", "stats", "resources", "team",
     "giving-levels", "impact-units", "giving-options",
-    "other-ways-to-give", "faq"
+    "other-ways-to-give", "faq", "involvement"
   ];
 
   var cache = {};

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get Involved — Ty's Future Stars Foundation</title>
-<meta name="description" content="Volunteer, mentor, partner, or fundraise with Ty's Future Stars Foundation.">
+<meta name="description" content="Volunteer, mentor, sponsor, partner, donate supplies, host an event, or fundraise for Ty's Future Stars Foundation in Smyrna, Tennessee.">
 <link rel="icon" href="assets/img/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,112 +19,288 @@
 
 <main id="main">
 
+<!-- ===== HERO ===== -->
 <header class="page-hero">
   <div class="wrap">
     <div class="breadcrumb"><a href="index.html">Home</a> / Get Involved</div>
-    <span class="eyebrow">Get involved</span>
-    <h1 class="display" style="margin-top:14px;max-width:18ch;">Together, we can be the change.</h1>
-    <p class="lede">It takes a community to raise up the next generation of future stars. However you want to help, there's a place for you here.</p>
+    <span class="eyebrow">Join us</span>
+    <h1 class="display mt-1">Want to make an impact?</h1>
+    <p class="lede mt-2">There are seven ways in. Tell us how you would like to help and
+      we will take it from there.</p>
   </div>
 </header>
 
-<!-- WAYS TO HELP -->
+<!-- ===== SEVEN WAYS (from data/involvement.json) ===== -->
 <section class="section">
   <div class="wrap">
-    <h2 class="visually-hidden">Ways to get involved</h2>
-    <div class="grid grid-3">
-      <div class="card hover reveal">
-        <span class="card-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
-        <h3>Volunteer</h3>
-        <p>Coach, mentor, or lend a hand at our events and clinics. A few hours can change a young person's year.</p>
-        <a href="#volunteer" class="card-link">Sign up <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <div class="card hover reveal d1">
-        <span class="card-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M18 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-        <h3 id="partner">Partner</h3>
-        <p>Businesses and community groups can sponsor scholarships, teams, and events that open doors for youth.</p>
-        <a href="contact.html" class="card-link">Reach out <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <div class="card hover reveal d2">
-        <span class="card-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-        <h3 id="fundraise">Fundraise</h3>
-        <p>Rally your team, school, or workplace behind our scholarship fund and start your own campaign.</p>
-        <a href="donate.html" class="card-link">Start a campaign <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-    </div>
+    <div id="involve-cards"></div>
   </div>
 </section>
 
-<!-- STEPS -->
+<!-- ===== THE FORM =====
+     Static markup on purpose. Netlify discovers forms by parsing the
+     deployed HTML, so every field name that should ever be captured —
+     including the conditional ones — has to be present in this file.
+     assets/involve.js hides and DISABLES the groups that do not apply:
+     disabled controls are skipped by validation and excluded from the
+     submission, but they were still here at deploy time. -->
 <section class="section soft">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">How volunteering works</span>
-      <h2 class="title">From sign-up to service in three steps.</h2>
+  <div class="wrap narrow">
+    <div class="section-head">
+      <span class="eyebrow">One form</span>
+      <h2 class="title">Tell us about you.</h2>
+      <p>The questions change to match what you picked. Nothing is stored in your
+        browser.</p>
     </div>
-    <div class="steps">
-      <div class="step reveal"><div class="step-n">1</div><h3>Tell us about you</h3><p>Share your interests and availability so we can find the right fit for your skills.</p></div>
-      <div class="step reveal d1"><div class="step-n">2</div><h3>We match you</h3><p>We connect you with a program, team, or event where you're needed most.</p></div>
-      <div class="step reveal d2"><div class="step-n">3</div><h3>Show up &amp; serve</h3><p>Meet the young people you're supporting and see the difference you make.</p></div>
-    </div>
-  </div>
-</section>
 
-<!-- VOLUNTEER FORM -->
-<section class="section" id="volunteer">
-  <div class="wrap split">
-    <div class="reveal">
-      <span class="eyebrow">Volunteer sign-up</span>
-      <h2 class="title mt-1">Ready when you are.</h2>
-      <p class="lede mt-2">Tell us a little about yourself and how you'd like to help. We'll follow up with opportunities that match your interests.</p>
-      <div class="info-item mt-3">
-        <span class="ii-ic"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-        <div><h3>Flexible hours</h3><p>Give as much or as little time as you can.</p></div>
-      </div>
-      <div class="info-item mt-2">
-        <span class="ii-ic"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-        <div><h3>Near you</h3><p>Opportunities across the Madison area and beyond.</p></div>
-      </div>
-    </div>
-    <div class="form-card reveal d1">
-      <form data-demo-form>
-        <div class="field-row">
-          <div class="field"><label for="fn">First name</label><input id="fn" type="text" placeholder="Jamie" required></div>
-          <div class="field"><label for="ln">Last name</label><input id="ln" type="text" placeholder="Rivera" required></div>
-        </div>
-        <div class="field"><label for="em">Email</label><input id="em" type="email" placeholder="jamie@example.com" required></div>
-        <div class="field"><label for="int">I'm interested in</label>
-          <select id="int">
-            <option>Coaching / basketball clinics</option>
-            <option>Mentoring a student-athlete</option>
-            <option>Volunteering at events</option>
-            <option>Fundraising</option>
-            <option>Skilled / pro bono support</option>
+    <div class="form-card">
+      <form id="involve-form"
+            name="get-involved"
+            method="POST"
+            action="/thank-you.html"
+            data-tfsf-form
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            data-success-heading="Thank you — we have your details."
+            data-success-body="Someone from Ty's Future Stars Foundation will follow up within 2 business days."
+            novalidate>
+
+        <!-- Netlify needs the form name in the body of an AJAX post -->
+        <input type="hidden" name="form-name" value="get-involved">
+
+        <!-- Honeypot: hidden from people, tempting to bots -->
+        <p class="visually-hidden" aria-hidden="true">
+          <label>Do not fill this in if you are human:
+            <input name="bot-field" tabindex="-1" autocomplete="off">
+          </label>
+        </p>
+
+        <!-- ---------- Always shown ---------- -->
+        <div class="field">
+          <label for="involve-interest">How would you like to help? *</label>
+          <select id="involve-interest" name="interest" required
+                  data-error="Choose how you would like to help.">
+            <option value="">Choose one</option>
+            <option value="volunteer">Volunteer</option>
+            <option value="mentor">Become a Mentor</option>
+            <option value="sponsor">Become a Sponsor</option>
+            <option value="corporate">Corporate Partnership</option>
+            <option value="supplies">Donate Supplies</option>
+            <option value="event">Host an Event</option>
+            <option value="fundraise">Become a Fundraiser</option>
           </select>
         </div>
-        <div class="field"><label for="msg">Anything else?</label><textarea id="msg" placeholder="Tell us a bit about yourself…"></textarea></div>
-        <button type="submit" class="btn btn-secondary mt-2" style="width:100%;">Sign me up</button>
-        <p class="form-note" data-form-note>We'll never share your details.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="involve-name">Your name *</label>
+            <input id="involve-name" name="name" type="text" autocomplete="name" required
+                   data-error="Enter your name.">
+          </div>
+          <div class="field">
+            <label for="involve-email">Email *</label>
+            <input id="involve-email" name="email" type="email" autocomplete="email" required
+                   data-error="Enter your email address so we can reply.">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="involve-phone">Phone</label>
+            <input id="involve-phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="involve-city">City</label>
+            <input id="involve-city" name="city" type="text" autocomplete="address-level2">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="involve-heard">How did you hear about TFSF?</label>
+          <select id="involve-heard" name="heardAbout">
+            <option value="">Choose one</option>
+            <option>A friend or family member</option>
+            <option>Social media</option>
+            <option>A school or coach</option>
+            <option>A community event</option>
+            <option>Search engine</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <!-- ---------- Volunteer / Mentor ---------- -->
+        <fieldset class="field-group" data-when="volunteer mentor" hidden disabled>
+          <legend>Volunteering details</legend>
+
+          <div class="field">
+            <span class="field-legend" id="lbl-availability">Availability</span>
+            <div class="check-grid" role="group" aria-labelledby="lbl-availability">
+              <label class="check"><input type="checkbox" name="availability" value="Weekday mornings"> Weekday mornings</label>
+              <label class="check"><input type="checkbox" name="availability" value="Weekday afternoons"> Weekday afternoons</label>
+              <label class="check"><input type="checkbox" name="availability" value="Weekday evenings"> Weekday evenings</label>
+              <label class="check"><input type="checkbox" name="availability" value="Saturdays"> Saturdays</label>
+              <label class="check"><input type="checkbox" name="availability" value="Sundays"> Sundays</label>
+              <label class="check"><input type="checkbox" name="availability" value="One-off events only"> One-off events only</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="field-legend" id="lbl-areas">Areas of interest</span>
+            <div class="check-grid" role="group" aria-labelledby="lbl-areas">
+              <label class="check"><input type="checkbox" name="areasOfInterest" value="Coaching"> Coaching</label>
+              <label class="check"><input type="checkbox" name="areasOfInterest" value="Mentoring"> Mentoring</label>
+              <label class="check"><input type="checkbox" name="areasOfInterest" value="Tutoring"> Tutoring</label>
+              <label class="check"><input type="checkbox" name="areasOfInterest" value="Events"> Events</label>
+              <label class="check"><input type="checkbox" name="areasOfInterest" value="Admin and behind the scenes"> Admin and behind the scenes</label>
+              <label class="check"><input type="checkbox" name="areasOfInterest" value="Transport"> Transport</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="field-legend" id="lbl-age">Are you 18 or older? *</span>
+            <div class="check-grid check-grid-inline" role="radiogroup" aria-labelledby="lbl-age">
+              <label class="check"><input type="radio" name="isAdult" value="Yes" required> Yes</label>
+              <label class="check"><input type="radio" name="isAdult" value="No" required> No</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="check check-ack">
+              <input type="checkbox" name="backgroundCheckAck" value="Acknowledged" required
+                     data-error="Please acknowledge the background check requirement.">
+              <span>I understand that a background check is required before I can work
+                with young people. *</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- ---------- Sponsor / Corporate ---------- -->
+        <fieldset class="field-group" data-when="sponsor corporate" hidden disabled>
+          <legend>Organization details</legend>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="involve-org">Organization name</label>
+              <input id="involve-org" name="organization" type="text" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="involve-role">Your role</label>
+              <input id="involve-role" name="role" type="text" autocomplete="organization-title">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="involve-level">Sponsorship level of interest</label>
+              <select id="involve-level" name="sponsorshipLevel">
+                <option value="">Choose one</option>
+                <option>Sponsor a child</option>
+                <option>Sponsor a team</option>
+                <option>Sponsor a program</option>
+                <option>Sponsor an event</option>
+                <option>Not sure yet — let's talk</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="involve-budget">Budget range</label>
+              <select id="involve-budget" name="budgetRange">
+                <option value="">Choose one</option>
+                <option>Under $500</option>
+                <option>$500 to $1,000</option>
+                <option>$1,000 to $5,000</option>
+                <option>$5,000 to $10,000</option>
+                <option>Over $10,000</option>
+                <option>Prefer to discuss</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ---------- Donate Supplies ---------- -->
+        <fieldset class="field-group" data-when="supplies" hidden disabled>
+          <legend>About the supplies</legend>
+
+          <div class="field">
+            <label for="involve-items">What are you donating?</label>
+            <textarea id="involve-items" name="suppliesItems" rows="3"
+                      placeholder="Basketballs, jerseys, backpacks, laptops…"></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="involve-qty">Roughly how many?</label>
+              <input id="involve-qty" name="suppliesQuantity" type="text">
+            </div>
+            <div class="field">
+              <label for="involve-condition">Condition</label>
+              <select id="involve-condition" name="suppliesCondition">
+                <option value="">Choose one</option>
+                <option>New</option>
+                <option>Gently used</option>
+                <option>Well used but working</option>
+                <option>Mixed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="field-legend" id="lbl-handover">Drop-off or pickup?</span>
+            <div class="check-grid check-grid-inline" role="radiogroup" aria-labelledby="lbl-handover">
+              <label class="check"><input type="radio" name="handover" value="I can drop off"> I can drop off</label>
+              <label class="check"><input type="radio" name="handover" value="I need pickup"> I need pickup</label>
+              <label class="check"><input type="radio" name="handover" value="Either works"> Either works</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ---------- Host an Event / Fundraise ---------- -->
+        <fieldset class="field-group" data-when="event fundraise" hidden disabled>
+          <legend>About your event</legend>
+
+          <div class="field">
+            <label for="involve-idea">What do you have in mind?</label>
+            <textarea id="involve-idea" name="eventIdea" rows="3"
+                      placeholder="A 3-on-3 tournament, a bake sale, a birthday fundraiser…"></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="involve-date">Proposed date</label>
+              <input id="involve-date" name="proposedDate" type="date">
+            </div>
+            <div class="field">
+              <label for="involve-attendance">Expected attendance</label>
+              <input id="involve-attendance" name="expectedAttendance" type="number" min="1" max="100000" inputmode="numeric">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ---------- Always shown ---------- -->
+        <div class="field">
+          <label for="involve-message">Anything else we should know?</label>
+          <textarea id="involve-message" name="message" rows="4"></textarea>
+        </div>
+
+        <div data-form-status></div>
+
+        <button type="submit" class="btn btn-primary btn-lg form-submit">Send my details</button>
+
+        <p class="form-note">We will only use these details to reply to you. Read our
+          <a href="privacy.html">privacy policy</a>.</p>
       </form>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="section soft">
-  <div class="wrap">
-    <div class="cta-band reveal">
-      <h2 class="title">Prefer to give instead?</h2>
-      <p>A gift of any size helps put a scholarship, a mentor, or a ball in a young person's hands.</p>
-      <div class="hero-actions"><a href="donate.html" class="btn btn-primary btn-lg">Donate now</a></div>
-    </div>
-  </div>
-</section>
 </main>
 
 <div id="site-footer"></div>
 
 <script src="assets/site.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/render.js"></script>
+<script src="assets/forms.js"></script>
+<script src="assets/involve.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>

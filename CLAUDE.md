@@ -27,6 +27,8 @@ Pages are hand-written `.html` at the repo root.
 | `assets/render.js` | Turns a collection into DOM from a template. |
 | `assets/programs.js` | Programs index (filters) and the program detail template. |
 | `assets/give.js` | Donate page: amounts, frequency, impact estimator, Givebutter handoff. |
+| `assets/forms.js` | **Shared form engine**: validation, Netlify submit, busy state, success swap. |
+| `assets/involve.js` | Get Involved: the seven cards and the interest-driven fieldsets. |
 | `assets/styleguide.{css,js}` | Internal reference page only. |
 
 Load order on every page: `tokens.css` -> `styles.css`, then `site.js` -> `main.js`.
@@ -118,10 +120,11 @@ are defined but not rendered, so the nav never links to a page that doesn't exis
 | `about.html` | Nav · Page hero · Mission + Vision · Purpose · Core Values (Leadership, Education, Discipline, Community, Opportunity, Legacy) · Meet LaSonya Adams · CTA · Footer |
 | `programs.html` | Nav · Hero · Filters (category + age) · Four category groups from `programs.json` · FAQ · CTA · Footer |
 | `program.html?slug=` | Nav · Hero · What We Do · Who We Serve · Impact · Details · Gallery + lightbox · Get Involved · Related · Footer |
-| `get-involved.html` | Nav · Page hero · Volunteer / Partner / Fundraise · 3-step process · Sign-up form (`#volunteer`) · Donate CTA · Footer |
+| `get-involved.html` | Nav · Hero · Seven involvement cards from `involvement.json` · One smart form that adapts to the chosen interest · Footer |
 | `contact.html` | Nav · Page hero · Contact info (Email / Phone / Location / Hours) + Contact form · Footer |
 | `donate.html` | Nav · Hero + 501(c)(3)/EIN trust line · Frequency + amount tiles + custom · Your Donation in Action · Goal meter · Sponsorship · Other ways to give · FAQ · Footer |
 | `404.html` | Nav · Hero · Footer |
+| `thank-you.html` | Nav · Thank-you message · Footer. `noindex`. Fallback landing for a form POST without JS. |
 | `privacy.html` | Nav · Page hero · Interim privacy statement · Footer |
 | `terms.html` | Nav · Page hero · Interim terms statement · Footer |
 | `styleguide.html` | **Internal.** Every token + component. `noindex`, unlinked. |
@@ -493,6 +496,26 @@ itself on. `singular` reads as "a team jersey" (with the article, no count prefi
 }
 ```
 
+**`involvement.json`** - the seven cards on get-involved.html. `interest` must match
+an `<option value>` in that page's interest select, or the card's CTA will do nothing.
+`icon` keys into the SVG map in `assets/involve.js`, so the JSON stays free of markup.
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "id": "volunteer",
+  "icon": "users",
+  "title": "Volunteer",
+  "description": "Two sentences on what volunteers actually do.",
+  "timeCommitment": "A few hours a month, seasonal",
+  "cta": "Sign up to volunteer",
+  "interest": "volunteer"
+}
+```
+
+A `timeCommitment` is a promise to a volunteer. Get it approved before publishing.
+
 **`faq.json`** - one collection, several pages. `page` selects which; the host element
 carries `data-faq-page`. Currently `donate` and `programs`.
 
@@ -570,6 +593,99 @@ Open **`/data-preview.html`** - it renders every collection through the same lay
 real pages use. If an entry does not appear there, it will not appear on the site.
 
 `fetch()` needs HTTP, so preview over `npx serve .`, not by opening the file directly.
+
+---
+
+## Forms
+
+**Netlify Forms.** `assets/forms.js` is the shared engine. Contact and the newsletter
+signup are meant to move onto it next; they are still on the old "not connected"
+handler in `main.js`.
+
+### Notification email
+
+Submissions go to the Netlify dashboard. **Set the notification address in Netlify:**
+
+```
+tysfuturestarsfoundation@gmail.com
+```
+
+Netlify UI: Site configuration -> Forms -> Form notifications -> Add notification ->
+Email notification. Nothing in this repo can set it; it is a dashboard setting.
+
+### The one rule that breaks everything if you miss it
+
+**Netlify discovers forms by parsing the deployed HTML.** A form built by JavaScript
+is invisible to it and its submissions go nowhere. So:
+
+- The form markup is **static HTML in the page**, not rendered from `/data`. This is
+  the documented exception to the no-hardcoded-content rule, and it applies to form
+  *structure* only — the involvement cards above the form still come from
+  `data/involvement.json`.
+- **Every field name must exist in the file at deploy time**, including fields that
+  start hidden. A conditional group is a `<fieldset data-when="volunteer mentor">`
+  that is hidden **and disabled** when it does not apply. Disabling is the important
+  half: disabled controls are skipped by validation and left out of the submission,
+  but they were still in the HTML for Netlify to find.
+
+### Marking up a form
+
+```html
+<form name="get-involved" method="POST" action="/thank-you.html"
+      data-tfsf-form
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      data-success-heading="..."
+      data-success-body="..."
+      novalidate>
+  <input type="hidden" name="form-name" value="get-involved">
+  <p class="visually-hidden" aria-hidden="true">
+    <label>Do not fill this in if you are human:
+      <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+  </p>
+  ...
+  <div data-form-status></div>
+  <button type="submit" class="btn btn-primary btn-lg form-submit">Send</button>
+</form>
+```
+
+| Attribute | Why |
+|---|---|
+| `data-tfsf-form` | Opts the form into the engine |
+| `novalidate` | Suppresses the browser's own bubbles; we render inline errors |
+| `action="/thank-you.html"` | The no-JS fallback. With JS the form swaps in place. |
+| `data-netlify-honeypot` | Paired with the hidden `bot-field` input |
+| `data-form-status` | Where the form-level error message is written |
+
+### Validation
+
+Rules come from the markup: `required`, `type="email"`, `minlength`, `min`/`max` on
+numbers. `data-error="..."` overrides the generated message on any field. Messages stay
+grammatical whether the label is a noun ("Your name" -> "Enter your name.") or a
+question ("Are you 18 or older?" -> "Please answer: Are you 18 or older?").
+
+Errors render inline with an icon, set `aria-invalid` and `aria-describedby`, and the
+first failing control takes focus. A field re-validates on blur once touched, so an
+error clears as soon as it is fixed.
+
+### Submission
+
+AJAX POST to `/` as `application/x-www-form-urlencoded`, with `form-name` in the body.
+The submit button disables and shows a spinner, and a `data-submitting` guard blocks a
+second submit — disabling the button alone does not stop an Enter keypress, and the
+result would be duplicate applications. On success the form is replaced in place by a
+confirmation. On failure the form survives, the button re-enables, and the message
+offers the email address instead.
+
+**No `localStorage`, ever.** Nothing about a form is persisted to the browser. A
+half-finished volunteer application mentioning a child should not sit in storage on a
+shared machine.
+
+### The follow-up promise
+
+"within 2 business days" appears in `FOLLOW_UP` in `assets/forms.js`, in the
+`data-success-body` on the form, and on `thank-you.html`. It is a commitment the
+foundation makes — confirm it before launch and keep the three in step.
 
 ---
 
@@ -667,10 +783,9 @@ history is visible — do not re-introduce them.
    no `sitemap.xml`, no JSON-LD.
 4. **Inline `style=` attributes** remain in page bodies (~36). Pre-existing debt, not
    precedent — see the "do not do" list.
-5. **Forms still have no backend.** Contact, volunteer, and newsletter submissions are
-   not delivered anywhere. The handler now tells the visitor plainly that the form is
-   not connected and gives the email address instead of claiming success, but this must
-   be wired up before any real campaign drives traffic.
+5. **Contact and newsletter forms still have no backend.** The Get Involved form is on
+   Netlify Forms; those two are not yet and still show the "not connected" message from
+   `main.js`. Move them onto `assets/forms.js` next.
 6. **Dead code:** `api/create-checkout-session.js` (Vercel, 404-redirected).
 7. **Unverified figures still published:** "$7,000+ awarded" and "100% to programs".
 
@@ -697,6 +812,8 @@ history is visible — do not re-introduce them.
   the document's scrollable width. Dropping the blur below 900px fixes it. Verified with
   a real scroll attempt at 375/639/900/1200 on index, programs, and donate.
 - ~~`programs.html` was hardcoded~~ — now rendered from `data/programs.json`.
+- ~~Get Involved had a front-end-only form that discarded submissions~~ — replaced with
+  the Netlify Forms engine in `assets/forms.js`.
 - ~~The FAQ on `programs.html` was hardcoded~~ — moved into `faq.json` under
   `page: "programs"`, alongside the donate FAQ.
 - ~~No EIN despite 501(c)(3) claims~~ — EIN 42-2398737 supplied 2026-09-17 and now
@@ -712,8 +829,11 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Written confirmation of the "$7,000+ awarded in scholarships" figure, with as-of date
 - [ ] Written confirmation of the "100% to programs" claim, or replacement wording
 - [ ] Real social media URLs (set `ORG.social[].url` in `assets/site.js`)
-- [ ] Destination for contact form submissions (email address or service)
-- [ ] Destination for volunteer sign-up submissions
+- [ ] Destination for contact form submissions (move it onto `assets/forms.js`)
+- [ ] **Configure the Netlify form notification email**: `tysfuturestarsfoundation@gmail.com`
+      (Site configuration -> Forms -> Form notifications). Nothing in the repo can do this.
+- [ ] Confirm the "within 2 business days" follow-up promise used across the forms
+- [ ] Approved descriptions and time commitments for the seven involvement cards
 - [ ] Whether the newsletter signup should function, and which provider
 - [ ] Permissioned photographs of TFSF participants, with signed media releases
 - [ ] Approved photo and bio for LaSonya Adams, President & Founder
