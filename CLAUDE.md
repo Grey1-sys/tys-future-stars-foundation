@@ -23,7 +23,6 @@ Pages are hand-written `.html` at the repo root.
 | `assets/styles.css` | Every component and page style. Contains **zero** raw colors. |
 | `assets/site.js` | Shared header + footer, injected into every page. Nav config lives here. |
 | `assets/main.js` | Page-level behavior (scroll reveals, form handling). |
-| `assets/give.js` | Donate page: amounts, frequency, impact estimator, Givebutter handoff. |
 | `assets/data.js` | Loads `/data/*.json`. Applies the publish + consent gates. |
 | `assets/render.js` | Turns a collection into DOM from a template. |
 | `assets/programs.js` | Programs index (filters) and the program detail template. |
@@ -44,12 +43,12 @@ The only external runtime dependency is **Google Fonts** (Anton + Inter).
 Donations hand off to **Givebutter's hosted checkout**. There is no payment form on
 this site and there must never be one -- no card data touches these pages.
 
-**To switch it on:** put the foundation's public Givebutter campaign URL in
-`GIVEBUTTER.campaignUrl` at the top of `assets/give.js`, e.g.
-`"https://givebutter.com/tys-future-stars"`. That is the only value needed and it is
-public by design. **Never put a Givebutter password or API key in this repo.**
+**Live since 2026-09-22.** `GIVEBUTTER.campaignUrl` in `assets/give.js` holds the
+public campaign URL (campaign id `744209`). It is public by design -- the same link
+anyone can share. **Never put a Givebutter password or API key in this repo.**
 
-Until it is set, every give button stays disabled and the page directs donors to email.
+Setting `campaignUrl` back to `null` is the kill switch: every give button disables
+itself and the page directs donors to email instead.
 
 Amount and frequency ride across as query parameters, so nobody retypes them
 (documented at docs.givebutter.com, "URL Prefill Parameters"):
@@ -66,6 +65,17 @@ https://givebutter.com/<campaign>?amount=20&frequency=monthly
 Only amount and frequency cross the handoff. If a future perk or question needs to
 travel with the gift, add it as a custom question on the Givebutter form rather than
 trying to encode it in the URL.
+
+**Verified against the live campaign**, not just the docs: `frequency=monthly` checks
+the monthly radio, omitting it leaves `once` selected, and the amount lands in the
+form's "Other" field with the hidden `amount` input set.
+
+**The Givebutter campaign's own preset buttons do not match our tiles.** Givebutter
+keeps a separate preset set per frequency -- currently $250/$100/$50/$25/$15/$5 for
+monthly and $1000/$500/$250/$100/$55/$25 for one-time. Our $15/$20/$30 therefore arrive
+in the "Other" box rather than lighting up a preset. It works, but the donor sees a
+different grid after the handoff. Align the presets in the Givebutter campaign settings
+to smooth it over.
 
 The old Stripe flow is gone: `assets/donate.js` was deleted. The two serverless
 functions are now dead in a second sense -- they were already 404-redirected, and
@@ -708,10 +718,8 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Permissioned photographs of TFSF participants, with signed media releases
 - [ ] Approved photo and bio for LaSonya Adams, President & Founder
 - [ ] Office hours confirmation (currently "Mon–Fri, 9am – 5pm")
-- [ ] Go/no-go and Stripe account credentials for switching online giving on
 - [ ] Reviewed Privacy Policy and Terms of Use copy (interim statements are live now)
 - [ ] Content for Impact, Events, and News (nav entries staged, `ready: false`)
-- [ ] Public Givebutter campaign URL (set `GIVEBUTTER.campaignUrl` in `assets/give.js`)
 - [ ] Confirmed impact unit costs, to switch on "Your Donation in Action"
 - [ ] Confirmed campaign raised total and goal, to switch on the goal meter
 - [ ] Sponsor a Child and Sponsor a Program dollar amounts
@@ -721,3 +729,6 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 
 - **2026-09-17** — EIN `42-2398737`. Published in the footer 501(c)(3) line and in the
   donate page trust line.
+- **2026-09-22** — Public Givebutter campaign URL
+  (`support-local-youth-through-future-stars-njiri2`, campaign id `744209`). Online
+  giving is live; prefill verified against the real campaign page.

@@ -14,15 +14,13 @@
      amount     dollars, e.g. 25
      frequency  monthly | quarterly | yearly   (omit for one-time)
 
-   SETUP — one value, and it is not a secret
-     Put the foundation's public Givebutter campaign URL in
-     GIVEBUTTER.campaignUrl below, e.g.
-       "https://givebutter.com/tys-future-stars"
-     That identifier is public by design. Never put an account
-     password or API key in this repo.
+   CONFIGURED
+     GIVEBUTTER.campaignUrl holds the foundation's public campaign URL.
+     That identifier is public by design. Never put an account password
+     or API key in this repo.
 
-   Until campaignUrl is set the give buttons stay disabled and the page
-   directs donors to email instead, exactly as it did before.
+     Setting campaignUrl back to null is the kill switch: every give
+     button disables itself and the page directs donors to email.
 
    FIGURES
      Impact costs and the campaign goal come from /data and are null
@@ -39,8 +37,9 @@
 
   /* ---------------- Configuration ---------------- */
   var GIVEBUTTER = {
-    // TODO(client): paste the public Givebutter campaign URL here.
-    campaignUrl: null,
+    // Public campaign URL, supplied by the client 2026-09-22. Public by
+    // design -- it is the same link anyone can share. Not a secret.
+    campaignUrl: "https://givebutter.com/support-local-youth-through-future-stars-njiri2",
     amountParam: "amount",
     frequencyParam: "frequency"
   };
