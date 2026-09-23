@@ -1,25 +1,75 @@
 [
   {
-    "_comment": "PLACEHOLDER. Per CLAUDE.md, never publish a figure the client has not confirmed in writing. value is null on purpose.",
-    "published": false,
-    "id": "placeholder-scholarships-awarded",
+    "_comment": "value stays null until confirmed IN WRITING. Fill in source and verifiedOn at the same time — a number without provenance does not go on the site.",
+    "published": true,
+    "order": 1,
+    "id": "scholarships-awarded",
     "label": "PLACEHOLDER — Awarded in scholarships",
     "value": null,
+    "prefix": "$",
     "suffix": "",
-    "icon": "award",
-    "asOf": "",
-    "sourceNote": "PLACEHOLDER — who confirmed this figure, in writing, and when."
+    "source": "PLACEHOLDER — who supplied this figure and how, e.g. \"LaSonya Adams, by email\"",
+    "verifiedOn": "PLACEHOLDER — YYYY-MM-DD, the date this was last checked"
   },
   {
-    "_comment": "PLACEHOLDER. value is null on purpose — see CLAUDE.md, 'No placeholder financial figures'.",
-    "published": false,
-    "id": "placeholder-athletes-supported",
+    "_comment": "value stays null until confirmed IN WRITING. Fill in source and verifiedOn at the same time — a number without provenance does not go on the site.",
+    "published": true,
+    "order": 2,
+    "id": "athletes-supported",
     "label": "PLACEHOLDER — Athletes supported",
     "value": null,
+    "prefix": "",
     "suffix": "+",
-    "icon": "users",
-    "asOf": "",
-    "sourceNote": "PLACEHOLDER — who confirmed this figure, in writing, and when."
+    "source": "PLACEHOLDER — who supplied this figure and how, e.g. \"LaSonya Adams, by email\"",
+    "verifiedOn": "PLACEHOLDER — YYYY-MM-DD, the date this was last checked"
+  },
+  {
+    "_comment": "value stays null until confirmed IN WRITING. Fill in source and verifiedOn at the same time — a number without provenance does not go on the site.",
+    "published": true,
+    "order": 3,
+    "id": "mentor-hours",
+    "label": "PLACEHOLDER — Mentoring hours",
+    "value": null,
+    "prefix": "",
+    "suffix": "+",
+    "source": "PLACEHOLDER — who supplied this figure and how, e.g. \"LaSonya Adams, by email\"",
+    "verifiedOn": "PLACEHOLDER — YYYY-MM-DD, the date this was last checked"
+  },
+  {
+    "_comment": "value stays null until confirmed IN WRITING. Fill in source and verifiedOn at the same time — a number without provenance does not go on the site.",
+    "published": true,
+    "order": 4,
+    "id": "volunteers",
+    "label": "PLACEHOLDER — Active volunteers",
+    "value": null,
+    "prefix": "",
+    "suffix": "",
+    "source": "PLACEHOLDER — who supplied this figure and how, e.g. \"LaSonya Adams, by email\"",
+    "verifiedOn": "PLACEHOLDER — YYYY-MM-DD, the date this was last checked"
+  },
+  {
+    "_comment": "value stays null until confirmed IN WRITING. Fill in source and verifiedOn at the same time — a number without provenance does not go on the site.",
+    "published": true,
+    "order": 5,
+    "id": "events-hosted",
+    "label": "PLACEHOLDER — Community events hosted",
+    "value": null,
+    "prefix": "",
+    "suffix": "",
+    "source": "PLACEHOLDER — who supplied this figure and how, e.g. \"LaSonya Adams, by email\"",
+    "verifiedOn": "PLACEHOLDER — YYYY-MM-DD, the date this was last checked"
+  },
+  {
+    "_comment": "value stays null until confirmed IN WRITING. Fill in source and verifiedOn at the same time — a number without provenance does not go on the site.",
+    "published": true,
+    "order": 6,
+    "id": "years-running",
+    "label": "PLACEHOLDER — Years serving Smyrna",
+    "value": null,
+    "prefix": "",
+    "suffix": "",
+    "source": "PLACEHOLDER — who supplied this figure and how, e.g. \"LaSonya Adams, by email\"",
+    "verifiedOn": "PLACEHOLDER — YYYY-MM-DD, the date this was last checked"
   },
   {
     "_comment": "Donation goal meter on donate.html. Set BOTH value and goal to confirmed figures, then flip published to true. The meter hides itself until then.",
@@ -28,9 +78,9 @@
     "label": "PLACEHOLDER — 2026 campaign",
     "value": null,
     "goal": null,
+    "prefix": "$",
     "suffix": "",
-    "icon": "target",
-    "asOf": "",
-    "sourceNote": "PLACEHOLDER — who confirmed the raised total and the goal, in writing, and when."
+    "source": "PLACEHOLDER — who confirmed the raised total and the goal",
+    "verifiedOn": "PLACEHOLDER — YYYY-MM-DD"
   }
 ]

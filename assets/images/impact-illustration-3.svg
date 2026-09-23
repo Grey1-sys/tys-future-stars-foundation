@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="Illustrated placeholder">
+<defs><linearGradient id="i3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#123566"/><stop offset="1" stop-color="#1B4F9C"/></linearGradient></defs>
+<rect width="1200" height="750" fill="url(#i3)"/>
+<path d="M300 520 L480 300 L660 440 L900 240" fill="none" stroke="#A8D1F0" stroke-width="8" opacity=".55" stroke-linecap="round" stroke-linejoin="round"/><circle cx="900" cy="240" r="46" fill="#F26522" opacity=".9"/>
+<text x="600" y="660" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" letter-spacing="6" fill="#A8D1F0">ILLUSTRATED PLACEHOLDER</text>
+</svg>

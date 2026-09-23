@@ -289,18 +289,10 @@
   }
 
   function gallery(images, programName) {
-    if (!Array.isArray(images)) return "";
-    var usable = images.filter(function (g) {
-      return g && g.src && g.alt && String(g.alt).trim();
-    });
-    if (!usable.length) return "";
-    return '<ul class="gallery-grid">' + usable.map(function (g, i) {
-      return '<li class="gallery-item">' +
-        '<button type="button" class="gallery-btn" data-gallery-index="' + i + '" ' +
-          'aria-label="View image ' + (i + 1) + ' of ' + usable.length + ' for ' + esc(programName) + '">' +
-          '<img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" loading="lazy" decoding="async">' +
-        "</button></li>";
-    }).join("") + "</ul>";
+    // Thumbnails and the viewer both come from assets/lightbox.js, so
+    // there is one focus trap on the site rather than two.
+    var lb = window.TFSF && window.TFSF.lightbox;
+    return lb ? lb.thumbs(images, programName) : "";
   }
 
   function relatedCards(all, current) {
@@ -463,7 +455,9 @@
         /* 8. Related */
         relatedCards(all, p);
 
-      initLightbox(host, p.gallery, p.name);
+      if (window.TFSF && window.TFSF.lightbox) {
+        window.TFSF.lightbox.attach(host, p.gallery, { label: p.name });
+      }
     });
   }
 
@@ -472,102 +466,6 @@
     return String(text).split(/\n\s*\n/).map(function (t) {
       return "<p>" + esc(t.trim()) + "</p>";
     }).join("");
-  }
-
-  /* =================================================================
-     LIGHTBOX
-     Modal over the gallery. Escape closes, arrows move, focus is held
-     inside while open and returned to the thumbnail that opened it.
-     ================================================================= */
-  function initLightbox(scope, images, programName) {
-    var usable = (images || []).filter(function (g) {
-      return g && g.src && g.alt && String(g.alt).trim();
-    });
-    if (!usable.length) return;
-
-    var box = document.createElement("div");
-    box.className = "lightbox";
-    box.setAttribute("role", "dialog");
-    box.setAttribute("aria-modal", "true");
-    box.setAttribute("aria-label", programName + " gallery");
-    box.hidden = true;
-    box.innerHTML =
-      '<div class="lightbox-inner">' +
-        '<button type="button" class="lightbox-close" aria-label="Close gallery">' +
-          '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>' +
-        "</button>" +
-        '<button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous image">' +
-          '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>' +
-        "</button>" +
-        /* No src attribute until an image is chosen. <img src=""> makes
-           the browser re-request the page URL. */
-        '<figure class="lightbox-figure">' +
-          '<img class="lightbox-img" alt="">' +
-          '<figcaption class="lightbox-cap"></figcaption>' +
-        "</figure>" +
-        '<button type="button" class="lightbox-nav lightbox-next" aria-label="Next image">' +
-          '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>' +
-        "</button>" +
-      "</div>";
-    document.body.appendChild(box);
-
-    var imgEl = box.querySelector(".lightbox-img");
-    var capEl = box.querySelector(".lightbox-cap");
-    var closeBtn = box.querySelector(".lightbox-close");
-    var prevBtn = box.querySelector(".lightbox-prev");
-    var nextBtn = box.querySelector(".lightbox-next");
-    var opener = null;
-    var index = 0;
-
-    function show(i) {
-      index = (i + usable.length) % usable.length;
-      var g = usable[index];
-      imgEl.src = g.src;
-      imgEl.alt = g.alt;
-      capEl.textContent = "Image " + (index + 1) + " of " + usable.length;
-    }
-
-    function open(i, trigger) {
-      opener = trigger || null;
-      show(i);
-      box.hidden = false;
-      document.body.classList.add("lightbox-open");
-      closeBtn.focus();
-    }
-
-    function close() {
-      box.hidden = true;
-      document.body.classList.remove("lightbox-open");
-      if (opener) opener.focus();
-    }
-
-    scope.addEventListener("click", function (e) {
-      var btn = e.target.closest ? e.target.closest("[data-gallery-index]") : null;
-      if (!btn) return;
-      open(parseInt(btn.getAttribute("data-gallery-index"), 10) || 0, btn);
-    });
-
-    closeBtn.addEventListener("click", close);
-    prevBtn.addEventListener("click", function () { show(index - 1); });
-    nextBtn.addEventListener("click", function () { show(index + 1); });
-
-    // Backdrop click, but not a click on the image itself.
-    box.addEventListener("click", function (e) {
-      if (e.target === box) close();
-    });
-
-    box.addEventListener("keydown", function (e) {
-      if (box.hidden) return;
-      if (e.key === "Escape") { e.preventDefault(); close(); return; }
-      if (e.key === "ArrowLeft") { e.preventDefault(); show(index - 1); return; }
-      if (e.key === "ArrowRight") { e.preventDefault(); show(index + 1); return; }
-      if (e.key !== "Tab") return;
-
-      var nodes = [closeBtn, prevBtn, nextBtn];
-      var first = nodes[0], last = nodes[nodes.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    });
   }
 
   /* =================================================================

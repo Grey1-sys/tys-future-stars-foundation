@@ -1,6 +1,6 @@
 [
   {
-    "_comment": "PLACEHOLDER. consent MUST be true to render. A story about a minor ALSO requires mediaReleaseOnFile true.",
+    "_comment": "PLACEHOLDER. consent MUST be true to render. A story about a minor ALSO requires mediaReleaseOnFile true — a SIGNED MEDIA RELEASE must be on file before either is set.",
     "published": false,
     "id": "placeholder-story-1",
     "name": "PLACEHOLDER — First name only, or full name with written permission",
@@ -8,17 +8,18 @@
     "programSlug": "placeholder-skills-clinic",
     "headline": "PLACEHOLDER — One line, in the storyteller's own framing.",
     "body": "PLACEHOLDER — The story in their words wherever possible. Do not dramatize and do not invent detail.",
-    "quote": "PLACEHOLDER — A short direct quote you have on record.",
     "photo": {
       "src": "assets/images/story-placeholder-story-1-portrait.jpg",
       "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
     },
     "consent": false,
     "isMinor": true,
-    "mediaReleaseOnFile": false
+    "mediaReleaseOnFile": false,
+    "excerpt": "PLACEHOLDER — two lines that stand alone on a card, in the storyteller’s framing.",
+    "pullQuote": "PLACEHOLDER — A short direct quote you have on record."
   },
   {
-    "_comment": "PLACEHOLDER. consent MUST be true to render.",
+    "_comment": "PLACEHOLDER. consent MUST be true to render. A story about a minor ALSO requires mediaReleaseOnFile true — a SIGNED MEDIA RELEASE must be on file before either is set.",
     "published": false,
     "id": "placeholder-story-2",
     "name": "PLACEHOLDER — Storyteller name",
@@ -26,13 +27,14 @@
     "programSlug": "placeholder-mentorship-circle",
     "headline": "PLACEHOLDER — One line, in the storyteller's own framing.",
     "body": "PLACEHOLDER — The story in their words wherever possible.",
-    "quote": "PLACEHOLDER — A short direct quote you have on record.",
     "photo": {
       "src": "assets/images/story-placeholder-story-2-portrait.jpg",
       "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
     },
     "consent": false,
     "isMinor": false,
-    "mediaReleaseOnFile": false
+    "mediaReleaseOnFile": false,
+    "excerpt": "PLACEHOLDER — two lines that stand alone on a card, in the storyteller’s framing.",
+    "pullQuote": "PLACEHOLDER — A short direct quote you have on record."
   }
 ]

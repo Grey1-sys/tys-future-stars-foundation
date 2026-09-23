@@ -29,6 +29,8 @@ Pages are hand-written `.html` at the repo root.
 | `assets/give.js` | Donate page: amounts, frequency, impact estimator, Givebutter handoff. |
 | `assets/forms.js` | **Shared form engine**: validation, Netlify submit, busy state, success swap. |
 | `assets/involve.js` | Get Involved: the seven cards and the interest-driven fieldsets. |
+| `assets/lightbox.js` | **Shared** accessible image viewer. Used by the program and impact galleries. |
+| `assets/impact.js` | Impact page: counters, story modal, testimonial rotator, gallery, video facade. |
 | `assets/styleguide.{css,js}` | Internal reference page only. |
 
 Load order on every page: `tokens.css` -> `styles.css`, then `site.js` -> `main.js`.
@@ -111,7 +113,9 @@ into the page:
 **Adding a page:** create the file with the shell above, then add one entry to the
 `NAV` array in `assets/site.js` with `ready: true`. Entries marked `ready: false`
 are defined but not rendered, so the nav never links to a page that doesn't exist.
-`impact.html`, `events.html`, and `news.html` are staged this way.
+`events.html` and `news.html` are staged this way. **`impact.html` is built but still
+staged** — flip its two `ready: false` entries in `assets/site.js` once real figures,
+stories, and testimonials replace the placeholders, so nothing unfinished goes live.
 
 | Page | Sections (in order) |
 |---|---|
@@ -123,6 +127,7 @@ are defined but not rendered, so the nav never links to a page that doesn't exis
 | `get-involved.html` | Nav · Hero · Seven involvement cards from `involvement.json` · One smart form that adapts to the chosen interest · Footer |
 | `contact.html` | Nav · Page hero · Contact info (Email / Phone / Location / Hours) + Contact form · Footer |
 | `donate.html` | Nav · Hero + 501(c)(3)/EIN trust line · Frequency + amount tiles + custom · Your Donation in Action · Goal meter · Sponsorship · Other ways to give · FAQ · Footer |
+| `impact.html` | Nav · Hero · Impact counters · Success stories (+ modal) · Testimonials · Gallery · Video · CTA · Footer. **Staged: nav `ready: false`.** |
 | `404.html` | Nav · Hero · Footer |
 | `thank-you.html` | Nav · Thank-you message · Footer. `noindex`. Fallback landing for a form POST without JS. |
 | `privacy.html` | Nav · Page hero · Interim privacy statement · Footer |
@@ -349,8 +354,9 @@ multi-day event does not vanish on its opening morning.
   "ageOrRole": "Age 16",
   "programSlug": "saturday-skills-clinic",
   "headline": "One line, in their own framing.",
+  "excerpt": "Two lines that stand alone on a card.",
   "body": "The story, in their words wherever possible.",
-  "quote": "A short direct quote you have on record.",
+  "pullQuote": "A short direct quote you have on record.",
   "photo": { "src": "assets/images/story-jordan-portrait.jpg", "alt": "Describe the photo." },
   "consent": true,
   "isMinor": true,
@@ -389,19 +395,28 @@ multi-day event does not vanish on its opening morning.
 }
 ```
 
-**`stats.json`** - leave `value` as `null` until the figure is confirmed **in writing**.
-A `null` value is not rendered.
+**`stats.json`** - drives the impact counters. Leave `value` as `null` until the figure
+is confirmed **in writing**; a null value is not rendered.
+
+**Every number carries its provenance.** `source` says where it came from and
+`verifiedOn` is the date it was last checked. A figure without both does not go on the
+site — if you cannot say where it came from, it is not ready to publish.
+
+`value` must be a **number** for the count-up animation. `prefix` and `suffix` wrap it,
+so "$7,000+" is prefix `$`, value `7000`, suffix `+`. A non-numeric string still renders,
+just without animating.
 
 ```json
 {
   "published": true,
+  "order": 1,
   "id": "scholarships-awarded",
   "label": "Awarded in scholarships",
-  "value": "$7,000",
+  "value": 7000,
+  "prefix": "$",
   "suffix": "+",
-  "icon": "award",
-  "asOf": "March 2026",
-  "sourceNote": "Confirmed by the foundation by email, 2026-03-01."
+  "source": "LaSonya Adams, by email",
+  "verifiedOn": "2026-03-01"
 }
 ```
 
@@ -516,6 +531,54 @@ an `<option value>` in that page's interest select, or the card's CTA will do no
 
 A `timeCommitment` is a promise to a volunteer. Get it approved before publishing.
 
+**`testimonials.json`** - the rotating quote block on impact.html. **Never invent a
+quote.** Paste one you have on record, with permission to publish it and the person's
+name. `photo` may be null; the rotator falls back to an initial.
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "id": "testimonial-parent",
+  "quote": "An approved quote you have on record.",
+  "name": "Parent name, with permission",
+  "role": "Parent",
+  "photo": { "src": "assets/images/testimonial-name-portrait.jpg", "alt": "Describe the photo." }
+}
+```
+
+**`gallery.json`** - the impact page gallery. `caption` is optional and shows in the
+lightbox. **No stock photography of children.** Where a real permissioned photo is
+missing, point at an illustrated placeholder rather than a purchased image of an
+unrelated child.
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "id": "gallery-1",
+  "src": "assets/images/gallery-spring-clinic-1.jpg",
+  "alt": "Describe the photo.",
+  "caption": "Spring skills clinic, 2026"
+}
+```
+
+**`videos.json`** - the click-to-load video. The section hides itself entirely while
+`youtubeId` is null, so there is never an empty player. Nothing loads from YouTube
+until the visitor presses play.
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "id": "intro-video",
+  "title": "Our year in ninety seconds",
+  "description": "One line on what the video shows.",
+  "youtubeId": "abc123XYZ",
+  "poster": { "src": "assets/images/video-intro-poster.jpg", "alt": "Describe the poster." }
+}
+```
+
 **`faq.json`** - one collection, several pages. `page` selects which; the host element
 carries `data-faq-page`. Currently `donate` and `programs`.
 
@@ -586,6 +649,40 @@ an invented or empty counter -- see the "no placeholder financial figures" rule.
 **Extra fields** `programs.json` carries for these pages, beyond the shape documented
 above: `summary`, `metaDescription`, `eligibility`, `serviceArea`, `ageMin`, `ageMax`,
 `gallery[]`, `ctaPrimary`, `ctaSecondary`.
+
+### The impact page
+
+Five sections, all from `/data`, in `assets/impact.js`.
+
+**Counters.** Count up from zero once per page load, triggered by IntersectionObserver
+at 35% visibility. `prefers-reduced-motion` gets the final number immediately — the
+number is the information, the animation is not. Numbers are comma-formatted and use
+tabular figures so they do not jitter while counting. The `campaign-goal` entry is
+excluded here; it belongs to the donate page meter.
+
+**Stories.** Cards open an accessible modal: `role="dialog"`, `aria-modal`, labelled by
+the headline, focus trapped, Escape closes, focus returns to the button that opened it.
+The modal shows photo, headline, body, pull quote, the program they were part of, and a
+CTA to support that program.
+
+> **Consent is not optional.** A story about anyone under 18 renders only when
+> `consent` is true **and** `mediaReleaseOnFile` is true — and that flag should only be
+> set when a **signed media release is physically on file**. The gate is enforced in
+> `assets/data.js` so no page can bypass it. When nothing clears the gate the section
+> says stories are only published with permission, rather than implying there are none.
+
+**Testimonials.** One slide at a time with manual previous/next and a position counter.
+Rotation pauses on hover **and** on keyboard focus, so a reader is never interrupted
+mid-quote. Under `prefers-reduced-motion` nothing auto-rotates at all; the controls
+still work.
+
+**Gallery.** Uses the shared `assets/lightbox.js`. Arrow keys move, Escape closes, Tab
+is trapped, focus returns to the thumbnail.
+
+**Video.** A poster and a play button, nothing else. The YouTube iframe is only built on
+click, and it points at `youtube-nocookie.com`. A third-party player is roughly a
+megabyte of JavaScript plus cookies, and nobody should pay that on a page view they did
+not ask for. With no `youtubeId` configured the whole section hides itself.
 
 ### Checking your work
 
@@ -814,6 +911,9 @@ history is visible — do not re-introduce them.
 - ~~`programs.html` was hardcoded~~ — now rendered from `data/programs.json`.
 - ~~Get Involved had a front-end-only form that discarded submissions~~ — replaced with
   the Netlify Forms engine in `assets/forms.js`.
+- ~~The lightbox was about to be duplicated~~ — extracted from `programs.js` into the
+  shared `assets/lightbox.js` before the impact gallery could grow a second copy of the
+  focus trap. Program detail gallery re-verified after the move.
 - ~~The FAQ on `programs.html` was hardcoded~~ — moved into `faq.json` under
   `page: "programs"`, alongside the donate FAQ.
 - ~~No EIN despite 501(c)(3) claims~~ — EIN 42-2398737 supplied 2026-09-17 and now
@@ -839,7 +939,12 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Approved photo and bio for LaSonya Adams, President & Founder
 - [ ] Office hours confirmation (currently "Mon–Fri, 9am – 5pm")
 - [ ] Reviewed Privacy Policy and Terms of Use copy (interim statements are live now)
-- [ ] Content for Impact, Events, and News (nav entries staged, `ready: false`)
+- [ ] Content for Events and News (nav entries staged, `ready: false`)
+- [ ] **Impact page content**, then flip `impact.html` to `ready: true` in `assets/site.js`:
+  - [ ] Four to six confirmed impact figures, each with a `source` and `verifiedOn` date
+  - [ ] Approved testimonials from a parent, a volunteer, and a partner — real quotes, with permission
+  - [ ] Permissioned gallery photographs (illustrated placeholders are in place)
+  - [ ] A YouTube video id and poster image, if there is a video
 - [ ] Confirmed impact unit costs, to switch on "Your Donation in Action"
 - [ ] Confirmed campaign raised total and goal, to switch on the goal meter
 - [ ] Sponsor a Child and Sponsor a Program dollar amounts
