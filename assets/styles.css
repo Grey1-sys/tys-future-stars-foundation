@@ -2816,3 +2816,386 @@ body.modal-open { overflow: hidden; }
   .related-links a { flex-direction: column; gap: var(--space-1); }
   .feed-actions .btn { width: 100%; justify-content: center; }
 }
+
+
+/* ===================================================================
+   13. ACCOUNTABILITY, CONTACT, RESOURCES, SPONSORS, HANDOFF
+   where-your-money-goes.html, contact.html, resources.html, and the
+   two sections added to get-involved.html.
+=================================================================== */
+
+/* ---------- Allocation chart (inline SVG, no library) ---------- */
+.alloc-pending {
+  padding: var(--space-6);
+  background: var(--color-surface-tint);
+  border-radius: var(--radius-lg);
+}
+.alloc-pending p { margin: 0; }
+.alloc-figure { margin: 0; }
+.alloc-svg {
+  width: 100%;
+  height: var(--space-12);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  display: block;
+}
+/* Three fills that stay distinguishable in greyscale as well as in
+   colour -- a printed grant packet is not in colour. */
+.alloc-programs    { fill: var(--color-brand); }
+.alloc-operations  { fill: var(--color-brand-light-strong); }
+.alloc-fundraising { fill: var(--color-accent-strong); }
+
+.alloc-legend {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+.alloc-row { display: flex; align-items: center; gap: var(--space-2); }
+.alloc-key {
+  width: var(--space-4);
+  height: var(--space-4);
+  border-radius: var(--radius-xs);
+  flex: 0 0 auto;
+}
+/* The legend keys are spans, so they need background, not fill. */
+.alloc-key.alloc-programs    { background: var(--color-brand); }
+.alloc-key.alloc-operations  { background: var(--color-brand-light-strong); }
+.alloc-key.alloc-fundraising { background: var(--color-accent-strong); }
+.alloc-row-label { font-weight: var(--weight-semibold); }
+.alloc-row-pct { color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.alloc-source {
+  margin-top: var(--space-5);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Documents ---------- */
+.doc-list { list-style: none; padding: 0; margin: 0; }
+.doc-item { border-top: 1px solid var(--color-border); }
+.doc-list .doc-item:last-child { border-bottom: 1px solid var(--color-border); }
+.doc-item a,
+.doc-item.is-pending {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) 0;
+  text-decoration: none;
+  color: inherit;
+}
+.doc-item a:hover .doc-title { color: var(--color-text-link); }
+.doc-type {
+  flex: 0 0 auto;
+  min-width: var(--space-12);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface-subtle);
+  color: var(--color-text-secondary);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.doc-main { flex: 1 1 auto; min-width: 0; }
+.doc-title { display: block; font-weight: var(--weight-semibold); }
+.doc-desc {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+.doc-status {
+  flex: 0 0 auto;
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+.doc-status-ready { color: var(--color-text-link); font-weight: var(--weight-semibold); }
+.doc-item.is-pending { color: var(--color-text-secondary); }
+.doc-note {
+  margin-top: var(--space-5);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Leadership ---------- */
+.person-group + .person-group { margin-top: var(--space-12); }
+.person-group-title {
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-6);
+}
+.person-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+.person-card {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-card-pad);
+  background: var(--color-surface-page);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.person-photo,
+.person-initials {
+  width: var(--space-16);
+  height: var(--space-16);
+  border-radius: var(--radius-circle);
+  flex: 0 0 auto;
+  object-fit: cover;
+}
+/* Initials, not a broken image: most of these people have no approved
+   headshot yet and a 404 on the accountability page is worse. */
+.person-initials {
+  display: grid;
+  place-items: center;
+  background: var(--color-surface-tint);
+  color: var(--color-brand);
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+}
+.person-body { min-width: 0; }
+.person-name { font-size: var(--text-3xl); }
+.person-role {
+  margin-top: var(--space-1);
+  color: var(--color-text-accent-strong);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+}
+.person-bio {
+  margin-top: var(--space-2);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Legal block ---------- */
+.legal-list { margin: 0; }
+.legal-pending { color: var(--color-text-secondary); font-style: italic; }
+.legal-statement {
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  background: var(--color-surface-tint);
+  border-radius: var(--radius-md);
+}
+.legal-policies { list-style: none; padding: 0; margin: var(--space-6) 0 0; }
+.legal-policies li + li { margin-top: var(--space-2); }
+.legal-label { font-weight: var(--weight-semibold); }
+
+/* ---------- Contact ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+.field-optional { color: var(--color-text-secondary); font-weight: var(--weight-normal); }
+.contact-social { margin-top: var(--space-8); }
+.contact-social ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-3) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/* ---------- Resources ---------- */
+.res-group + .res-group { margin-top: var(--space-16); }
+.res-group-title { font-size: var(--text-5xl); }
+.res-group-blurb { margin-top: var(--space-2); color: var(--color-text-secondary); }
+.res-list { list-style: none; padding: 0; margin: var(--space-6) 0 0; }
+.res-item {
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--color-border);
+}
+.res-list .res-item:last-child { border-bottom: 1px solid var(--color-border); }
+.res-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.res-title { font-weight: var(--weight-semibold); font-size: var(--text-3xl); }
+.res-badge { flex: 0 0 auto; }
+.res-desc { margin-top: var(--space-2); color: var(--color-text-secondary); }
+.res-desc.is-pending { font-style: italic; }
+.res-contact { margin-top: var(--space-2); }
+.res-phone { font-weight: var(--weight-semibold); }
+/* An unverified number must not look like a number you can dial. */
+.res-phone.is-pending {
+  color: var(--color-text-secondary);
+  font-style: italic;
+  font-weight: var(--weight-normal);
+}
+/* Whose resource this is. Quiet, but never omitted. */
+.res-owner {
+  margin-top: var(--space-2);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+.res-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  font-weight: var(--weight-semibold);
+}
+.ext-icon { width: 15px; height: 15px; flex: 0 0 auto; }
+
+/* ---------- Sponsor logo wall ---------- */
+.sponsor-wall {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+/* Fixed height + contain + equal padding. Sponsor logos arrive at
+   wildly different aspect ratios; letting each size itself looks
+   broken, and stretching one is a trademark problem. */
+.sponsor-cell {
+  height: var(--space-20);
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: var(--color-surface-page);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.sponsor-cell a { display: grid; place-items: center; width: 100%; height: 100%; }
+.sponsor-cell .sponsor-logo {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.sponsor-wordmark {
+  font-weight: var(--weight-semibold);
+  text-align: center;
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+.sponsor-empty { text-align: center; }
+
+/* ---------- Sponsorship tiers ---------- */
+/* Stacked cards, not a comparison table: a five-column grid of ticks
+   is unreadable on a phone and flattens the concrete detail that
+   makes a sponsor say yes. */
+.tier-stack { display: flex; flex-direction: column; gap: var(--space-5); }
+.tier-card {
+  padding: var(--space-card-pad);
+  background: var(--color-surface-page);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.tier-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.tier-name { font-size: var(--text-4xl); }
+.tier-amount {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  color: var(--color-brand);
+}
+.tier-amount.is-pending {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+.tier-freq { margin-left: var(--space-2); color: var(--color-text-secondary); font-size: var(--text-base); }
+.tier-summary { margin-top: var(--space-2); color: var(--color-text-secondary); }
+.tier-benefits { list-style: none; padding: 0; margin: var(--space-5) 0 0; }
+.tier-benefits li {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin-top: var(--space-2);
+}
+.tier-tick {
+  width: var(--space-5);
+  height: var(--space-5);
+  flex: 0 0 auto;
+  color: var(--color-accent-strong);
+  margin-top: 2px;
+}
+.tier-cta { margin-top: var(--space-6); }
+
+/* ---------- Volunteer / family handoff ---------- */
+.handoff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+.handoff-card {
+  padding: var(--space-card-pad);
+  background: var(--color-surface-page);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.handoff-title { font-size: var(--text-4xl); }
+.handoff-steps {
+  margin: var(--space-5) 0 0;
+  padding-left: var(--space-6);
+}
+.handoff-steps li { margin-top: var(--space-3); }
+.handoff-steps li::marker {
+  font-weight: var(--weight-bold);
+  color: var(--color-accent-strong);
+}
+.handoff-actions {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+/* Say plainly that the visitor is leaving. A silent jump to a
+   differently-branded form is how people abandon halfway. */
+.handoff-notice {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+.handoff-notice svg { width: 16px; height: 16px; flex: 0 0 auto; margin-top: 3px; }
+.handoff-pending,
+.handoff-fallback {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+.handoff-phone { font-size: var(--text-base); }
+
+@media (max-width: 900px) {
+  .person-grid { grid-template-columns: repeat(2, 1fr); }
+  .sponsor-wall { grid-template-columns: repeat(3, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+  .handoff-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .person-grid { grid-template-columns: 1fr; }
+  .sponsor-wall { grid-template-columns: repeat(2, 1fr); }
+  .alloc-legend { flex-direction: column; gap: var(--space-3); }
+  .doc-item a,
+  .doc-item.is-pending { flex-wrap: wrap; gap: var(--space-3); }
+  .doc-status { width: 100%; }
+  .tier-head { flex-direction: column; gap: var(--space-1); }
+  .handoff-actions .btn { width: 100%; justify-content: center; }
+}

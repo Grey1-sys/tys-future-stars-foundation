@@ -36,12 +36,32 @@
     phoneHref: null,
     city: "Smyrna, Tennessee",
     ein: "42-2398737",                 // client-supplied 2026-09-17
+
+    /* Legal identity, surfaced on where-your-money-goes.html and in the
+       NGO JSON-LD on contact.html. A grant reviewer looks for exactly
+       these fields. Anything still null renders as "being confirmed"
+       rather than guessing -- see CLAUDE.md. */
+    legalName: null,                   // TODO(client): exact name on the IRS letter
+    stateOfIncorporation: null,        // TODO(client): e.g. "Tennessee"
+    mailingAddress: null,              // TODO(client): a real MAILING address.
+                                       // Never a home address. A PO box is fine.
+    hasPublicOffice: false,            // true only if there is a public office
+                                       // the public may visit. Drives the map link.
+    responseTime: "within 2 business days",
+    donorPrivacyPolicyUrl: null,       // TODO(client): renders "available on request"
+
     social: [
       { label: "Instagram", url: null },   // TODO(client): real profile URLs
       { label: "Facebook",  url: null },
       { label: "X",         url: null }
     ]
   };
+
+  /* One source of truth for contact and legal details. Pages read this
+     instead of hardcoding an email or an EIN into markup -- change it
+     here and every page follows. */
+  window.TFSF = window.TFSF || {};
+  window.TFSF.org = ORG;
 
   /* ---------------- Navigation model ----------------
      ready:false  -> defined, not rendered. Flip to true when the
@@ -52,7 +72,10 @@
       label: "About", ready: true,
       children: [
         { label: "About the Foundation", href: "about.html",    ready: true },
-        { label: "Ty's Story",           href: "ty-story.html", ready: true }
+        { label: "Ty's Story",           href: "ty-story.html", ready: true },
+        // Accountability lives under About: it is where a grant reviewer
+        // or a careful donor goes looking for it.
+        { label: "Where Your Money Goes", href: "where-your-money-goes.html", ready: true }
       ]
     },
     {
@@ -81,6 +104,7 @@
     // keep a separate blog, and an empty calendar reads worse than a
     // combined feed -- see assets/happening.js.
     { label: "What's Happening", href: "whats-happening.html", ready: true },
+    { label: "Resources", href: "resources.html", ready: true },
     { label: "Contact", href: "contact.html", ready: true }
   ];
 
@@ -94,7 +118,9 @@
     { label: "Get Involved", href: "get-involved.html", ready: true },
     { label: "Donate",      href: "donate.html",      ready: true },
     { label: "Impact",      href: "impact.html",      ready: false },
-    { label: "What's Happening", href: "whats-happening.html", ready: true }
+    { label: "What's Happening", href: "whats-happening.html", ready: true },
+    { label: "Resources",   href: "resources.html", ready: true },
+    { label: "Where Your Money Goes", href: "where-your-money-goes.html", ready: true }
   ];
 
   var LEGAL = [

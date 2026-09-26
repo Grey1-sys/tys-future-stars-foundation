@@ -177,6 +177,17 @@
     if (start) choose(start, false);
     else applyInterest(select.value);
 
+    /* The hash is also read on CHANGE, not just at boot. An in-page
+       link -- the nav's get-involved.html#volunteer, or a sponsorship
+       tier's #sponsor -- changes the hash without reloading, so
+       without this the link scrolls to the form and preselects
+       nothing. */
+    window.addEventListener("hashchange", function () {
+      var hash = (window.location.hash || "").replace(/^#/, "").toLowerCase();
+      var mapped = HASH_ALIAS[hash];
+      if (mapped) choose(mapped, true);
+    });
+
     // forms.js binds on DOMContentLoaded; if this ran first, make sure
     // the form is wired either way.
     if (forms) forms.init(document.getElementById(FORM_ID));

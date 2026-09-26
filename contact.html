@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Ty's Future Stars Foundation</title>
-<meta name="description" content="Get in touch with Ty's Future Stars Foundation.">
+<meta name="description" content="Contact Ty's Future Stars Foundation in Smyrna, Tennessee. Questions about programs, scholarships, volunteering, donations, or partnerships — a person reads every message.">
+<link rel="canonical" href="https://tysfuturestars.org/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — Ty's Future Stars Foundation">
+<meta property="og:description" content="Questions about programs, scholarships, volunteering, donations, or partnerships. A person reads every message.">
+<meta property="og:url" content="https://tysfuturestars.org/contact.html">
+<meta property="og:site_name" content="Ty's Future Stars Foundation">
 <link rel="icon" href="assets/img/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,68 +25,137 @@
 
 <main id="main">
 
+<!-- ===== HERO ===== -->
 <header class="page-hero">
   <div class="wrap">
     <div class="breadcrumb"><a href="index.html">Home</a> / Contact</div>
     <span class="eyebrow">Contact</span>
-    <h1 class="display" style="margin-top:14px;max-width:18ch;">We'd love to hear from you.</h1>
-    <p class="lede">Questions about our scholarships, programs, or partnerships? Send us a note and we'll be in touch.</p>
+    <h1 class="display mt-1">We'd love to hear from you.</h1>
+    <p class="lede mt-2">Questions about our programs, scholarships, or partnerships?
+      Send us a note and we will be in touch.</p>
   </div>
 </header>
 
+<!-- ===== FORM + DETAILS =====
+     Two columns on desktop, stacked on mobile. The form is on the
+     LEFT so it is the first thing reached on a phone. -->
 <section class="section">
-  <div class="wrap split">
-    <!-- Contact info -->
-    <div class="reveal">
-      <span class="eyebrow">Reach us directly</span>
-      <h2 class="title mt-1">Let's talk.</h2>
-      <p class="lede mt-2">Whether you're a parent, a student-athlete, a partner, or someone who wants to help — we're always glad to connect.</p>
+  <div class="wrap contact-grid">
 
-      <div class="stack mt-3">
-        <div class="info-item">
-          <span class="ii-ic"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg></span>
-          <div><h3>Email</h3><a href="mailto:hello@tysfuturestars.org">hello@tysfuturestars.org</a></div>
-        </div>
-        <div class="info-item">
-          <span class="ii-ic"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          <div><h3>Location</h3><p>Smyrna, Tennessee</p></div>
-        </div>
-        <div class="info-item">
-          <span class="ii-ic"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-          <div><h3>Hours</h3><p>Mon–Fri, 9am – 5pm</p></div>
-        </div>
-      </div>
-    </div>
+    <!-- ---------- Left: the form ----------
+         Static markup on purpose. Netlify discovers forms by parsing
+         the DEPLOYED HTML, so a form built by JavaScript would be
+         invisible to it and every message would go nowhere. Runs on
+         the shared engine in assets/forms.js. -->
+    <div class="form-card">
+      <h2 class="title">Send us a message</h2>
 
-    <!-- Contact form -->
-    <div class="form-card reveal d1">
-      <form data-demo-form>
+      <form id="contact-form"
+            name="contact"
+            method="POST"
+            action="/thank-you.html"
+            data-tfsf-form
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            data-success-heading="Thank you — your message is on its way."
+            data-success-body="Someone from Ty's Future Stars Foundation will reply within 2 business days."
+            novalidate>
+
+        <!-- Netlify needs the form name in the body of an AJAX post -->
+        <input type="hidden" name="form-name" value="contact">
+
+        <!-- Honeypot: hidden from people, tempting to bots -->
+        <p class="visually-hidden" aria-hidden="true">
+          <label>Do not fill this in if you are human:
+            <input name="bot-field" tabindex="-1" autocomplete="off">
+          </label>
+        </p>
+
+        <div class="field">
+          <label for="contact-name">Your name *</label>
+          <input id="contact-name" name="name" type="text" autocomplete="name"
+                 required data-error="Enter your name.">
+        </div>
+
         <div class="field-row">
-          <div class="field"><label for="cfn">First name</label><input id="cfn" type="text" placeholder="Jamie" required></div>
-          <div class="field"><label for="cln">Last name</label><input id="cln" type="text" placeholder="Rivera" required></div>
+          <div class="field">
+            <label for="contact-email">Email *</label>
+            <input id="contact-email" name="email" type="email" autocomplete="email"
+                   required data-error="Enter your email address so we can reply.">
+          </div>
+          <div class="field">
+            <label for="contact-phone">Phone <span class="field-optional">(optional)</span></label>
+            <input id="contact-phone" name="phone" type="tel" autocomplete="tel">
+          </div>
         </div>
-        <div class="field"><label for="cem">Email</label><input id="cem" type="email" placeholder="jamie@example.com" required></div>
-        <div class="field"><label for="csub">Subject</label>
-          <select id="csub">
-            <option>General question</option>
-            <option>Scholarship inquiry</option>
-            <option>Partnership / sponsorship</option>
-            <option>Media &amp; press</option>
-            <option>Donations &amp; receipts</option>
+
+        <!-- PLACEHOLDER routing categories. Confirm with the director
+             which messages she actually receives, and whether any of
+             these should be routed to a different inbox. Netlify can
+             send a different notification per form, not per subject —
+             so a separate inbox means a separate form. -->
+        <div class="field">
+          <label for="contact-subject">What is this about? *</label>
+          <select id="contact-subject" name="subject" required
+                  data-error="Choose what your message is about.">
+            <option value="">Choose one</option>
+            <option>I need assistance</option>
+            <option>Volunteer question</option>
+            <option>Donation question</option>
+            <option>Partnership inquiry</option>
+            <option>Media inquiry</option>
+            <option>Other</option>
           </select>
         </div>
-        <div class="field"><label for="cmsg">Message</label><textarea id="cmsg" placeholder="How can we help?" required></textarea></div>
-        <button type="submit" class="btn btn-secondary mt-2" style="width:100%;">Send message</button>
-        <p class="form-note" data-form-note>Typical reply time: 1–2 business days.</p>
+
+        <div class="field">
+          <label for="contact-message">Message *</label>
+          <textarea id="contact-message" name="message" rows="6" required
+                    minlength="10"
+                    data-error="Tell us a little about what you need."></textarea>
+        </div>
+
+        <div data-form-status></div>
+
+        <button type="submit" class="btn btn-primary btn-lg form-submit">Send message</button>
+
+        <p class="form-note">We will only use these details to reply to you. Read our
+          <a href="privacy.html">privacy policy</a>.</p>
       </form>
     </div>
+
+    <!-- ---------- Right: how to reach a human ----------
+         Rendered from ORG in assets/site.js, so a detail the
+         foundation has not confirmed is never invented here. -->
+    <div id="contact-details" class="contact-details"></div>
+
   </div>
 </section>
+
+<!-- ===== FAQ =====
+     Reuses the shared accordion renderer in assets/give.js, the same
+     one donate.html and programs.html use. Entries live in
+     data/faq.json under page: "contact". -->
+<section class="section soft">
+  <div class="wrap narrow">
+    <div class="section-head">
+      <span class="eyebrow">Before you write</span>
+      <h2 class="title">Questions we get a lot.</h2>
+    </div>
+    <div id="give-faq" data-faq-page="contact"></div>
+  </div>
+</section>
+
 </main>
 
 <div id="site-footer"></div>
 
 <script src="assets/site.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/render.js"></script>
+<script src="assets/forms.js"></script>
+<script src="assets/give.js"></script>
+<script src="assets/contact.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>

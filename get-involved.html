@@ -292,6 +292,59 @@
   </div>
 </section>
 
+<!-- ===== SECTION A — SPONSORS =====
+     A SECTION, not a page. A dedicated sponsors page carrying four
+     logos reads as aspiration; promote it when the wall fills out.
+     Logo wall + five tiers rendered by assets/sponsors.js. -->
+<section class="section" id="sponsors">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our sponsors</span>
+      <h2 class="title">The businesses behind the kids.</h2>
+      <p>Sponsorship pays for the things a registration fee never covers —
+        jerseys, gym time, transport, and the scholarships themselves.</p>
+    </div>
+
+    <div id="sponsor-wall"></div>
+
+    <div class="section-head mt-5">
+      <h3 class="title">Sponsorship levels</h3>
+      <p>Five ways in. Every level is concrete — you will know exactly what
+        your name is on before you commit.</p>
+    </div>
+
+    <div id="sponsor-tiers"></div>
+  </div>
+</section>
+
+<!-- ===== SECTION B — VOLUNTEER & FAMILY HANDOFF =====
+     Deliberately NOT a portal. No accounts, no uploads, no payments:
+     see the header of assets/handoff.js and "Systems we deliberately
+     did not build" in CLAUDE.md. These blocks explain each process in
+     numbered steps and hand off to a partner tool. -->
+<section class="section soft" id="how-it-works">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2 class="title">What happens after you reach out.</h2>
+      <p>No account to create, no password to forget. Here is the whole
+        process, start to finish.</p>
+    </div>
+
+    <div class="handoff-grid">
+      <article class="handoff-card" id="volunteer-handoff">
+        <h3 class="handoff-title">Becoming a volunteer</h3>
+        <div id="volunteer-steps"></div>
+      </article>
+
+      <article class="handoff-card" id="family-handoff">
+        <h3 class="handoff-title">Registering your child</h3>
+        <div id="family-steps"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <div id="site-footer"></div>
@@ -301,6 +354,8 @@
 <script src="assets/render.js"></script>
 <script src="assets/forms.js"></script>
 <script src="assets/involve.js"></script>
+<script src="assets/sponsors.js"></script>
+<script src="assets/handoff.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>

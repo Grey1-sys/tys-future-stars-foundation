@@ -32,6 +32,11 @@ Pages are hand-written `.html` at the repo root.
 | `assets/lightbox.js` | **Shared** accessible image viewer. Used by the program and impact galleries. |
 | `assets/impact.js` | Impact page: counters, story modal, testimonial rotator, gallery, video facade. |
 | `assets/happening.js` | What's Happening: the combined feed, plus the event and post detail templates. |
+| `assets/money.js` | Where Your Money Goes: allocation chart, documents, leadership, legal block. |
+| `assets/contact.js` | Contact page: the details column and the NGO JSON-LD. |
+| `assets/resources.js` | Resources: the grouped list of local links. |
+| `assets/sponsors.js` | Get Involved: the sponsor logo wall and the five tiers. |
+| `assets/handoff.js` | Get Involved: the volunteer and family process blocks. |
 | `tools/build-sitemap.js` | Regenerates `/sitemap.xml` from `/data`. Run by hand, not on deploy. |
 | `assets/styleguide.{css,js}` | Internal reference page only. |
 
@@ -129,8 +134,10 @@ one combined feed — see **What's Happening** below.
 | `about.html` | Nav · Page hero · Mission + Vision · Purpose · Core Values (Leadership, Education, Discipline, Community, Opportunity, Legacy) · Meet LaSonya Adams · CTA · Footer |
 | `programs.html` | Nav · Hero · Filters (category + age) · Four category groups from `programs.json` · FAQ · CTA · Footer |
 | `program.html?slug=` | Nav · Hero · What We Do · Who We Serve · Impact · Details · Gallery + lightbox · Get Involved · Related · Footer |
-| `get-involved.html` | Nav · Hero · Seven involvement cards from `involvement.json` · One smart form that adapts to the chosen interest · Footer |
-| `contact.html` | Nav · Page hero · Contact info (Email / Phone / Location / Hours) + Contact form · Footer |
+| `get-involved.html` | Nav · Hero · Seven involvement cards · One smart form · **Sponsors** (logo wall + five tiers) · **How it works** (volunteer + family handoff) · Footer |
+| `contact.html` | Nav · Page hero · Form (left) + how to reach us (right) · Six-question FAQ · Footer. NGO JSON-LD. |
+| `where-your-money-goes.html` | Nav · Hero · Allocation chart · Documents · Leadership (board / staff) · Legal block · CTA · Footer |
+| `resources.html` | Nav · Hero · Education / Employment / Community list · "Don't see what you need?" · Footer |
 | `donate.html` | Nav · Hero + 501(c)(3)/EIN trust line · Frequency + amount tiles + custom · Your Donation in Action · Goal meter · Sponsorship · Other ways to give · FAQ · Footer |
 | `impact.html` | Nav · Hero · Impact counters · Success stories (+ modal) · Testimonials · Gallery · Video · CTA · Footer. **Staged: nav `ready: false`.** |
 | `whats-happening.html` | Nav · Hero · Filter row (All / Events / Updates) · Coming up · Recent updates · Recently (last 4 past events) · CTA · Footer |
@@ -143,9 +150,12 @@ one combined feed — see **What's Happening** below.
 | `styleguide.html` | **Internal.** Every token + component. `noindex`, unlinked. |
 | `data-preview.html` | **Internal.** Every `/data` collection rendered live. `noindex`, unlinked. |
 
-Nav order: Home · About (Foundation, Ty's Story) · Programs (dropdown, one entry per category) · Get Involved
-(dropdown) · What's Happening · Contact · **Donate** (CTA button). Impact is staged in
-the config as `ready: false`.
+Nav order: Home · About (Foundation, Ty's Story, Where Your Money Goes) · Programs
+(dropdown, one entry per category) · Get Involved (dropdown) · What's Happening ·
+Resources · Contact · **Donate** (CTA button). Impact is staged as `ready: false`.
+
+Accountability sits under **About** rather than top level: it is where a grant reviewer
+or a careful donor goes looking for it, and nine top-level items is too many.
 
 **Detail templates belong to a section.** `event.html`, `post.html`, and `program.html`
 are not nav entries, but a visitor reading one is still inside a section, so the nav
@@ -153,6 +163,28 @@ highlights it. The mapping is `DETAIL_PARENT` in `assets/site.js` — add to it 
 you add a detail template.
 
 ---
+
+## Organization details: one source of truth
+
+`ORG` at the top of `assets/site.js` holds every contact and legal detail, and is
+published as `window.TFSF.org`. Pages read it; **no page hardcodes an email, a phone
+number, an EIN, or an address into markup.** Change it there and every page follows.
+
+| Field | Notes |
+|---|---|
+| `email` | Used in the footer, contact page, and as the fallback everywhere a phone number would go |
+| `phone` / `phoneHref` | **`null`.** A row renders only with a real number. |
+| `ein` | Client-supplied 2026-09-17 |
+| `legalName` | `null` — the exact name on the IRS determination letter |
+| `stateOfIncorporation` | `null` |
+| `mailingAddress` | `null`. **Never a home address.** A PO box is fine. |
+| `hasPublicOffice` | `false`. Drives the office-hours line and the directions link. |
+| `responseTime` | The promise made on the contact page |
+| `donorPrivacyPolicyUrl` | `null` — renders "Available on request" with the email |
+| `social[].url` | All `null`. An icon renders only with a real profile URL. |
+
+**Anything null renders as an honest line or is dropped entirely.** That is the whole
+point: the page states what is being confirmed rather than inventing it.
 
 ## Design tokens
 
@@ -612,6 +644,37 @@ until the visitor presses play.
 }
 ```
 
+**`sponsorship-tiers.json`** - the five stacked tier cards on get-involved.html.
+`amount` stays `null` until the director sets real price points: a sponsorship level is
+a **promise**, so the no-invented-figures rule applies here too. A null renders
+"Amount being confirmed" and sends the sponsor to the form instead of quoting a price.
+
+Benefits must be **concrete**. Nobody writes a cheque for "recognition" — name the
+deliverable: logo on game jerseys, a banner at the tournament, a booth at back-to-school,
+a named scholarship.
+
+```json
+{
+  "published": true,
+  "order": 3,
+  "id": "tier-silver",
+  "name": "Silver",
+  "amount": 2500,
+  "frequency": "yearly",
+  "summary": "One line on who this tier suits.",
+  "benefits": ["Logo on game jerseys", "Booth at the back-to-school event"]
+}
+```
+
+**`resources.json`** additions - two fields beyond the shape documented above, both for
+resources.html: `organization` (whose service this is) and `phone`. A `category` of
+`Governance` is routed to where-your-money-goes.html instead of the resources list.
+
+**A PLACEHOLDER phone number is never rendered as a `tel:` link.** `assets/resources.js`
+checks for it and renders plain text, because the point of a placeholder is that nobody
+has verified it. A wrong number on a page a struggling family is reading is worse than
+no number at all.
+
 **`faq.json`** - one collection, several pages. `page` selects which; the host element
 carries `data-faq-page`. Currently `donate` and `programs`.
 
@@ -773,6 +836,86 @@ node tools/build-sitemap.js
 It lists the static pages plus every **published** event and post, and skips drafts and
 `ready: false` pages. It is not wired into deploy — nothing runs it for you. Commit the
 regenerated `sitemap.xml` alongside the content change.
+
+### Where Your Money Goes
+
+The page a grant reviewer actually opens. Four blocks, all in `assets/money.js`.
+
+**The allocation chart is inline SVG — no charting library**, and the percentages live in
+a single `ALLOCATION` constant at the top of that file. They start as `null`.
+
+> **While any value is null, no chart is drawn.** The page renders one short line saying
+> the figures are being finalized, linked to the Form 990 on the IRS Tax Exempt
+> Organization Search, where anyone can read the real numbers today. **Never render
+> example percentages.** A plausible 80/15/5 on a nonprofit page is a financial claim,
+> and a reviewer will check it against the 990.
+
+If the three percentages do not total 100 the chart is also withheld, with a note saying
+so — silently normalising them into looking correct would misrepresent the data.
+
+A horizontal stacked bar rather than a pie: a pie needs arc maths and a legend to be
+readable, while a bar labels its own segments and degrades to a list on a phone.
+
+**Documents.** The four a reviewer looks for — annual report, Form 990, determination
+letter, financial statements — in that order. A document we do not have yet still gets a
+row, marked **"Coming soon" with no link.** A list that silently omits what is missing
+reads as complete when it is not.
+
+**Leadership.** Board and staff from `team.json`, **grouped separately and never mixed** —
+a reviewer reads governance and operations as two different things. No approved headshot
+yet, so cards fall back to initials rather than requesting an image that 404s.
+
+**Legal block.** Legal name, EIN, state of incorporation, 501(c)(3) statement, mailing
+address, and the two policies. A policy that does not exist yet renders
+"Available on request" with the contact email — not a dead link, and not silence.
+
+### Contact
+
+Two columns on desktop, stacked on mobile, **form first** so it is what a phone reaches
+first. The form is static markup on `assets/forms.js` (Netlify parses deployed HTML —
+see Forms). The right column and the NGO JSON-LD come from `ORG`.
+
+**No map embed.** One renders only when `ORG.hasPublicOffice` is true *and* a mailing
+address exists. TFSF operates by appointment, and the address on file may be a
+director's home. **Never pin a home address**, and never load a third-party map that
+tracks every visitor who opens the page.
+
+The six-question accordion reuses the shared FAQ renderer in `assets/give.js` — the same
+one donate.html and programs.html use — with `page: "contact"` in `faq.json`.
+
+### Resources
+
+A plain list grouped Education · Employment · Community, in the order a family in
+difficulty needs them, not alphabetical.
+
+**No search box.** It is a list of about a dozen links; Ctrl+F already works, and a
+search field on a list this short is a widget that exists to look sophisticated.
+
+**External resources are not ours.** Anything with `external: true` names the
+organization it belongs to, says plainly that it is their service and not a TFSF
+program, opens in a new tab with a visible indicator, and carries `rel="noopener"`.
+
+The one deliberately non-placeholder entry is **988**, the Suicide & Crisis Lifeline: a
+real, permanent national number. A crisis line with a PLACEHOLDER number would be
+dangerous.
+
+### Sponsors: a section, not a page
+
+The logo wall and the five tiers live on **get-involved.html**. A dedicated sponsors page
+carrying four logos reads as aspiration — promote it when the wall fills out, not before.
+
+The wall is a uniform grid: fixed container height, `object-fit: contain`, equal padding.
+Sponsor logos arrive at wildly different aspect ratios; letting each size itself looks
+broken, and stretching one is a trademark problem. Every logo links out with
+`rel="noopener"`.
+
+A sponsor is published only once the partnership is confirmed **in writing** — a logo is
+a public claim about someone else's organization.
+
+Tiers are **stacked cards, not a comparison table**: a five-column grid of ticks is
+unreadable on a phone and flattens the concrete detail that makes a sponsor say yes.
+Every tier CTA points at `#sponsor`, which `involve.js` already routes to the sponsor
+branch of the one form.
 
 ### Checking your work
 
@@ -972,9 +1115,9 @@ history is visible — do not re-introduce them.
    no `robots.txt` `Sitemap:` line still has to be submitted by hand in Search Console.
 4. **Inline `style=` attributes** remain in page bodies (~36). Pre-existing debt, not
    precedent — see the "do not do" list.
-5. **Contact and newsletter forms still have no backend.** The Get Involved form is on
-   Netlify Forms; those two are not yet and still show the "not connected" message from
-   `main.js`. Move them onto `assets/forms.js` next.
+5. **The newsletter signup still has no backend** and shows the "not connected" message
+   from `main.js`. The contact form moved onto `assets/forms.js` and Netlify Forms; the
+   newsletter is the last one left.
 6. **Dead code:** `api/create-checkout-session.js` (Vercel, 404-redirected).
 7. **Unverified figures still published:** "$7,000+ awarded" and "100% to programs".
 
@@ -1020,8 +1163,57 @@ history is visible — do not re-introduce them.
   templates. Re-declared for those scopes in section 12.
 - ~~`program.html` highlighted nothing in the nav~~ — detail templates now resolve to
   their section through `DETAIL_PARENT` in `assets/site.js`.
+- ~~The contact form was a demo that discarded submissions~~ — it was still the original
+  `data-demo-form` with inline styles and ids but no `name` attributes, so nothing it
+  collected could ever have been submitted. Rebuilt on `assets/forms.js`.
+- ~~Contact details were hardcoded into markup~~ — email, hours and location were typed
+  into `contact.html` directly. They now come from `ORG` in `assets/site.js`.
 - ~~No EIN despite 501(c)(3) claims~~ — EIN 42-2398737 supplied 2026-09-17 and now
   published in the footer and on the donate page.
+
+## Systems we deliberately did not build
+
+**Read this before adding a login page.**
+
+The client asked for a **volunteer portal** and a **parent portal**: user accounts,
+document uploads, and payments. They were not built, and that was a decision, not an
+oversight or a backlog item.
+
+**1. There is no backend.** This is a static site — files on a CDN. There is no server,
+no database, and no session store. There is nothing to authenticate against and nowhere
+to put an uploaded file. Adding accounts means adding a backend, and a backend is a
+thing somebody has to patch, monitor, back up, and pay for, forever.
+
+**2. Those systems would hold minors' personal data.** Names, ages, addresses, medical
+notes, emergency contacts, custody arrangements. That is a serious custodial duty with
+real legal weight. It does not belong in a volunteer-built static site with no security
+review, no access logging, no encryption at rest, and no breach-notification process. If
+that data leaks, it is children's data, and the foundation carries it.
+
+**3. Payments would put card data in scope.** `donate.html` hands off to Givebutter for
+exactly this reason, and registration payments are no different.
+
+**What exists instead:** two blocks on get-involved.html that explain each process in
+numbered steps and then hand off to an outside tool — `assets/handoff.js`. Each block
+says plainly that the visitor is moving to a partner system, because a silent jump to a
+differently-branded form is how people abandon halfway, and each shows a fallback
+contact if that tool is down.
+
+**Choosing the tools.** `TOOLS` at the top of `assets/handoff.js` holds both, `null`
+until the director picks. While a URL is null the block still renders its steps and falls
+back to the form and the contact details — the explanation is the useful part and should
+never be blocked on a vendor choice.
+
+- **Volunteer:** under about 30 volunteers, a Netlify form plus a shared spreadsheet is
+  genuinely enough. Golden or POINT are the step up when scheduling gets real. Do not
+  sell her software she will not open.
+- **Family:** Jotform if money changes hands at registration; a printable PDF plus
+  in-person intake if it does not.
+
+A partner tool that does this properly is safer for these families than anything that
+could be stood up here. **If a portal is genuinely needed later, it is a separate
+project with a budget, a data-protection review, and someone accountable for it** — not
+a page added to this repo in an afternoon.
 
 ## Content the client still owes us
 
@@ -1033,6 +1225,29 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Written confirmation of the "$7,000+ awarded in scholarships" figure, with as-of date
 - [ ] Written confirmation of the "100% to programs" claim, or replacement wording
 - [ ] Real social media URLs (set `ORG.social[].url` in `assets/site.js`)
+- [ ] **Confirm `ORG.email`.** `hello@tysfuturestars.org` is currently published
+      sitewide. The only address confirmed in writing is
+      `tysfuturestarsfoundation@gmail.com`. If the `hello@` alias does not actually
+      receive mail, every page is publishing a dead address.
+- [ ] **Expense split for the allocation chart**: programs / operations / fundraising as
+      whole percentages, from Form 990 Part IX, plus the fiscal year. Set `ALLOCATION`
+      in `assets/money.js`. The chart stays hidden until all three are set.
+- [ ] Governance documents to upload: annual report, Form 990, determination letter,
+      financial statements (each renders "Coming soon" until `url` is set)
+- [ ] Legal name, state of incorporation, and a **mailing address that is not a home
+      address** (set in `ORG`)
+- [ ] A Donor Privacy Policy, or confirmation that "available on request" is acceptable
+- [ ] Board and staff names, roles, and approved bios for the leadership section
+- [ ] **Local resources with real phone numbers**: the actual food bank, the county
+      housing authority, the workforce center, the school district contact. National
+      links make the page useless; local numbers make it worth keeping. **Do not guess a
+      number** — an unverified one renders as plain text, never as a dialable link.
+- [ ] Five sponsorship price points with 3 to 5 **concrete** deliverables each
+- [ ] Confirmed sponsor logos, and written confirmation of each partnership
+- [ ] Which volunteer tool and which family-registration tool to use (set `TOOLS` in
+      `assets/handoff.js`)
+- [ ] Confirm the contact form's subject options, and whether any should route to a
+      different inbox (a different inbox means a separate Netlify form)
 - [ ] Destination for contact form submissions (move it onto `assets/forms.js`)
 - [ ] **Configure the Netlify form notification email**: `tysfuturestarsfoundation@gmail.com`
       (Site configuration -> Forms -> Form notifications). Nothing in the repo can do this.

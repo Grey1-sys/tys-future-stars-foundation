@@ -70,5 +70,56 @@
     "id": "programs-get-involved",
     "question": "How can I get involved beyond giving?",
     "answer": "You can volunteer, mentor, coach, partner with us as a sponsor, or start your own fundraiser. Visit our Get Involved page to sign up."
+  },
+  {
+    "published": true,
+    "order": 1,
+    "page": "contact",
+    "id": "contact-response-time",
+    "question": "How quickly will I hear back?",
+    "answer": "We reply to most messages within 2 business days. If your question is urgent, say so in the subject line and we will move it up."
+  },
+  {
+    "_comment": "PLACEHOLDER answer — confirm with the director before launch.",
+    "published": true,
+    "order": 2,
+    "page": "contact",
+    "id": "contact-who-eligible",
+    "question": "Who can take part in TFSF programs?",
+    "answer": "PLACEHOLDER — confirm the service area and any eligibility requirements. Most programs serve young people in and around Smyrna, Tennessee."
+  },
+  {
+    "_comment": "PLACEHOLDER answer — confirm with the director before launch.",
+    "published": true,
+    "order": 3,
+    "page": "contact",
+    "id": "contact-cost",
+    "question": "Do your programs cost anything?",
+    "answer": "PLACEHOLDER — confirm which programs are free and whether any carry a fee. Say plainly what a family should expect to pay, if anything."
+  },
+  {
+    "published": true,
+    "order": 4,
+    "page": "contact",
+    "id": "contact-volunteer",
+    "question": "How do I volunteer?",
+    "answer": "Start on our Get Involved page and tell us how you would like to help. A background check is required before anyone works directly with young people."
+  },
+  {
+    "published": true,
+    "order": 5,
+    "page": "contact",
+    "id": "contact-donation-receipt",
+    "question": "I donated but did not get a receipt.",
+    "answer": "Receipts are sent by email from our giving platform at the time of the gift. Check your spam folder first, then email us and we will resend it."
+  },
+  {
+    "_comment": "PLACEHOLDER answer — confirm with the director before launch.",
+    "published": true,
+    "order": 6,
+    "page": "contact",
+    "id": "contact-visit",
+    "question": "Can I visit your office?",
+    "answer": "PLACEHOLDER — confirm whether TFSF has a public office. If it does not, keep the line about meeting by appointment: never publish a home address."
   }
 ]

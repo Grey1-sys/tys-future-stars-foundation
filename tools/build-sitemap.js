@@ -46,6 +46,8 @@ const PAGES = [
   "programs.html",
   "get-involved.html",
   "whats-happening.html",
+  "where-your-money-goes.html",
+  "resources.html",
   "donate.html",
   "contact.html",
   "privacy.html",
