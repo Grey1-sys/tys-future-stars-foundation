@@ -376,6 +376,18 @@
       setMeta(p);
       injectSchema(p);
 
+      /* Which programs people actually open. The director uses this to
+         decide what to run more of, so it is the program SLUG rather
+         than a page path -- program.html?slug= would otherwise collapse
+         into one row in the report. */
+      if (window.TFSF && window.TFSF.track) {
+        window.TFSF.track("program_view", {
+          program_slug: p.slug,
+          program_name: p.name,
+          program_category: p.category || ""
+        });
+      }
+
       var g = gallery(p.gallery, p.name);
 
       host.innerHTML =

@@ -2,12 +2,19 @@
   "name": "tys-future-stars-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Marketing site for Ty's Future Stars Foundation with Stripe Checkout donations.",
+  "description": "Static marketing site for Ty's Future Stars Foundation. Donations hand off to Givebutter; there is no build step.",
   "scripts": {
-    "dev": "netlify dev",
-    "start": "netlify dev"
+    "dev": "npx serve .",
+    "start": "npx serve .",
+    "build:head": "node tools/build-head.js",
+    "check:head": "node tools/build-head.js --check",
+    "build:sitemap": "node tools/build-sitemap.js",
+    "build:images": "node tools/build-images.js",
+    "lh": "node tools/run-lighthouse.js mobile",
+    "lh:desktop": "node tools/run-lighthouse.js desktop"
   },
-  "dependencies": {
-    "stripe": "^16.0.0"
+  "devDependencies": {
+    "lighthouse": "^13.5.0",
+    "sharp": "^0.35.4"
   }
 }

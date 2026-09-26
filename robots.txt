@@ -1,0 +1,26 @@
+# Ty's Future Stars Foundation — https://tysfuturestars.org
+#
+# Everything public is crawlable. The two internal reference pages and
+# the form landing page carry <meta name="robots" content="noindex">
+# as well; they are listed here so a crawler does not waste a fetch on
+# them in the first place.
+
+User-agent: *
+Allow: /
+
+Disallow: /styleguide.html
+Disallow: /data-preview.html
+Disallow: /thank-you.html
+
+# Query-string views of pages that already exist at a canonical URL.
+# The filtered programs index and the feed filters are useful to share
+# but are not separate pages, and each one already declares a canonical.
+Disallow: /*?show=
+Disallow: /*?notfound=
+Disallow: /*?interest=
+
+# Dead endpoints from the retired Stripe flow. They 404 by redirect.
+Disallow: /api/
+Disallow: /netlify/
+
+Sitemap: https://tysfuturestars.org/sitemap.xml

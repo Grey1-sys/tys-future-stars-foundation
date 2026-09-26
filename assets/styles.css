@@ -377,8 +377,11 @@ button { cursor: pointer; }
 }
 .brand-fill .stat .stat-n,
 .hero.dark .stat .stat-n { color: var(--color-text-on-dark-strong); }
+/* -muted (#9FB6D4) is only 3.82:1 on the --color-brand band these
+   stats sit on, which fails AA at 13px. -soft is 5.54:1 there and
+   still reads as a label rather than a heading. */
 .brand-fill .stat .stat-l,
-.hero.dark .stat .stat-l { color: var(--color-text-on-dark-muted); }
+.hero.dark .stat .stat-l { color: var(--color-text-on-dark-soft); }
 
 .stat-band {
   display: grid;
@@ -506,6 +509,14 @@ button { cursor: pointer; }
   height: var(--nav-height);
   gap: var(--space-4);
 }
+
+/* Reserve the header's height BEFORE assets/site.js fills it in.
+   #site-header is an empty div at parse time, so without this the
+   whole page paints 86px too high and then jumps down when the nav
+   is injected -- a visible shift on every page load, and the entire
+   source of this site's Cumulative Layout Shift.
+   .nav is position:sticky, so it really does occupy this space. */
+#site-header { min-height: var(--nav-height); }
 
 /* Brand lockup */
 .brand-lockup {
@@ -879,6 +890,18 @@ body.nav-open { overflow: hidden; }
 @media (max-width: 860px) { .footer-top { grid-template-columns: 1fr 1fr; gap: var(--space-9); } }
 @media (max-width: 520px) { .footer-top { grid-template-columns: 1fr; } }
 
+/* A grid item's default `min-width: auto` means the track cannot shrink
+   below the widest item's min-content. In the footer that is an
+   unbreakable string -- an email address -- which forced the single
+   column to 341px inside a 320px viewport and pushed the whole
+   document 47px wide. Every page, at 320px.
+   min-width:0 lets the track shrink; overflow-wrap lets the long
+   string break instead of overflowing. */
+.footer-top > * { min-width: 0; }
+.footer-top a,
+.footer-about,
+.footer-contact { overflow-wrap: anywhere; }
+
 
 /* ===================================================================
    5. PAGE COMPONENTS
@@ -948,7 +971,7 @@ body.nav-open { overflow: hidden; }
 .hero.dark h1, .hero.dark h2 { color: var(--color-text-on-dark-strong); }
 .hero.dark .lede { color: var(--color-text-on-dark-soft); }
 .hero.dark .hero-stats .stat-n { color: var(--color-text-on-dark-strong); }
-.hero.dark .hero-stats .stat-l { color: var(--color-text-on-dark-muted); }
+.hero.dark .hero-stats .stat-l { color: var(--color-text-on-dark-soft); }
 .hero.dark .btn-ghost {
   border-color: var(--palette-white-a55);
   color: var(--color-text-inverse);
@@ -1128,6 +1151,12 @@ body.nav-open { overflow: hidden; }
     var(--color-surface-subtle);
 }
 .donate-hero .wrap { position: relative; z-index: var(--z-raised); }
+/* The hero's lower-left corner washes to #FBDFCE, where the standard
+   secondary colour lands at 4.27:1 -- under AA for body text. */
+.donate-hero .lede,
+.donate-hero .breadcrumb,
+.donate-hero .breadcrumb a,
+.donate-hero .trust-line { color: var(--color-text-secondary-warm); }
 .donate-hero .blob { position: absolute; border-radius: var(--radius-circle); z-index: var(--z-base); }
 .donate-hero .blob-1 {
   width: 300px; height: 300px;
@@ -2131,6 +2160,12 @@ body.lightbox-open { overflow: hidden; }
 /* ---------- Sponsorship + other ways ---------- */
 .give-option .data-card-body,
 .give-way .data-card-body { padding: var(--space-6); }
+/* Grid items default to min-width:auto, so a long unbroken word in the
+   body kept these cards 322px wide inside a 320px screen. */
+.give-option,
+.give-way { min-width: 0; }
+.give-option .data-card-body,
+.give-way .data-card-body { overflow-wrap: anywhere; }
 .give-option-amount {
   font-family: var(--font-display);
   font-size: var(--text-5xl);
@@ -3131,7 +3166,16 @@ body.modal-open { overflow: hidden; }
   color: var(--color-accent-strong);
   margin-top: 2px;
 }
-.tier-cta { margin-top: var(--space-6); }
+/* .btn sets white-space: nowrap, and a tier CTA carries the tier's
+   full name -- "Talk to us about Community Supporter" refused to wrap
+   and ran 500px wide inside a 320px screen. Same failure the
+   involvement cards had. */
+.tier-cta {
+  margin-top: var(--space-6);
+  white-space: normal;
+  text-align: center;
+}
+.tier-card { min-width: 0; }
 
 /* ---------- Volunteer / family handoff ---------- */
 .handoff-grid {
@@ -3140,7 +3184,12 @@ body.modal-open { overflow: hidden; }
   gap: var(--space-6);
   align-items: start;
 }
+.handoff-grid > * { min-width: 0; }
 .handoff-card {
+  /* Grid items default to min-width:auto and refuse to shrink below
+     their content's min-content width. At 320px that pushed the card
+     to 335px and the document sideways. */
+  min-width: 0;
   padding: var(--space-card-pad);
   background: var(--color-surface-page);
   border: 1px solid var(--color-border);
@@ -3199,3 +3248,108 @@ body.modal-open { overflow: hidden; }
   .tier-head { flex-direction: column; gap: var(--space-1); }
   .handoff-actions .btn { width: 100%; justify-content: center; }
 }
+
+
+/* ===================================================================
+   14. 404 PAGE
+   Search + popular links. assets/notfound.js.
+=================================================================== */
+.nf-hero { padding: clamp(70px, 11vw, 130px) 0; }
+.nf-hero-inner { position: relative; z-index: 1; text-align: center; }
+.nf-hero-inner .eyebrow { justify-content: center; }
+.nf-hero-inner .lede { margin-left: auto; margin-right: auto; }
+
+.nf-search { margin-bottom: var(--space-12); }
+.nf-label {
+  display: block;
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-2);
+}
+.nf-input-wrap { position: relative; }
+.nf-icon {
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--space-5);
+  height: var(--space-5);
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+#nf-q {
+  width: 100%;
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
+  font-size: var(--text-2xl);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-page);
+  color: var(--color-text-primary);
+}
+.nf-status {
+  margin-top: var(--space-3);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+
+.nf-results { list-style: none; padding: 0; margin: var(--space-4) 0 0; }
+.nf-results li { border-top: 1px solid var(--color-border); }
+.nf-results li:last-child { border-bottom: 1px solid var(--color-border); }
+.nf-results a {
+  display: block;
+  padding: var(--space-4) 0;
+  text-decoration: none;
+  color: inherit;
+}
+.nf-results a:hover .nf-result-title { color: var(--color-text-link); }
+.nf-result-title {
+  display: block;
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-3xl);
+}
+.nf-result-desc {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+.nf-popular .title { font-size: var(--text-4xl); }
+.nf-help { margin-top: var(--space-8); color: var(--color-text-secondary); }
+
+
+/* ===================================================================
+   15. LAYOUT-SHIFT RESERVATIONS
+   ===================================================================
+   These containers are filled by assets/render.js AFTER a fetch of
+   /data/*.json resolves, which is after first paint. Until then they
+   are zero-height, so everything below them jumps down when the data
+   lands -- measured as Cumulative Layout Shift, and visible as a
+   lurch on a slow connection.
+
+   `:empty` reserves the space ONLY while the container is still
+   empty, and releases it the instant content is injected. The values
+   are chosen against what each one actually renders, so the reserved
+   box is never taller than the content that replaces it -- a
+   reservation that is too generous just trades a downward shift for
+   an upward one.
+
+   The proper fix is to not fetch at all: inline each page's data at
+   build time so the first render is synchronous. That is a larger
+   change to the data layer and is noted in CLAUDE.md.
+=================================================================== */
+
+/* Always long: seven cards, a dozen resource rows, five tier cards.
+   These always render taller than a screen, so reserving a screenful
+   can only ever under-reserve, never over-reserve. */
+#involve-cards:empty,
+#resource-list:empty,
+#sponsor-tiers:empty { min-height: 100vh; }
+
+/* The feed can legitimately be almost empty -- one line, when nothing
+   is published. Reserved to match that empty state rather than to
+   match a full feed, because over-reserving here would collapse. */
+#feed:empty { min-height: 30vh; }
+
+/* Leadership and the documents list sit below the fold on a long
+   page, but still move the footer. A modest reservation. */
+#leadership:empty,
+#documents:empty { min-height: 40vh; }

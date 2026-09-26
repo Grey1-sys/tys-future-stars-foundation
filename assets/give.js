@@ -212,6 +212,25 @@
           'rel="noopener">' + esc(label) + "</a>" +
         '<p class="give-secure-note">You will finish on Givebutter’s secure checkout. ' +
           "Card details never touch this website.</p>";
+
+      /* The one moment worth measuring on this page: which amount and
+         which frequency people actually press. Recorded as a button
+         press on our own page -- no card data is involved and none of
+         it reaches this site. TFSF.track is a no-op until a GA4
+         measurement id is configured. */
+      var btn = host.querySelector(".give-btn");
+      if (btn) {
+        btn.addEventListener("click", function () {
+          if (window.TFSF && window.TFSF.track) {
+            window.TFSF.track("donate_cta_click", {
+              value: state.amount,
+              currency: "USD",
+              frequency: state.frequency === "monthly" ? "monthly" : "one-time",
+              is_custom: !!state.isCustom
+            });
+          }
+        });
+      }
       return;
     }
 

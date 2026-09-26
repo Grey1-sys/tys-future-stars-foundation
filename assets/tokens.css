@@ -1,4 +1,47 @@
 /* ===================================================================
+   SELF-HOSTED FONTS
+   ===================================================================
+   Was two render-blocking requests to fonts.googleapis.com plus two
+   DNS lookups to fonts.gstatic.com. Now two files, same origin,
+   preloaded in the head. This removed the site's only external
+   runtime dependency.
+
+   Only the `latin` subset is shipped. Inter's latin subset is a
+   single VARIABLE file covering 400-700, so all four weights the site
+   uses cost one 48 KB download.
+
+   font-display: swap -- text paints immediately in the fallback and
+   reflows when the webfont lands. For a site whose job is to tell a
+   family where to get help, readable-now beats pretty-in-200ms.
+
+   Regenerate with tools/build-images.js? No -- these were downloaded
+   once from Google Fonts. Both are open licensed: Anton and Inter are
+   SIL Open Font License 1.1.
+=================================================================== */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 700;          /* variable: one file, all weights */
+  font-display: swap;
+  src: url('fonts/inter-var-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                 U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/anton-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                 U+FEFF, U+FFFD;
+}
+
+/* ===================================================================
    TY'S FUTURE STARS FOUNDATION — DESIGN TOKENS
    ===================================================================
    Single source of truth for every color, size, space, radius, and
@@ -48,6 +91,7 @@
 
   /* Slate — the tint ladder used for text on navy */
   --palette-slate-700:    #5A6B85;
+  --palette-slate-750:    #53637C;   /* secondary text on a warm tint */
   --palette-slate-500:    #7C90AC;
   --palette-slate-450:    #8496B0;
   --palette-slate-400:    #9FB6D4;
@@ -106,6 +150,10 @@
   /* ---- Text ---- */
   --color-text-primary:        var(--palette-navy-ink);
   --color-text-secondary:      var(--palette-slate-700);
+  /* #5A6B85 is 4.27:1 on the donate hero's warm corner (#FBDFCE) --
+     just under AA. This is the same colour a step darker, for
+     secondary text over a light warm wash. */
+  --color-text-secondary-warm:  var(--palette-slate-750);
   --color-text-inverse:        var(--palette-white);
   --color-text-link:           var(--palette-blue-700);
   --color-text-link-hover:     var(--palette-navy-deep);

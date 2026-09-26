@@ -37,7 +37,12 @@ Pages are hand-written `.html` at the repo root.
 | `assets/resources.js` | Resources: the grouped list of local links. |
 | `assets/sponsors.js` | Get Involved: the sponsor logo wall and the five tiers. |
 | `assets/handoff.js` | Get Involved: the volunteer and family process blocks. |
+| `assets/analytics.js` | GA4. Inert until a measurement ID is set. Defines `TFSF.track()`. |
+| `assets/notfound.js` | 404 page: local search index and popular links. |
+| `tools/build-head.js` | Regenerates the managed `<head>` block on every page. |
 | `tools/build-sitemap.js` | Regenerates `/sitemap.xml` from `/data`. Run by hand, not on deploy. |
+| `tools/build-images.js` | Regenerates WebP/PNG derivatives, favicons, and the share card. |
+| `tools/run-lighthouse.js` | Runs Lighthouse over the site and prints a score table. |
 | `assets/styleguide.{css,js}` | Internal reference page only. |
 
 Load order on every page: `tokens.css` -> `styles.css`, then `site.js` -> `main.js`.
@@ -47,7 +52,9 @@ Hosted on **Netlify** at **tysfuturestars.org**. `netlify.toml` sets `publish = 
 nothing else — deploys are a straight file upload, triggered automatically on push to
 **`main`**. There is no staging branch: **pushing to `main` publishes to the live site.**
 
-The only external runtime dependency is **Google Fonts** (Anton + Inter).
+**There are no external runtime dependencies.** Fonts are self-hosted (see below), and
+`assets/analytics.js` makes no request until a GA4 measurement ID is configured. A
+freshly loaded page issues **zero third-party requests**.
 
 ### Online giving: Givebutter, not Stripe
 
@@ -91,6 +98,35 @@ to smooth it over.
 The old Stripe flow is gone: `assets/donate.js` was deleted. The two serverless
 functions are now dead in a second sense -- they were already 404-redirected, and
 nothing references them at all.
+
+### netlify.toml
+
+**Redirects.** Order matters and the `/*` catch-all must stay last. It returns the 404
+page **with a 404 status** -- serving it as 200 would let search engines index every
+mistyped URL. `/events`, `/events.html`, `/news`, `/news.html` and `/blog/*` 301 to
+`whats-happening.html`, because those pages were merged. Short links (`/give`,
+`/volunteer`, `/sponsor`, `/financials`) exist for flyers and email signatures.
+
+**Security headers.** `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`,
+`Permissions-Policy` denying camera/microphone/geolocation/payment, HSTS for two years,
+and a Content Security Policy.
+
+> The CSP needs `'unsafe-inline'` for **styles** only, because the pages still carry
+> inline `style=` attributes (see Known defects). Remove it from the policy once those
+> are gone. `script-src` does **not** allow inline script.
+
+**Cache policy.** There is no build step, so filenames are **not content-hashed**. That
+rules out `immutable` on CSS and JS -- a one-year cache on `styles.css` would strand
+returning visitors on an old stylesheet after every edit.
+
+| Path | Cache |
+|---|---|
+| `*.html`, `/` | `max-age=0, must-revalidate` -- a page is never stale |
+| `/data/*` | 5 minutes -- the director edits these to change what the site says |
+| `/assets/*.css`, `/assets/*.js` | 1 day, revalidate |
+| `/assets/fonts/*` | 1 year, `immutable` -- versioned in the filename |
+| `/assets/img/*`, `/assets/images/*` | 1 week |
+| `robots.txt`, `sitemap.xml` | 1 hour |
 
 ### Local preview
 
@@ -163,6 +199,109 @@ highlights it. The mapping is `DETAIL_PARENT` in `assets/site.js` — add to it 
 you add a detail template.
 
 ---
+
+## Build tools (run by hand, never on deploy)
+
+There is still **no build step**: Netlify uploads files exactly as they sit in the repo.
+These are local generators. Run them, check the diff, commit the result.
+
+```bash
+npm run build:head       # regenerate the <head> block on all 20 pages
+npm run check:head       # verify title/description limits, change nothing
+npm run build:sitemap    # regenerate /sitemap.xml from /data
+npm run build:images     # regenerate WebP/PNG, favicons, share card
+npm run lh               # Lighthouse, mobile
+npm run lh:desktop       # Lighthouse, desktop
+```
+
+`sharp` and `lighthouse` are **devDependencies**. `node_modules` is gitignored, so
+Netlify never sees them and nothing they produce is a runtime dependency.
+
+### The managed head block
+
+Everything between `<!-- head:start -->` and `<!-- head:end -->` is generated. **Do not
+hand-edit it** -- change the `PAGES` table in `tools/build-head.js` and re-run.
+
+It owns: title, description, canonical, robots, Open Graph, Twitter card, favicons,
+font preloads, and the two stylesheet links.
+
+`build-head.js` **exits non-zero** if any title exceeds 60 characters or any description
+exceeds 155, so an over-long title cannot quietly ship. `npm run check:head` reports
+without writing.
+
+### Fonts are self-hosted
+
+Two files in `assets/fonts/`, 66 KB total, preloaded in the head:
+
+| File | Covers |
+|---|---|
+| `inter-var-latin.woff2` | Inter 400-700 -- a **variable** font, one file for all four weights |
+| `anton-400-latin.woff2` | Anton 400 |
+
+Only the `latin` subset ships. `@font-face` lives at the top of `assets/tokens.css` with
+`font-display: swap`. Both are SIL Open Font License 1.1.
+
+This replaced two render-blocking requests to `fonts.googleapis.com` plus DNS lookups to
+`fonts.gstatic.com`, and removed the last third-party request from the site.
+
+### Images
+
+`assets/img/logo.jpg` is the 1024px source. It is **not** what pages load -- the nav and
+footer use a `<picture>` with WebP and PNG at 1x/2x/3x for a 54px glyph. The original was
+189 KB, downloaded twice per page and again as the favicon; the WebP is **1.3 KB**.
+
+Real favicons (`favicon-32`, `favicon-192`, `apple-touch-icon`) replaced `rel="icon"`
+pointing at the full-size JPEG.
+
+`assets/img/og-default.png` is the 1200x630 share card, generated from an SVG in
+`tools/build-images.js`. It states the organisation name and the motto and makes no claim
+about money, numbers, or people. Per-page overrides go in the `PAGES` table.
+
+> **`ty.jpg` is 308x330 in a ~560px container.** It is being upscaled and looks soft.
+> Re-encoding cannot fix that; it needs a larger original from the client.
+
+### Cumulative Layout Shift
+
+Two sources, both fixed, both easy to reintroduce:
+
+1. **`#site-header` is empty at parse time** and filled by `assets/site.js`. `.nav` is
+   `position: sticky`, so it occupies real space -- without a reserved height the whole
+   page painted 86px too high and jumped. `#site-header { min-height: var(--nav-height); }`
+2. **Containers filled after a `fetch`** of `/data/*.json`. Section 15 of `styles.css`
+   reserves space with `:empty`, which releases the moment content arrives. The reserved
+   heights are chosen against what each container actually renders -- over-reserving
+   just trades a downward shift for an upward one.
+
+The real fix for (2) is to inline each page's data at build time so the first render is
+synchronous. That is a larger change to the data layer and has not been made.
+
+## Analytics
+
+**GA4, and it is switched off.** `MEASUREMENT_ID` at the top of `assets/analytics.js` is
+`null`. While it is null the file makes **no network request, sets no cookie**, and
+defines `TFSF.track()` as a no-op, so every tracking call elsewhere stays harmless.
+
+Set it to the `G-XXXXXXXXXX` from Google Analytics -> Admin -> Data Streams -> Web.
+
+**Privacy decisions already made, on purpose:**
+
+- IP anonymisation on.
+- Google Signals and ad personalisation **off**. This is a youth charity; visitors
+  include minors and grieving families, and building ad audiences from them is not
+  acceptable.
+- `Do Not Track` is respected -- if the browser sets it, nothing loads.
+- **No field values are ever sent.** Forms carry names, phone numbers and notes about
+  children; only the form's name and the chosen category are recorded.
+
+| Event | Fired from | Carries |
+|---|---|---|
+| `donate_cta_click` | `assets/give.js` | amount, currency, frequency, whether custom |
+| `form_submit` | `assets/forms.js` | form name and type. **On success only** |
+| `program_view` | `assets/programs.js` | program slug, name, category |
+| `outbound_click` | `assets/analytics.js` | any off-site link, including partner tools |
+| `page_not_found` | `assets/notfound.js` | the path that 404'd, so broken links surface |
+
+If a cookie banner is ever needed, `assets/analytics.js` is the single file to gate.
 
 ## Organization details: one source of truth
 
@@ -917,6 +1056,20 @@ unreadable on a phone and flattens the concrete detail that makes a sponsor say 
 Every tier CTA points at `#sponsor`, which `involve.js` already routes to the sponsor
 branch of the one form.
 
+### The 404 page
+
+Search plus popular links, in `assets/notfound.js`.
+
+**The search is local.** A small hand-kept index filtered in the browser: instant, works
+offline, and the query never leaves the machine. Handing off to a Google `site:` search
+would leak what someone typed and take them off the site to find their way back onto it.
+The index carries the words people actually type -- "990", "food", "jobs" -- not just
+page titles. If the site ever passes ~30 pages, generate the index rather than adding a
+search vendor.
+
+Landing on the 404 fires `page_not_found` with the failed path, so the director can see
+which broken link people are following. Path only.
+
 ### Checking your work
 
 Open **`/data-preview.html`** - it renders every collection through the same layer the
@@ -1106,20 +1259,21 @@ history is visible — do not re-introduce them.
 
 1. **`README.md` is stale** — still documents DM Serif Display and a cream/teal/coral
    palette that no longer exist, and claims the Netlify functions are configured.
-2. **Perf:** `logo.jpg` is 194 KB, loaded twice per page (nav + footer) as a ~54px glyph
-   and again as the favicon. Needs resizing and a proper favicon. Page images still lack
-   `loading="lazy"`.
-3. **SEO:** still no `robots.txt`, and no Open Graph or canonical tags on the older
-   pages (index, about, programs, donate, contact). Events, updates and programs now
-   emit JSON-LD, and `sitemap.xml` exists — see the SEO section above. A sitemap with
-   no `robots.txt` `Sitemap:` line still has to be submitted by hand in Search Console.
-4. **Inline `style=` attributes** remain in page bodies (~36). Pre-existing debt, not
-   precedent — see the "do not do" list.
+2. **Inline `style=` attributes** remain in page bodies. `404.html` was rebuilt without
+   any; the rest still carry them. They are why the CSP has to allow `'unsafe-inline'`
+   for styles, so clearing them has a concrete security payoff.
+3. **CSS and JS are unminified**, and Lighthouse flags unused CSS. Deliberate: adding a
+   minifier means adding a build step, and Netlify already serves gzip/brotli. The cost
+   is a few Lighthouse points on mobile, not a user-visible delay.
+4. **`ty.jpg` is upscaled** — 308x330 in a ~560px container. Needs a larger original.
 5. **The newsletter signup still has no backend** and shows the "not connected" message
    from `main.js`. The contact form moved onto `assets/forms.js` and Netlify Forms; the
    newsletter is the last one left.
 6. **Dead code:** `api/create-checkout-session.js` (Vercel, 404-redirected).
 7. **Unverified figures still published:** "$7,000+ awarded" and "100% to programs".
+8. **Inline links are smaller than the 24px target-size minimum** (16-21px tall). WCAG
+   2.5.8 exempts links inline in a sentence, so this passes -- but it is worth knowing
+   before anyone turns a body link into a standalone control.
 
 ### Resolved
 
@@ -1168,6 +1322,28 @@ history is visible — do not re-introduce them.
   collected could ever have been submitted. Rebuilt on `assets/forms.js`.
 - ~~Contact details were hardcoded into markup~~ — email, hours and location were typed
   into `contact.html` directly. They now come from `ORG` in `assets/site.js`.
+- ~~No `robots.txt`, no Open Graph, no canonical, no Twitter cards~~ — all generated by
+  `tools/build-head.js` on all 20 pages, with `robots.txt` carrying the sitemap line.
+- ~~`logo.jpg` was 189 KB served at 54px, twice a page, and as the favicon~~ — now a
+  1.3 KB WebP with PNG fallback at 1x/2x/3x, plus real favicons.
+- ~~Google Fonts was an external runtime dependency~~ — self-hosted, 66 KB, preloaded.
+  A page now makes zero third-party requests.
+- ~~Every page shifted down 86px on load~~ — `#site-header` had no reserved height while
+  `assets/site.js` filled it. This was the site's entire CLS.
+- ~~`get-involved.html` skipped from `h1` to `h3`~~ — the seven involvement cards render
+  as `h3` and the section had no heading above them.
+- ~~Stat labels failed AA on the brand band~~ — `--color-text-on-dark-muted` is 3.82:1 on
+  `--color-brand`. Now `-soft`, at 5.54:1.
+- ~~The donate hero's secondary text failed AA~~ — 4.27:1 where its gradient washes to
+  #FBDFCE. Added `--color-text-secondary-warm`.
+- ~~The footer overflowed every page at 320px~~ — a grid item's default `min-width: auto`
+  meant an unbreakable email address held the column at 341px inside a 320px screen,
+  pushing the document 47px wide. `min-width: 0` plus `overflow-wrap`.
+- ~~Sponsorship tier CTAs ran 500px wide at 320px~~ — `.btn` sets `white-space: nowrap`
+  and the label carries the tier name. Same failure the involvement cards had.
+- ~~`.give-option` and `.handoff-card` overflowed at 320px~~ — the same grid
+  `min-width: auto` cause as the footer.
+- ~~`package.json` still depended on `stripe`~~ — removed; the Stripe flow is long gone.
 - ~~No EIN despite 501(c)(3) claims~~ — EIN 42-2398737 supplied 2026-09-17 and now
   published in the footer and on the donate page.
 
@@ -1225,6 +1401,11 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Written confirmation of the "$7,000+ awarded in scholarships" figure, with as-of date
 - [ ] Written confirmation of the "100% to programs" claim, or replacement wording
 - [ ] Real social media URLs (set `ORG.social[].url` in `assets/site.js`)
+- [ ] **GA4 Measurement ID** (`G-XXXXXXXXXX`) — set `MEASUREMENT_ID` in
+      `assets/analytics.js`. Analytics is completely inert until then.
+- [ ] Founding year, for the homepage NGO schema (`ORG.foundingDate`)
+- [ ] A larger original of the photograph used on about.html
+- [ ] **Submit `sitemap.xml` in Google Search Console** after the first deploy
 - [ ] **Confirm `ORG.email`.** `hello@tysfuturestars.org` is currently published
       sitewide. The only address confirmed in writing is
       `tysfuturestarsfoundation@gmail.com`. If the `hello@` alias does not actually

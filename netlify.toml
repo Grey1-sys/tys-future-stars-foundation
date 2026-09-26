@@ -1,25 +1,22 @@
-# Netlify configuration for the Ty's Future Stars Foundation site.
+# Netlify configuration — Ty's Future Stars Foundation
 #
-# The site is plain static HTML at the repo root, and online giving is not
-# switched on yet — so there is no build step and no functions to bundle.
-# Deploys are a straight file upload.
+# The site is plain static HTML at the repo root: no build step, no
+# bundler, no functions. Deploys are a straight file upload triggered
+# by a push to `main`, which IS production.
 #
-# WHEN YOU TURN ON STRIPE, restore the build + functions config:
-#   [build]
-#     publish = "."
-#     functions = "netlify/functions"
-#     command = "npm install"
-#   [functions]
-#     node_bundler = "esbuild"
-#   [[redirects]]
-#     from = "/api/create-checkout-session"
-#     to = "/.netlify/functions/create-checkout-session"
-#     status = 200
+# The retired Stripe flow left two serverless functions behind. They
+# are 404-redirected below and nothing references them.
 
 [build]
   publish = "."
 
-# Don't publish source/config that isn't part of the website itself.
+# ---------------------------------------------------------------------
+# REDIRECTS
+# Order matters: the first match wins, and the SPA-style catch-all must
+# stay last or it would swallow everything above it.
+# ---------------------------------------------------------------------
+
+# Dead endpoints from the retired Stripe flow.
 [[redirects]]
   from = "/netlify/*"
   to = "/404.html"
@@ -30,8 +27,194 @@
   to = "/404.html"
   status = 404
 
-# Long-cache the logo and photo; they're content-stable.
+# Pages that were renamed. Events and News were merged into one feed;
+# anyone holding an old link, or any search engine still carrying one,
+# lands on the page that replaced them rather than on a 404.
+[[redirects]]
+  from = "/events"
+  to = "/whats-happening.html"
+  status = 301
+
+[[redirects]]
+  from = "/events.html"
+  to = "/whats-happening.html"
+  status = 301
+
+[[redirects]]
+  from = "/news"
+  to = "/whats-happening.html"
+  status = 301
+
+[[redirects]]
+  from = "/news.html"
+  to = "/whats-happening.html"
+  status = 301
+
+[[redirects]]
+  from = "/blog/*"
+  to = "/whats-happening.html"
+  status = 301
+
+# Friendly short links worth having on a flyer or in an email
+# signature. Each one is a 301 to the real page.
+[[redirects]]
+  from = "/give"
+  to = "/donate.html"
+  status = 301
+
+[[redirects]]
+  from = "/donate"
+  to = "/donate.html"
+  status = 301
+
+[[redirects]]
+  from = "/volunteer"
+  to = "/get-involved.html#volunteer"
+  status = 301
+
+[[redirects]]
+  from = "/sponsor"
+  to = "/get-involved.html#sponsor"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/programs"
+  to = "/programs.html"
+  status = 301
+
+[[redirects]]
+  from = "/financials"
+  to = "/where-your-money-goes.html"
+  status = 301
+
+# Everything else that does not exist gets the real 404 page WITH a
+# 404 status. Serving it as 200 would let search engines index every
+# mistyped URL as a real page.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# ---------------------------------------------------------------------
+# SECURITY HEADERS
+# ---------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Clickjacking: nothing on this site should ever be framed.
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # No page here needs a camera, a microphone, or a location. Denying
+    # them means a compromised third-party script cannot ask either.
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), interest-cohort=()"
+
+    # HSTS. Netlify already serves HTTPS and redirects HTTP; this tells
+    # the browser to stop trying HTTP at all. Two years, subdomains
+    # included. Do NOT add `preload` without deciding to keep this
+    # domain on HTTPS permanently — preload is very hard to undo.
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains"
+
+    # Content Security Policy.
+    #   'unsafe-inline' for style-src is required: the pages carry
+    #   inline style attributes (~36 of them, tracked in CLAUDE.md as
+    #   debt). Remove it from here once those are gone.
+    #
+    #   googletagmanager + google-analytics are listed because
+    #   assets/analytics.js loads GA4 when a measurement ID is set.
+    #   They are inert while it is null.
+    #
+    #   frame-src allows the YouTube facade on the impact page, which
+    #   only builds an iframe after a click.
+    Content-Security-Policy = """
+      default-src 'self';
+      base-uri 'self';
+      object-src 'none';
+      frame-ancestors 'none';
+      form-action 'self';
+      img-src 'self' data: https://www.google-analytics.com;
+      font-src 'self';
+      style-src 'self' 'unsafe-inline';
+      script-src 'self' https://www.googletagmanager.com;
+      connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com;
+      frame-src https://www.youtube-nocookie.com;
+      upgrade-insecure-requests
+    """
+
+# ---------------------------------------------------------------------
+# CACHE POLICY
+#
+# The trade-off: content the director edits must never be stale, and
+# assets the browser can re-fetch cheaply should be cached hard.
+#
+# There is no build step, so filenames are NOT content-hashed. That
+# rules out `immutable` on CSS and JS: a one-year cache on styles.css
+# would strand returning visitors on an old stylesheet after every
+# edit. They get a day, with revalidation.
+# ---------------------------------------------------------------------
+
+# HTML: always revalidate. A page must never be a day stale.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Content JSON: the director edits these to change what the site says.
+# Short cache so an update is visible quickly, but not every request.
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+# CSS and JS: one day, then revalidate. Not immutable — see above.
+[[headers]]
+  for = "/assets/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+[[headers]]
+  for = "/assets/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+# Fonts are versioned in their filename and will never change in place.
+# These genuinely are immutable.
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+
+# Images: a week. Long enough to matter, short enough that replacing a
+# photo does not need a filename change to take effect.
 [[headers]]
   for = "/assets/img/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Crawler files: short, so a robots change is picked up the same day.
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

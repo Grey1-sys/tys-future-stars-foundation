@@ -309,6 +309,20 @@ window.TFSF = window.TFSF || {};
     })
       .then(function (res) {
         if (!res.ok) throw new Error("Server returned " + res.status);
+
+        /* Tracked on SUCCESS only. Counting attempts would inflate the
+           number with validation failures and network errors. Only the
+           form name and, for the involvement form, which branch was
+           chosen -- never a field value, because these forms carry
+           names, phone numbers, and notes about children. */
+        if (window.TFSF && window.TFSF.track) {
+          window.TFSF.track("form_submit", {
+            form_name: form.getAttribute("name") || "unknown",
+            form_type: (data && data.interest) ||
+                       (data && data.subject) || "general"
+          });
+        }
+
         var wrap = form.parentNode;
         wrap.innerHTML = successMarkup(form);
         var panel = wrap.querySelector(".form-success");

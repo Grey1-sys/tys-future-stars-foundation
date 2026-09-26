@@ -48,6 +48,9 @@
     hasPublicOffice: false,            // true only if there is a public office
                                        // the public may visit. Drives the map link.
     responseTime: "within 2 business days",
+    foundingDate: null,                // TODO(client): year the foundation
+                                       // was established, e.g. "2021"
+    givebutterUrl: "https://givebutter.com/support-local-youth-through-future-stars-njiri2",
     donorPrivacyPolicyUrl: null,       // TODO(client): renders "available on request"
 
     social: [
@@ -128,6 +131,86 @@
     { label: "Terms of Use",   href: "terms.html",   ready: true }
   ];
 
+  /* ---------------- Organization schema ----------------
+     Emitted on the HOMEPAGE ONLY. One canonical Organization node per
+     site: repeating it on every page invites a search engine to treat
+     them as different entities.
+
+     Every field is read from ORG, and a field ORG has not confirmed is
+     LEFT OUT rather than emitted empty. An empty string in JSON-LD is
+     a positive claim that the value is empty, which is worse than
+     silence -- and this is the node Google reads to decide the
+     foundation is a real organisation. */
+  function injectOrgSchema() {
+    if (currentPage() !== "index.html") return;
+
+    var origin = "https://tysfuturestars.org";
+    var node = {
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": ORG.name,
+      "alternateName": "TFSF",
+      "url": origin + "/",
+      "description": ORG.mission,
+      "slogan": "Building Futures Through Basketball.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": origin + "/assets/img/favicon-192.png",
+        "width": 192, "height": 192
+      },
+      "image": origin + "/assets/img/og-default.png",
+      "nonprofitStatus": "Nonprofit501c3",
+      "areaServed": { "@type": "Place", "name": ORG.city }
+    };
+
+    if (ORG.legalName) node.legalName = ORG.legalName;
+    if (ORG.ein) node.taxID = ORG.ein;
+    if (ORG.email) node.email = ORG.email;
+    if (ORG.phone) node.telephone = ORG.phone;
+    if (ORG.foundingDate) node.foundingDate = ORG.foundingDate;
+    if (ORG.stateOfIncorporation) {
+      node.foundingLocation = {
+        "@type": "Place", "name": ORG.stateOfIncorporation
+      };
+    }
+
+    /* A street address only when there is a real, confirmed MAILING
+       address. Never a home address -- see CLAUDE.md. */
+    if (ORG.mailingAddress) {
+      node.address = {
+        "@type": "PostalAddress",
+        "streetAddress": ORG.mailingAddress,
+        "addressLocality": "Smyrna",
+        "addressRegion": "TN",
+        "addressCountry": "US"
+      };
+    } else {
+      node.address = {
+        "@type": "PostalAddress",
+        "addressLocality": "Smyrna",
+        "addressRegion": "TN",
+        "addressCountry": "US"
+      };
+    }
+
+    var profiles = (ORG.social || [])
+      .filter(function (x) { return !!x.url; })
+      .map(function (x) { return x.url; });
+    if (profiles.length) node.sameAs = profiles;
+
+    if (ORG.givebutterUrl) {
+      node.potentialAction = {
+        "@type": "DonateAction",
+        "target": ORG.givebutterUrl
+      };
+    }
+
+    var el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.textContent = JSON.stringify(node, null, 2);
+    document.head.appendChild(el);
+  }
+
   /* ---------------- Icons ---------------- */
   var ICON = {
     chevron: '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
@@ -173,7 +256,19 @@
 
   function brandLockup() {
     return '<a href="index.html" class="brand-lockup">' +
-             '<img src="assets/img/logo.jpg" alt="" width="54" height="54" class="brand-glyph">' +
+             /* <picture> so modern browsers take the 1.3 KB WebP and
+                everything else falls back to PNG. The old logo.jpg was
+                a 1024px, 189 KB JPEG rendered at 54px -- twice a page,
+                since the footer carries the same lockup.
+                alt="" is deliberate: the wordmark beside it and the
+                visually-hidden label below already name the link, so
+                describing the glyph would make a screen reader say the
+                organisation's name three times. */
+             '<picture>' +
+               '<source type="image/webp" srcset="assets/img/logo-54.webp 1x, assets/img/logo-108.webp 2x, assets/img/logo-162.webp 3x">' +
+               '<img src="assets/img/logo-54.png" srcset="assets/img/logo-108.png 2x, assets/img/logo-162.png 3x" ' +
+                 'alt="" width="54" height="54" class="brand-glyph" decoding="async">' +
+             '</picture>' +
              '<span class="brand-word">' +
                '<span class="bw-1">Ty\'s</span>' +
                '<span class="bw-2">Future Stars</span>' +
@@ -483,6 +578,7 @@
     if (header) header.innerHTML = buildHeader();
     if (footer) footer.innerHTML = buildFooter();
     initNav();
+    injectOrgSchema();
   }
 
   if (document.readyState === "loading") {
