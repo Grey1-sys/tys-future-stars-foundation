@@ -1533,6 +1533,9 @@ body.nav-open { overflow: hidden; }
 .mt-1 { margin-top: var(--space-3); }
 .mt-2 { margin-top: var(--space-6); }
 .mt-3 { margin-top: var(--space-10); }
+.mt-4 { margin-top: var(--space-12); }
+.mt-5 { margin-top: var(--space-16); }
+.pt-0 { padding-top: 0; }
 
 /* Highlighted word inside a display headline */
 .serif-accent { color: var(--color-brand-light-strong); }
@@ -2600,3 +2603,216 @@ body.modal-open { overflow: hidden; }
 }
 .video-desc { margin-top: var(--space-2); color: var(--color-text-secondary); }
 .video-note { margin-top: var(--space-3); font-size: var(--text-base); color: var(--color-text-secondary); }
+
+
+/* ===================================================================
+   12. WHAT'S HAPPENING
+   One combined feed of events and updates, plus the event and post
+   detail templates. The event card itself reuses .event-row from
+   section 8 -- only the feed chrome is new here.
+=================================================================== */
+
+/* ---------- Filter row ---------- */
+.feed-filter-row {
+  display: inline-flex;
+  gap: var(--space-1-5);
+  background: var(--color-surface-subtle);
+  padding: var(--space-1);
+  border-radius: var(--radius-pill);
+  max-width: 100%;
+}
+.feed-filter {
+  border: none;
+  background: transparent;
+  padding: var(--space-2-5) var(--space-6);
+  border-radius: var(--radius-pill);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+.feed-filter.active {
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Feed blocks ---------- */
+.feed-block + .feed-block { margin-top: var(--space-16); }
+.feed-block-title {
+  font-size: var(--text-5xl);
+  margin-bottom: var(--space-6);
+}
+.feed-empty { text-align: center; }
+
+.feed-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+/* The kind badge is the one piece of chrome that has to be readable at
+   a glance, so it carries a fill rather than the default hairline. */
+.badge-event {
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
+  border-color: var(--color-brand);
+}
+.badge-update {
+  background: var(--color-accent-strong);
+  color: var(--color-text-inverse);
+  border-color: var(--color-accent-strong);
+}
+.badge-past {
+  background: var(--color-surface-subtle);
+  color: var(--color-text-secondary);
+}
+
+/* The whole card is not a link -- a card-wide <a> would swallow the
+   Register button inside it. The title is the link instead. */
+.feed-title-link { color: inherit; text-decoration: none; }
+.feed-title-link:hover { color: var(--color-text-link); text-decoration: underline; }
+
+.feed-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+  margin-top: var(--space-2);
+}
+/* .card-link is styled as `.card .card-link` in section 3, so it loses
+   its layout outside a .card -- an event row is a .event-row, and the
+   detail templates are plain sections. Without this the arrow renders
+   at the SVG default size on its own line. */
+.feed-actions .card-link,
+#event-detail .card-link,
+#post-detail .card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  color: var(--color-brand-deep);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+}
+.feed-actions .card-link svg,
+#event-detail .card-link svg,
+#post-detail .card-link svg {
+  width: var(--space-4);
+  height: var(--space-4);
+  flex: 0 0 auto;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.feed-actions .card-link:hover svg,
+#event-detail .card-link:hover svg,
+#post-detail .card-link:hover svg { transform: translateX(3px); }
+
+/* ---------- "Recently": the entire past-events archive ---------- */
+.recently-row {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+.recently-item a {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: inherit;
+}
+.recently-media,
+.recently-nomedia {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  display: block;
+}
+/* No photo yet: a dated plate, not a broken image frame. */
+.recently-nomedia {
+  display: grid;
+  place-items: center;
+  background: var(--color-surface-tint);
+  color: var(--color-brand);
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  text-transform: uppercase;
+}
+.recently-body { display: block; }
+.recently-title {
+  display: block;
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+}
+.recently-item a:hover .recently-title { color: var(--color-text-link); }
+.recently-when {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Detail: map link, share, related ---------- */
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.map-link svg { width: 18px; height: 18px; flex: 0 0 auto; }
+
+.post-share { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+.post-share .btn { display: inline-flex; align-items: center; gap: var(--space-2); }
+.post-share svg { width: 18px; height: 18px; }
+.post-share .btn.is-copied {
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
+  border-color: var(--color-brand);
+}
+.post-share-status { font-size: var(--text-base); color: var(--color-text-secondary); }
+/* The execCommand fallback needs a real, focusable input in the DOM --
+   visibility:hidden or display:none would make select() a no-op. */
+.copy-fallback {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+
+.related-links ul { list-style: none; padding: 0; margin: var(--space-4) 0 0; }
+.related-links li + li { margin-top: var(--space-1); }
+.related-links a {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--color-border);
+  text-decoration: none;
+  color: inherit;
+}
+.related-links li:last-child a { border-bottom: 1px solid var(--color-border); }
+.related-links a:hover .related-title { color: var(--color-text-link); }
+.related-title { font-weight: var(--weight-semibold); }
+.related-when {
+  flex: 0 0 auto;
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 900px) {
+  .recently-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .feed-filter-row { width: 100%; }
+  .feed-filter { flex: 1; padding: var(--space-2-5) var(--space-3); }
+  .recently-row { grid-template-columns: 1fr; gap: var(--space-4); }
+  .recently-item a { flex-direction: row; align-items: center; }
+  .recently-media,
+  .recently-nomedia { width: 96px; flex: 0 0 96px; aspect-ratio: 1 / 1; }
+  .related-links a { flex-direction: column; gap: var(--space-1); }
+  .feed-actions .btn { width: 100%; justify-content: center; }
+}

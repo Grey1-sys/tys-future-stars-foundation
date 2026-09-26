@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's Happening — Ty's Future Stars Foundation</title>
+<meta name="description" content="Upcoming events and recent updates from Ty's Future Stars Foundation in Smyrna, Tennessee — one page, newest first.">
+<link rel="canonical" href="https://tysfuturestars.org/whats-happening.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="What's Happening — Ty's Future Stars Foundation">
+<meta property="og:description" content="Upcoming events and recent updates from Ty's Future Stars Foundation in Smyrna, Tennessee.">
+<meta property="og:url" content="https://tysfuturestars.org/whats-happening.html">
+<meta property="og:site_name" content="Ty's Future Stars Foundation">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header"></div>
+
+<main id="main">
+
+<!-- ===== HERO ===== -->
+<header class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / What's Happening</div>
+    <span class="eyebrow">What's happening</span>
+    <h1 class="display mt-1">Events and updates.</h1>
+    <p class="lede mt-2">Everything coming up, and everything we have shared
+      lately, on one page.</p>
+  </div>
+</header>
+
+<!-- ===== FILTERS =====
+     Rendered by assets/happening.js, which only offers a tab for a kind
+     that actually has entries. A tab that always says "nothing here" is
+     a dead end, so the row hides itself when there is only one kind. -->
+<section class="section filter-section">
+  <div class="wrap">
+    <div id="feed-notice"></div>
+    <div id="feed-filters"></div>
+    <p class="filter-count" id="feed-count" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- ===== THE FEED =====
+     Upcoming events first (soonest first), then recent updates, then
+     past events collapsed into a single "Recently" row of the last four.
+     No month grid, no .ics file, no paginated archive. -->
+<section class="section pt-0">
+  <div class="wrap">
+    <div id="feed"></div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="cta-band">
+      <span class="eyebrow">Stay close</span>
+      <h2 class="title mt-1">Know before it fills up.</h2>
+      <p>Tell us how you would like to help and we will let you know what is
+        coming next.</p>
+      <div class="hero-actions">
+        <a href="get-involved.html" class="btn btn-primary btn-lg">Get involved</a>
+        <a href="donate.html" class="btn btn-ghost-inverse btn-lg">Donate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/site.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/render.js"></script>
+<script src="assets/happening.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>

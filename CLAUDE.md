@@ -31,6 +31,8 @@ Pages are hand-written `.html` at the repo root.
 | `assets/involve.js` | Get Involved: the seven cards and the interest-driven fieldsets. |
 | `assets/lightbox.js` | **Shared** accessible image viewer. Used by the program and impact galleries. |
 | `assets/impact.js` | Impact page: counters, story modal, testimonial rotator, gallery, video facade. |
+| `assets/happening.js` | What's Happening: the combined feed, plus the event and post detail templates. |
+| `tools/build-sitemap.js` | Regenerates `/sitemap.xml` from `/data`. Run by hand, not on deploy. |
 | `assets/styleguide.{css,js}` | Internal reference page only. |
 
 Load order on every page: `tokens.css` -> `styles.css`, then `site.js` -> `main.js`.
@@ -113,9 +115,12 @@ into the page:
 **Adding a page:** create the file with the shell above, then add one entry to the
 `NAV` array in `assets/site.js` with `ready: true`. Entries marked `ready: false`
 are defined but not rendered, so the nav never links to a page that doesn't exist.
-`events.html` and `news.html` are staged this way. **`impact.html` is built but still
-staged** — flip its two `ready: false` entries in `assets/site.js` once real figures,
-stories, and testimonials replace the placeholders, so nothing unfinished goes live.
+**`impact.html` is built but still staged** — flip its two `ready: false` entries in
+`assets/site.js` once real figures, stories, and testimonials replace the placeholders,
+so nothing unfinished goes live.
+
+`events.html` and `news.html` no longer exist as separate pages. They were replaced by
+one combined feed — see **What's Happening** below.
 
 | Page | Sections (in order) |
 |---|---|
@@ -128,6 +133,9 @@ stories, and testimonials replace the placeholders, so nothing unfinished goes l
 | `contact.html` | Nav · Page hero · Contact info (Email / Phone / Location / Hours) + Contact form · Footer |
 | `donate.html` | Nav · Hero + 501(c)(3)/EIN trust line · Frequency + amount tiles + custom · Your Donation in Action · Goal meter · Sponsorship · Other ways to give · FAQ · Footer |
 | `impact.html` | Nav · Hero · Impact counters · Success stories (+ modal) · Testimonials · Gallery · Video · CTA · Footer. **Staged: nav `ready: false`.** |
+| `whats-happening.html` | Nav · Hero · Filter row (All / Events / Updates) · Coming up · Recent updates · Recently (last 4 past events) · CTA · Footer |
+| `event.html?id=` | Nav · Hero · Photo · Full description · Details (when / who / what to bring / cost / map link) · Register CTA · Footer |
+| `post.html?slug=` | Nav · Hero · Photo · Body · Copy-link share · More updates (3) · Footer |
 | `404.html` | Nav · Hero · Footer |
 | `thank-you.html` | Nav · Thank-you message · Footer. `noindex`. Fallback landing for a form POST without JS. |
 | `privacy.html` | Nav · Page hero · Interim privacy statement · Footer |
@@ -136,8 +144,13 @@ stories, and testimonials replace the placeholders, so nothing unfinished goes l
 | `data-preview.html` | **Internal.** Every `/data` collection rendered live. `noindex`, unlinked. |
 
 Nav order: Home · About (Foundation, Ty's Story) · Programs (dropdown, one entry per category) · Get Involved
-(dropdown) · Contact · **Donate** (CTA button). Impact, Events, and News are staged in
+(dropdown) · What's Happening · Contact · **Donate** (CTA button). Impact is staged in
 the config as `ready: false`.
+
+**Detail templates belong to a section.** `event.html`, `post.html`, and `program.html`
+are not nav entries, but a visitor reading one is still inside a section, so the nav
+highlights it. The mapping is `DETAIL_PARENT` in `assets/site.js` — add to it whenever
+you add a detail template.
 
 ---
 
@@ -326,6 +339,15 @@ the URL token; `order` sets the sequence on the index.
 computed against today; an event stays upcoming through the end of `endDate`, so a
 multi-day event does not vanish on its opening morning.
 
+`description` is the one line that appears on the feed card. `body` is the full text on
+the event page. `registrationUrl` is **per event**, so the director can use whatever
+tool she likes for each one — Eventbrite for a gala, a Google Form for a clinic. Leave
+it empty and the page says registration details are on the way instead of showing a
+dead button. `registrationLabel` overrides the word "Register".
+
+**An event is a dated promise.** Do not publish one until the date, time, and venue are
+real: a placeholder venue on a public page can send a family to an empty parking lot.
+
 ```json
 {
   "published": true,
@@ -336,13 +358,23 @@ multi-day event does not vanish on its opening morning.
   "time": "10:00 AM - 4:00 PM",
   "locationName": "Venue name",
   "address": "Street address, Smyrna, TN 37167",
-  "description": "What it is and who it is for.",
+  "description": "One line for the feed card.",
+  "body": "The full description.\n\nParagraphs separated by a blank line.",
+  "whoItIsFor": "Ages 9 to 16, all skill levels",
+  "whatToBring": "Water bottle and indoor shoes",
+  "cost": "Free",
   "category": "Fundraiser",
   "registrationUrl": "https://example.com/tickets",
+  "registrationLabel": "",
+  "metaDescription": "Up to 150 characters, used as the search-result description.",
   "image": { "src": "assets/images/event-spring-classic-hero.jpg", "alt": "Describe the photo." },
   "featured": true
 }
 ```
+
+An empty `whoItIsFor`, `whatToBring`, or `cost` simply drops that row from the details
+list. `cost` is only turned into a schema.org price when it is literally "Free" — the
+no-invented-figures rule covers event pricing too.
 
 **`stories.json`** - read rule 2 above before adding one.
 
@@ -376,6 +408,7 @@ multi-day event does not vanish on its opening morning.
   "category": "News",
   "excerpt": "One or two sentences that stand alone in a card.",
   "body": "Full post body.\n\nParagraphs separated by a blank line.",
+  "metaDescription": "Up to 150 characters, used as the search-result description.",
   "hero": { "src": "assets/images/post-season-recap-hero.jpg", "alt": "Describe the photo." },
   "tags": ["scholarships", "community"]
 }
@@ -684,6 +717,63 @@ click, and it points at `youtube-nocookie.com`. A third-party player is roughly 
 megabyte of JavaScript plus cookies, and nobody should pay that on a page view they did
 not ask for. With no `youtubeId` configured the whole section hides itself.
 
+### What's Happening
+
+**One page, not two.** Events and updates share `whats-happening.html`. A part-time
+director will not maintain a separate blog, and a calendar with nothing on it reads
+worse than a combined feed with three items. There is no `events.html` and no
+`news.html`; do not add them back.
+
+The feed runs: **Coming up** (upcoming events, soonest first) · **Recent updates**
+(posts, newest first) · **Recently** (the last four past events). The filter row offers
+All / Events / Updates and writes itself into the query string (`?show=event`), so a
+filtered view can be shared. A kind with no entries gets no tab, and the row hides
+itself entirely when only one kind exists — a tab that always says "nothing here" is a
+dead end.
+
+**Deliberately not built:** no month-grid calendar, no `.ics` generator, no paginated
+archive. "Recently" *is* the archive.
+
+**Empty state.** When nothing is upcoming and nothing is posted, the feed is one short
+line pointing at Get Involved. The nav, hero, CTA and footer are all still there —
+never a blank page.
+
+**Event detail** (`event.html?id=`) shows the full description, who it is for, what to
+bring, cost, and the address as a link that opens the device's map app. Registration
+points at the entry's own `registrationUrl`. A past event swaps the CTA for a line
+saying it has already happened.
+
+**Post detail** (`post.html?slug=`) shows hero, title, date, author, body, three related
+links and a **copy-link** button. Deliberately **no social share row** — those are
+third-party scripts and tracking; this is a clipboard write and no network request.
+Related links are *derived* (same category first, then most recent), never authored, so
+nobody maintains a list of three links per post.
+
+A missing or unknown `?id=` / `?slug=` redirects to `whats-happening.html?notfound=`,
+which the feed explains, rather than leaving an empty shell.
+
+### SEO: titles, schema, Open Graph, sitemap
+
+Updates exist to be indexed, so every detail page sets its own:
+
+- `<title>` and `meta description`, from `metaDescription` falling back to the excerpt
+- a `canonical` link — always on `https://tysfuturestars.org`, never the preview origin
+- **Open Graph** tags carrying the item's own image (only when the image has a real
+  `alt`, same rule as `<img>`)
+- **JSON-LD**: `Event` on event pages, `Article` on post pages
+
+**`/sitemap.xml` is generated, not hand-written.** This site has no build step, so a
+hand-edited sitemap goes stale the first time someone adds an event. After publishing
+anything, run:
+
+```bash
+node tools/build-sitemap.js
+```
+
+It lists the static pages plus every **published** event and post, and skips drafts and
+`ready: false` pages. It is not wired into deploy — nothing runs it for you. Commit the
+regenerated `sitemap.xml` alongside the content change.
+
 ### Checking your work
 
 Open **`/data-preview.html`** - it renders every collection through the same layer the
@@ -876,8 +966,10 @@ history is visible — do not re-introduce them.
 2. **Perf:** `logo.jpg` is 194 KB, loaded twice per page (nav + footer) as a ~54px glyph
    and again as the favicon. Needs resizing and a proper favicon. Page images still lack
    `loading="lazy"`.
-3. **SEO:** no Open Graph or Twitter cards, no canonical tags, no `robots.txt`,
-   no `sitemap.xml`, no JSON-LD.
+3. **SEO:** still no `robots.txt`, and no Open Graph or canonical tags on the older
+   pages (index, about, programs, donate, contact). Events, updates and programs now
+   emit JSON-LD, and `sitemap.xml` exists — see the SEO section above. A sitemap with
+   no `robots.txt` `Sitemap:` line still has to be submitted by hand in Search Console.
 4. **Inline `style=` attributes** remain in page bodies (~36). Pre-existing debt, not
    precedent — see the "do not do" list.
 5. **Contact and newsletter forms still have no backend.** The Get Involved form is on
@@ -916,6 +1008,18 @@ history is visible — do not re-introduce them.
   focus trap. Program detail gallery re-verified after the move.
 - ~~The FAQ on `programs.html` was hardcoded~~ — moved into `faq.json` under
   `page: "programs"`, alongside the donate FAQ.
+- ~~The posts card linked to `news.html`, which never existed~~ — every update now
+  links to `post.html?slug=`. The dead link had been shipping since the data layer
+  landed; nothing pointed at it because no post was published.
+- ~~A blocked `registrationUrl` rendered `href=""`~~ — a `javascript:` URL in the JSON
+  sanitised to an empty string but still produced a Register button that silently
+  reloaded the page. The button is now gated on the *sanitised* URL, so a blocked value
+  renders no button at all.
+- ~~`.card-link` lost its layout outside a `.card`~~ — it is defined as
+  `.card .card-link`, so the arrow rendered at full SVG size on the feed and detail
+  templates. Re-declared for those scopes in section 12.
+- ~~`program.html` highlighted nothing in the nav~~ — detail templates now resolve to
+  their section through `DETAIL_PARENT` in `assets/site.js`.
 - ~~No EIN despite 501(c)(3) claims~~ — EIN 42-2398737 supplied 2026-09-17 and now
   published in the footer and on the donate page.
 
@@ -939,7 +1043,13 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Approved photo and bio for LaSonya Adams, President & Founder
 - [ ] Office hours confirmation (currently "Mon–Fri, 9am – 5pm")
 - [ ] Reviewed Privacy Policy and Terms of Use copy (interim statements are live now)
-- [ ] Content for Events and News (nav entries staged, `ready: false`)
+- [ ] **Events and updates for What's Happening.** The page is live and shows an honest
+      empty state until entries are published. Nothing in `events.json` or `posts.json`
+      is published yet — every entry is still a PLACEHOLDER.
+  - [ ] Real events: date, time, venue, address, who it is for, cost, and a
+        registration link per event (any tool — Eventbrite, a Google Form, anything)
+  - [ ] First two or three updates, with an author name
+  - [ ] Run `node tools/build-sitemap.js` and commit the result after publishing
 - [ ] **Impact page content**, then flip `impact.html` to `ready: true` in `assets/site.js`:
   - [ ] Four to six confirmed impact figures, each with a `source` and `verifiedOn` date
   - [ ] Approved testimonials from a parent, a volunteer, and a partner — real quotes, with permission

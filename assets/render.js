@@ -144,7 +144,7 @@ window.TFSF = window.TFSF || {};
           '<p class="data-byline">' + esc(data.formatDate(p.date)) +
             (has(p.author) ? " · " + esc(p.author) : "") + "</p>" +
           (has(p.excerpt) ? "<p>" + esc(p.excerpt) + "</p>" : "") +
-          '<a class="card-link" href="news.html?slug=' + encodeURIComponent(p.slug) + '">Read more' +
+          '<a class="card-link" href="post.html?slug=' + encodeURIComponent(p.slug) + '">Read more' +
             '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>' +
         "</div></article>";
     },
@@ -374,6 +374,7 @@ window.TFSF = window.TFSF || {};
     detailInto: detailInto,
     templates: templates,
     escape: esc,
+    safeUrl: safeUrl,
     image: img,
     mount: mount
   };

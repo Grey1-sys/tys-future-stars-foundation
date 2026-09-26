@@ -77,8 +77,10 @@
       ]
     },
     { label: "Impact",  href: "impact.html", ready: false },
-    { label: "Events",  href: "events.html", ready: false },
-    { label: "News",    href: "news.html",   ready: false },
+    // Events and updates share ONE page. A part-time director will not
+    // keep a separate blog, and an empty calendar reads worse than a
+    // combined feed -- see assets/happening.js.
+    { label: "What's Happening", href: "whats-happening.html", ready: true },
     { label: "Contact", href: "contact.html", ready: true }
   ];
 
@@ -92,8 +94,7 @@
     { label: "Get Involved", href: "get-involved.html", ready: true },
     { label: "Donate",      href: "donate.html",      ready: true },
     { label: "Impact",      href: "impact.html",      ready: false },
-    { label: "Events",      href: "events.html",      ready: false },
-    { label: "News",        href: "news.html",        ready: false }
+    { label: "What's Happening", href: "whats-happening.html", ready: true }
   ];
 
   var LEGAL = [
@@ -126,9 +127,20 @@
 
   var HERE = currentPage();
 
+  /* A detail template is not a nav entry, but it belongs to one. Someone
+     reading event.html is still inside What's Happening, and the nav
+     should say so instead of highlighting nothing. */
+  var DETAIL_PARENT = {
+    "program.html": "programs.html",
+    "event.html":   "whats-happening.html",
+    "post.html":    "whats-happening.html"
+  };
+
+  var SECTION = DETAIL_PARENT[HERE] || HERE;
+
   function isCurrent(href) {
     if (!href) return false;
-    return href.split("#")[0] === HERE;
+    return href.split("#")[0] === SECTION;
   }
 
   function ready(item) { return item.ready !== false; }
