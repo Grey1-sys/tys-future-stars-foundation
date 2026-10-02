@@ -42,7 +42,13 @@ window.TFSF = window.TFSF || {};
   /* How soon a human replies. This is a promise the foundation makes,
      so it lives in one place and should be confirmed before launch. */
   var FOLLOW_UP = "within 2 business days";
-  var CONTACT_EMAIL = "hello@tysfuturestars.org";
+  /* Read from ORG rather than keeping a second copy. This file had its
+     own hardcoded address and drifted from site.js the moment the real
+     one was confirmed. */
+  function contactEmail() {
+    return (window.TFSF && window.TFSF.org && window.TFSF.org.email) ||
+           "tysfuturestarsfoundation@gmail.com";
+  }
 
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -269,8 +275,8 @@ window.TFSF = window.TFSF || {};
       "</span>" +
       "<h3>" + esc(heading) + "</h3>" +
       "<p>" + esc(body) + "</p>" +
-      '<p class="muted">Nothing arrived? Email <a href="mailto:' + esc(CONTACT_EMAIL) + '">' +
-        esc(CONTACT_EMAIL) + "</a> and we will pick it up from there.</p>" +
+      '<p class="muted">Nothing arrived? Email <a href="mailto:' + esc(contactEmail()) + '">' +
+        esc(contactEmail()) + "</a> and we will pick it up from there.</p>" +
       "</div>";
   }
 
@@ -335,7 +341,7 @@ window.TFSF = window.TFSF || {};
         setBusy(form, false);
         showFormError(form,
           "We could not send that just now. Please try again, or email " +
-          CONTACT_EMAIL + " and we will pick it up from there.");
+          contactEmail() + " and we will pick it up from there.");
       });
   }
 

@@ -1,0 +1,6 @@
+{
+  "_comment": "Page copy for thank-you.html. Edited through the CMS at /admin. tools/build-pages.js writes these values back into the HTML at deploy time, so the text stays crawlable.",
+  "page__h1-1": "Thank you.",
+  "page__p-1": "We have your details. Someone from Ty's Future Stars\n      Foundation will follow up within 2 business days.",
+  "page__p-2": "Nothing arrived? Email\n      <a href=\"mailto:tysfuturestarsfoundation@gmail.com\">tysfuturestarsfoundation@gmail.com</a>\n      and we will pick it up from there."
+}

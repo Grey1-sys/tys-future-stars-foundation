@@ -31,7 +31,7 @@
     name: "Ty's Future Stars Foundation",
     mission: "Empowering youth through basketball, education, mentorship, " +
              "and scholarships in honor of Tykeem D'Majh Franklin.",
-    email: "hello@tysfuturestars.org",
+    email: "tysfuturestarsfoundation@gmail.com",  // confirmed 2026-09-25
     phone: null,                       // TODO(client): real number
     phoneHref: null,
     city: "Smyrna, Tennessee",

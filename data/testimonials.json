@@ -1,32 +1,34 @@
-[
-  {
-    "_comment": "PLACEHOLDER. Do NOT invent a quote. Paste one you have on record, with permission to publish it and the person's name.",
-    "published": true,
-    "order": 1,
-    "id": "testimonial-parent",
-    "quote": "PLACEHOLDER — paste an approved quote from a parent here. Do not write one.",
-    "name": "PLACEHOLDER — parent name, with permission",
-    "role": "Parent",
-    "photo": null
-  },
-  {
-    "_comment": "PLACEHOLDER. Do NOT invent a quote.",
-    "published": true,
-    "order": 2,
-    "id": "testimonial-volunteer",
-    "quote": "PLACEHOLDER — paste an approved quote from a volunteer here.",
-    "name": "PLACEHOLDER — volunteer name, with permission",
-    "role": "Volunteer",
-    "photo": null
-  },
-  {
-    "_comment": "PLACEHOLDER. Do NOT invent a quote.",
-    "published": true,
-    "order": 3,
-    "id": "testimonial-partner",
-    "quote": "PLACEHOLDER — paste an approved quote from a partner or sponsor here.",
-    "name": "PLACEHOLDER — partner name, with permission",
-    "role": "Community partner",
-    "photo": null
-  }
-]
+{
+  "items": [
+    {
+      "_comment": "PLACEHOLDER. Do NOT invent a quote. Paste one you have on record, with permission to publish it and the person's name.",
+      "published": true,
+      "order": 1,
+      "id": "testimonial-parent",
+      "quote": "PLACEHOLDER — paste an approved quote from a parent here. Do not write one.",
+      "name": "PLACEHOLDER — parent name, with permission",
+      "role": "Parent",
+      "photo": null
+    },
+    {
+      "_comment": "PLACEHOLDER. Do NOT invent a quote.",
+      "published": true,
+      "order": 2,
+      "id": "testimonial-volunteer",
+      "quote": "PLACEHOLDER — paste an approved quote from a volunteer here.",
+      "name": "PLACEHOLDER — volunteer name, with permission",
+      "role": "Volunteer",
+      "photo": null
+    },
+    {
+      "_comment": "PLACEHOLDER. Do NOT invent a quote.",
+      "published": true,
+      "order": 3,
+      "id": "testimonial-partner",
+      "quote": "PLACEHOLDER — paste an approved quote from a partner or sponsor here.",
+      "name": "PLACEHOLDER — partner name, with permission",
+      "role": "Community partner",
+      "photo": null
+    }
+  ]
+}

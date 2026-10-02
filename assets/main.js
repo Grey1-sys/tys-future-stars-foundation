@@ -35,8 +35,8 @@
       if (note) {
         note.innerHTML =
           'This form isn’t connected yet — your message was not sent. ' +
-          'Please email <a href="mailto:hello@tysfuturestars.org">' +
-          'hello@tysfuturestars.org</a> and we’ll reply within 1–2 business days.';
+          'Please email <a href="mailto:tysfuturestarsfoundation@gmail.com">' +
+          'tysfuturestarsfoundation@gmail.com</a> and we’ll reply within 1–2 business days.';
         note.setAttribute('role', 'alert');
         note.style.color = 'var(--color-danger)';
       }

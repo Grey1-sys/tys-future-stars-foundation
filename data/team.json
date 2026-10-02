@@ -1,44 +1,46 @@
-[
-  {
-    "_comment": "PLACEHOLDER bio. Published so the leadership section renders on where-your-money-goes.html -- a grant reviewer looks for named leadership. `photo` is null on purpose: the card falls back to initials rather than requesting an image file that does not exist. Set photo once an approved headshot is in assets/images/.",
-    "published": true,
-    "order": 1,
-    "id": "lasonya-adams",
-    "name": "LaSonya Adams",
-    "role": "President & Founder",
-    "bio": "PLACEHOLDER — approved bio, supplied by the foundation.",
-    "photo": null,
-    "boardMember": true
-  },
-  {
-    "published": true,
-    "order": 2,
-    "id": "board-member-2",
-    "name": "PLACEHOLDER — Board member name",
-    "role": "PLACEHOLDER — Board role, e.g. Treasurer",
-    "bio": "PLACEHOLDER — approved bio, supplied by the foundation.",
-    "photo": null,
-    "boardMember": true
-  },
-  {
-    "published": true,
-    "order": 3,
-    "id": "board-member-3",
-    "name": "PLACEHOLDER — Board member name",
-    "role": "PLACEHOLDER — Board role, e.g. Secretary",
-    "bio": "PLACEHOLDER — approved bio, supplied by the foundation.",
-    "photo": null,
-    "boardMember": true
-  },
-  {
-    "_comment": "boardMember:false groups this person under Staff & Volunteers rather than Board of Directors. A grant reviewer reads the two differently, so they are never mixed.",
-    "published": true,
-    "order": 4,
-    "id": "staff-member-1",
-    "name": "PLACEHOLDER — Staff or key volunteer name",
-    "role": "PLACEHOLDER — role, e.g. Program Director",
-    "bio": "PLACEHOLDER — approved bio, supplied by the foundation.",
-    "photo": null,
-    "boardMember": false
-  }
-]
+{
+  "items": [
+    {
+      "_comment": "PLACEHOLDER bio. Published so the leadership section renders on where-your-money-goes.html -- a grant reviewer looks for named leadership. `photo` is null on purpose: the card falls back to initials rather than requesting an image file that does not exist. Set photo once an approved headshot is in assets/images/.",
+      "published": true,
+      "order": 1,
+      "id": "lasonya-adams",
+      "name": "LaSonya Adams",
+      "role": "President & Founder",
+      "bio": "PLACEHOLDER — approved bio, supplied by the foundation.",
+      "photo": null,
+      "boardMember": true
+    },
+    {
+      "published": true,
+      "order": 2,
+      "id": "board-member-2",
+      "name": "PLACEHOLDER — Board member name",
+      "role": "PLACEHOLDER — Board role, e.g. Treasurer",
+      "bio": "PLACEHOLDER — approved bio, supplied by the foundation.",
+      "photo": null,
+      "boardMember": true
+    },
+    {
+      "published": true,
+      "order": 3,
+      "id": "board-member-3",
+      "name": "PLACEHOLDER — Board member name",
+      "role": "PLACEHOLDER — Board role, e.g. Secretary",
+      "bio": "PLACEHOLDER — approved bio, supplied by the foundation.",
+      "photo": null,
+      "boardMember": true
+    },
+    {
+      "_comment": "boardMember:false groups this person under Staff & Volunteers rather than Board of Directors. A grant reviewer reads the two differently, so they are never mixed.",
+      "published": true,
+      "order": 4,
+      "id": "staff-member-1",
+      "name": "PLACEHOLDER — Staff or key volunteer name",
+      "role": "PLACEHOLDER — role, e.g. Program Director",
+      "bio": "PLACEHOLDER — approved bio, supplied by the foundation.",
+      "photo": null,
+      "boardMember": false
+    }
+  ]
+}

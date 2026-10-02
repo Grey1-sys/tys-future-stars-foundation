@@ -1,15 +1,17 @@
-[
-  {
-    "_comment": "Set youtubeId and a poster image, then flip published to true. The player is only loaded when someone clicks — no third-party iframe on page load.",
-    "published": false,
-    "order": 1,
-    "id": "intro-video",
-    "title": "PLACEHOLDER — video title",
-    "description": "PLACEHOLDER — one line on what the video shows",
-    "youtubeId": null,
-    "poster": {
-      "src": "assets/images/impact-illustration-1.svg",
-      "alt": "PLACEHOLDER — describe the poster image"
+{
+  "items": [
+    {
+      "_comment": "Set youtubeId and a poster image, then flip published to true. The player is only loaded when someone clicks — no third-party iframe on page load.",
+      "published": false,
+      "order": 1,
+      "id": "intro-video",
+      "title": "PLACEHOLDER — video title",
+      "description": "PLACEHOLDER — one line on what the video shows",
+      "youtubeId": null,
+      "poster": {
+        "src": "assets/images/impact-illustration-1.svg",
+        "alt": "PLACEHOLDER — describe the poster image"
+      }
     }
-  }
-]
+  ]
+}

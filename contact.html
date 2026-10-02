@@ -54,8 +54,8 @@
   <div class="wrap">
     <div class="breadcrumb"><a href="index.html">Home</a> / Contact</div>
     <span class="eyebrow">Contact</span>
-    <h1 class="display mt-1">We'd love to hear from you.</h1>
-    <p class="lede mt-2">Questions about our programs, scholarships, or partnerships?
+    <h1 class="display mt-1" data-copy="hero__h1-1">We'd love to hear from you.</h1>
+    <p class="lede mt-2" data-copy="hero__p-1">Questions about our programs, scholarships, or partnerships?
       Send us a note and we will be in touch.</p>
   </div>
 </header>
@@ -72,7 +72,7 @@
          invisible to it and every message would go nowhere. Runs on
          the shared engine in assets/forms.js. -->
     <div class="form-card">
-      <h2 class="title">Send us a message</h2>
+      <h2 class="title" data-copy="form-details__h2-1">Send us a message</h2>
 
       <form id="contact-form"
             name="contact"
@@ -89,11 +89,9 @@
         <input type="hidden" name="form-name" value="contact">
 
         <!-- Honeypot: hidden from people, tempting to bots -->
-        <p class="visually-hidden" aria-hidden="true">
-          <label>Do not fill this in if you are human:
+        <p class="visually-hidden" aria-hidden="true"><label>Do not fill this in if you are human:
             <input name="bot-field" tabindex="-1" autocomplete="off">
-          </label>
-        </p>
+          </label></p>
 
         <div class="field">
           <label for="contact-name">Your name *</label>
@@ -143,7 +141,7 @@
 
         <button type="submit" class="btn btn-primary btn-lg form-submit">Send message</button>
 
-        <p class="form-note">We will only use these details to reply to you. Read our
+        <p class="form-note" data-copy="form-details__p-1">We will only use these details to reply to you. Read our
           <a href="privacy.html">privacy policy</a>.</p>
       </form>
     </div>
@@ -164,7 +162,7 @@
   <div class="wrap narrow">
     <div class="section-head">
       <span class="eyebrow">Before you write</span>
-      <h2 class="title">Questions we get a lot.</h2>
+      <h2 class="title" data-copy="faq__h2-1">Questions we get a lot.</h2>
     </div>
     <div id="give-faq" data-faq-page="contact"></div>
   </div>

@@ -1,41 +1,43 @@
-[
-  {
-    "_comment": "PLACEHOLDER — replace with a real post, then set published to true. Updates exist for SEO: a post is a page Google can index and a reason for someone to link to the foundation.",
-    "published": false,
-    "slug": "placeholder-season-recap",
-    "title": "PLACEHOLDER — Season Recap",
-    "date": "2026-03-02",
-    "author": "PLACEHOLDER — Author name",
-    "category": "News",
-    "excerpt": "PLACEHOLDER — One or two sentences that stand alone in a card.",
-    "body": "PLACEHOLDER — Full post body. Plain paragraphs separated by a blank line.",
-    "metaDescription": "PLACEHOLDER — up to 150 characters, used as the search-result description for this post.",
-    "hero": {
-      "src": "assets/images/post-placeholder-season-recap-hero.jpg",
-      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+{
+  "items": [
+    {
+      "_comment": "PLACEHOLDER — replace with a real post, then set published to true. Updates exist for SEO: a post is a page Google can index and a reason for someone to link to the foundation.",
+      "published": false,
+      "slug": "placeholder-season-recap",
+      "title": "PLACEHOLDER — Season Recap",
+      "date": "2026-03-02",
+      "author": "PLACEHOLDER — Author name",
+      "category": "News",
+      "excerpt": "PLACEHOLDER — One or two sentences that stand alone in a card.",
+      "body": "PLACEHOLDER — Full post body. Plain paragraphs separated by a blank line.",
+      "metaDescription": "PLACEHOLDER — up to 150 characters, used as the search-result description for this post.",
+      "hero": {
+        "src": "assets/images/post-placeholder-season-recap-hero.jpg",
+        "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+      },
+      "tags": [
+        "placeholder"
+      ]
     },
-    "tags": [
-      "placeholder"
-    ]
-  },
-  {
-    "_comment": "PLACEHOLDER — replace with a real post, then set published to true.",
-    "published": false,
-    "slug": "placeholder-scholarship-opens",
-    "title": "PLACEHOLDER — Scholarship Applications Open",
-    "date": "2026-01-15",
-    "author": "PLACEHOLDER — Author name",
-    "category": "Announcements",
-    "excerpt": "PLACEHOLDER — One or two sentences that stand alone in a card.",
-    "body": "PLACEHOLDER — Full post body.",
-    "metaDescription": "PLACEHOLDER — up to 150 characters.",
-    "hero": {
-      "src": "assets/images/post-placeholder-scholarship-opens-hero.jpg",
-      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
-    },
-    "tags": [
-      "placeholder",
-      "scholarships"
-    ]
-  }
-]
+    {
+      "_comment": "PLACEHOLDER — replace with a real post, then set published to true.",
+      "published": false,
+      "slug": "placeholder-scholarship-opens",
+      "title": "PLACEHOLDER — Scholarship Applications Open",
+      "date": "2026-01-15",
+      "author": "PLACEHOLDER — Author name",
+      "category": "Announcements",
+      "excerpt": "PLACEHOLDER — One or two sentences that stand alone in a card.",
+      "body": "PLACEHOLDER — Full post body.",
+      "metaDescription": "PLACEHOLDER — up to 150 characters.",
+      "hero": {
+        "src": "assets/images/post-placeholder-scholarship-opens-hero.jpg",
+        "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+      },
+      "tags": [
+        "placeholder",
+        "scholarships"
+      ]
+    }
+  ]
+}

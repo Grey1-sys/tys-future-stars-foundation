@@ -1,52 +1,54 @@
-[
-  {
-    "_comment": "PLACEHOLDER — stays published:false on purpose. An event is a DATED PROMISE: a fake venue and time on a public page can send a real family to an empty parking lot. Fill in every field, delete the PLACEHOLDER text, then set published to true.",
-    "published": false,
-    "id": "placeholder-spring-classic",
-    "title": "PLACEHOLDER — Spring Classic Fundraiser",
-    "date": "2026-04-18",
-    "endDate": "2026-04-18",
-    "time": "10:00 AM – 4:00 PM",
-    "locationName": "PLACEHOLDER — Venue name",
-    "address": "PLACEHOLDER — Street address, Smyrna, TN 37167",
-    "description": "PLACEHOLDER — one line for the feed card. What it is, in plain language.",
-    "body": "PLACEHOLDER — the full description for the event page.\n\nParagraphs separated by a blank line. What happens, what the day looks like, why it matters.",
-    "whoItIsFor": "PLACEHOLDER — who should come, in plain language.",
-    "whatToBring": "PLACEHOLDER — what to bring, or leave blank to hide this row.",
-    "cost": "PLACEHOLDER — Free, or a ticket price",
-    "category": "Fundraiser",
-    "registrationUrl": "",
-    "registrationLabel": "",
-    "metaDescription": "PLACEHOLDER — up to 150 characters, used as the search-result description for this event.",
-    "image": {
-      "src": "assets/images/event-placeholder-spring-classic-hero.jpg",
-      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+{
+  "items": [
+    {
+      "_comment": "PLACEHOLDER — stays published:false on purpose. An event is a DATED PROMISE: a fake venue and time on a public page can send a real family to an empty parking lot. Fill in every field, delete the PLACEHOLDER text, then set published to true.",
+      "published": false,
+      "id": "placeholder-spring-classic",
+      "title": "PLACEHOLDER — Spring Classic Fundraiser",
+      "date": "2026-04-18",
+      "endDate": "2026-04-18",
+      "time": "10:00 AM – 4:00 PM",
+      "locationName": "PLACEHOLDER — Venue name",
+      "address": "PLACEHOLDER — Street address, Smyrna, TN 37167",
+      "description": "PLACEHOLDER — one line for the feed card. What it is, in plain language.",
+      "body": "PLACEHOLDER — the full description for the event page.\n\nParagraphs separated by a blank line. What happens, what the day looks like, why it matters.",
+      "whoItIsFor": "PLACEHOLDER — who should come, in plain language.",
+      "whatToBring": "PLACEHOLDER — what to bring, or leave blank to hide this row.",
+      "cost": "PLACEHOLDER — Free, or a ticket price",
+      "category": "Fundraiser",
+      "registrationUrl": "",
+      "registrationLabel": "",
+      "metaDescription": "PLACEHOLDER — up to 150 characters, used as the search-result description for this event.",
+      "image": {
+        "src": "assets/images/event-placeholder-spring-classic-hero.jpg",
+        "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+      },
+      "featured": true
     },
-    "featured": true
-  },
-  {
-    "_comment": "PLACEHOLDER — a past-dated entry, so the upcoming/past split is visible in dev.",
-    "published": false,
-    "id": "placeholder-scholarship-night",
-    "title": "PLACEHOLDER — Scholarship Awards Night",
-    "date": "2025-11-08",
-    "endDate": "2025-11-08",
-    "time": "6:00 PM – 8:00 PM",
-    "locationName": "PLACEHOLDER — Venue name",
-    "address": "PLACEHOLDER — Street address, Smyrna, TN 37167",
-    "description": "PLACEHOLDER — one line for the feed card.",
-    "body": "PLACEHOLDER — the full description for the event page.",
-    "whoItIsFor": "PLACEHOLDER — who should come.",
-    "whatToBring": "",
-    "cost": "PLACEHOLDER — Free, or a ticket price",
-    "category": "Community",
-    "registrationUrl": "",
-    "registrationLabel": "",
-    "metaDescription": "PLACEHOLDER — up to 150 characters.",
-    "image": {
-      "src": "assets/images/event-placeholder-scholarship-night-hero.jpg",
-      "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
-    },
-    "featured": false
-  }
-]
+    {
+      "_comment": "PLACEHOLDER — a past-dated entry, so the upcoming/past split is visible in dev.",
+      "published": false,
+      "id": "placeholder-scholarship-night",
+      "title": "PLACEHOLDER — Scholarship Awards Night",
+      "date": "2025-11-08",
+      "endDate": "2025-11-08",
+      "time": "6:00 PM – 8:00 PM",
+      "locationName": "PLACEHOLDER — Venue name",
+      "address": "PLACEHOLDER — Street address, Smyrna, TN 37167",
+      "description": "PLACEHOLDER — one line for the feed card.",
+      "body": "PLACEHOLDER — the full description for the event page.",
+      "whoItIsFor": "PLACEHOLDER — who should come.",
+      "whatToBring": "",
+      "cost": "PLACEHOLDER — Free, or a ticket price",
+      "category": "Community",
+      "registrationUrl": "",
+      "registrationLabel": "",
+      "metaDescription": "PLACEHOLDER — up to 150 characters.",
+      "image": {
+        "src": "assets/images/event-placeholder-scholarship-night-hero.jpg",
+        "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
+      },
+      "featured": false
+    }
+  ]
+}

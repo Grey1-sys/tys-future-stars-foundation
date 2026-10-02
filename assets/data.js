@@ -112,9 +112,22 @@ window.TFSF = window.TFSF || {};
         if (!res.ok) throw new Error(name + ".json returned " + res.status);
         return res.json();
       })
-      .then(function (rows) {
-        if (!Array.isArray(rows)) {
-          throw new Error(name + ".json must contain an array");
+      .then(function (payload) {
+        /* Two accepted shapes.
+
+           { "items": [ ... ] }  is what the CMS writes and what every
+           file in /data now uses. Sveltia file collections map fields
+           to KEYS in a file, so a bare top-level array has nothing to
+           attach a list widget to.
+
+           [ ... ] is still accepted, so a hand-written file or an
+           older copy keeps working instead of blanking a page. */
+        var rows = Array.isArray(payload)
+          ? payload
+          : (payload && Array.isArray(payload.items) ? payload.items : null);
+
+        if (!rows) {
+          throw new Error(name + '.json must be an array, or an object with an "items" array');
         }
         return rows.filter(gateFor(name));
       })

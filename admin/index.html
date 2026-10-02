@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit the website — Ty's Future Stars Foundation</title>
+
+<!-- This page must never be indexed. robots.txt disallows /admin/ as
+     well; this is the belt to that braces. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+
+<!-- Sveltia CMS, self-hosted and version-pinned.
+     Loaded from our own origin rather than a CDN for three reasons:
+     the site's Content-Security-Policy stays script-src 'self', the
+     editor keeps working if a CDN is blocked or down, and the version
+     can never change underneath us without a commit.
+     To update: download a newer dist to assets/vendor/ and change the
+     src below. -->
+<script src="/assets/vendor/sveltia-cms-0.221.1.js" type="module"></script>
+<!-- The bundle exposes window.CMS but does not mount itself. init.js is
+     a separate file rather than an inline script so the /admin CSP can
+     stay script-src 'self' -- this is the page that holds a GitHub
+     token, so it is the last place to allow inline script. -->
+<script src="/admin/init.js" defer></script>
+</head>
+<body>
+<!-- Sveltia mounts itself into <body>. Nothing else belongs here. -->
+</body>
+</html>

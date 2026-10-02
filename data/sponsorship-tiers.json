@@ -1,80 +1,82 @@
-[
-  {
-    "_comment": "PLACEHOLDER TIERS. `amount` stays null until the director sets the real price points -- a sponsorship level is a PROMISE, not an estimate, so the no-invented-figures rule in CLAUDE.md applies here too. A tier with amount:null renders 'Amount being confirmed' and sends the sponsor to the form instead of quoting a price. Benefits must be CONCRETE: nobody writes a cheque for 'recognition'. Name the deliverable -- logo on game jerseys, banner at the tournament, a booth at back-to-school, a named scholarship.",
-    "published": true,
-    "order": 1,
-    "id": "tier-community",
-    "name": "PLACEHOLDER — Community Supporter",
-    "amount": null,
-    "frequency": "yearly",
-    "summary": "PLACEHOLDER — one line on who this tier suits.",
-    "benefits": [
-      "PLACEHOLDER — name the deliverable, e.g. logo on the website sponsor wall",
-      "PLACEHOLDER — e.g. social media thank-you post",
-      "PLACEHOLDER — e.g. mention in the annual report"
-    ]
-  },
-  {
-    "published": true,
-    "order": 2,
-    "id": "tier-bronze",
-    "name": "PLACEHOLDER — Bronze",
-    "amount": null,
-    "frequency": "yearly",
-    "summary": "PLACEHOLDER — one line on who this tier suits.",
-    "benefits": [
-      "PLACEHOLDER — everything in the tier below, plus:",
-      "PLACEHOLDER — e.g. logo on practice shirts",
-      "PLACEHOLDER — e.g. banner at one home tournament",
-      "PLACEHOLDER — e.g. two tickets to the awards night"
-    ]
-  },
-  {
-    "published": true,
-    "order": 3,
-    "id": "tier-silver",
-    "name": "PLACEHOLDER — Silver",
-    "amount": null,
-    "frequency": "yearly",
-    "summary": "PLACEHOLDER — one line on who this tier suits.",
-    "benefits": [
-      "PLACEHOLDER — everything in the tier below, plus:",
-      "PLACEHOLDER — e.g. logo on game jerseys",
-      "PLACEHOLDER — e.g. booth at the back-to-school event",
-      "PLACEHOLDER — e.g. named recognition at every home game",
-      "PLACEHOLDER — e.g. a team photo with your logo, for your own use"
-    ]
-  },
-  {
-    "published": true,
-    "order": 4,
-    "id": "tier-gold",
-    "name": "PLACEHOLDER — Gold",
-    "amount": null,
-    "frequency": "yearly",
-    "summary": "PLACEHOLDER — one line on who this tier suits.",
-    "benefits": [
-      "PLACEHOLDER — everything in the tier below, plus:",
-      "PLACEHOLDER — e.g. a named scholarship in your organization's name",
-      "PLACEHOLDER — e.g. presenting sponsor of one tournament",
-      "PLACEHOLDER — e.g. logo on the court banner for the season",
-      "PLACEHOLDER — e.g. a short feature in the annual report"
-    ]
-  },
-  {
-    "published": true,
-    "order": 5,
-    "id": "tier-presenting",
-    "name": "PLACEHOLDER — Presenting Partner",
-    "amount": null,
-    "frequency": "yearly",
-    "summary": "PLACEHOLDER — one line on who this tier suits.",
-    "benefits": [
-      "PLACEHOLDER — everything in the tier below, plus:",
-      "PLACEHOLDER — e.g. season presenting rights, named in every announcement",
-      "PLACEHOLDER — e.g. a named program, not just a named scholarship",
-      "PLACEHOLDER — e.g. a seat at the table for the annual planning meeting",
-      "PLACEHOLDER — e.g. co-branded press release"
-    ]
-  }
-]
+{
+  "items": [
+    {
+      "_comment": "PLACEHOLDER TIERS. `amount` stays null until the director sets the real price points -- a sponsorship level is a PROMISE, not an estimate, so the no-invented-figures rule in CLAUDE.md applies here too. A tier with amount:null renders 'Amount being confirmed' and sends the sponsor to the form instead of quoting a price. Benefits must be CONCRETE: nobody writes a cheque for 'recognition'. Name the deliverable -- logo on game jerseys, banner at the tournament, a booth at back-to-school, a named scholarship.",
+      "published": true,
+      "order": 1,
+      "id": "tier-community",
+      "name": "PLACEHOLDER — Community Supporter",
+      "amount": null,
+      "frequency": "yearly",
+      "summary": "PLACEHOLDER — one line on who this tier suits.",
+      "benefits": [
+        "PLACEHOLDER — name the deliverable, e.g. logo on the website sponsor wall",
+        "PLACEHOLDER — e.g. social media thank-you post",
+        "PLACEHOLDER — e.g. mention in the annual report"
+      ]
+    },
+    {
+      "published": true,
+      "order": 2,
+      "id": "tier-bronze",
+      "name": "PLACEHOLDER — Bronze",
+      "amount": null,
+      "frequency": "yearly",
+      "summary": "PLACEHOLDER — one line on who this tier suits.",
+      "benefits": [
+        "PLACEHOLDER — everything in the tier below, plus:",
+        "PLACEHOLDER — e.g. logo on practice shirts",
+        "PLACEHOLDER — e.g. banner at one home tournament",
+        "PLACEHOLDER — e.g. two tickets to the awards night"
+      ]
+    },
+    {
+      "published": true,
+      "order": 3,
+      "id": "tier-silver",
+      "name": "PLACEHOLDER — Silver",
+      "amount": null,
+      "frequency": "yearly",
+      "summary": "PLACEHOLDER — one line on who this tier suits.",
+      "benefits": [
+        "PLACEHOLDER — everything in the tier below, plus:",
+        "PLACEHOLDER — e.g. logo on game jerseys",
+        "PLACEHOLDER — e.g. booth at the back-to-school event",
+        "PLACEHOLDER — e.g. named recognition at every home game",
+        "PLACEHOLDER — e.g. a team photo with your logo, for your own use"
+      ]
+    },
+    {
+      "published": true,
+      "order": 4,
+      "id": "tier-gold",
+      "name": "PLACEHOLDER — Gold",
+      "amount": null,
+      "frequency": "yearly",
+      "summary": "PLACEHOLDER — one line on who this tier suits.",
+      "benefits": [
+        "PLACEHOLDER — everything in the tier below, plus:",
+        "PLACEHOLDER — e.g. a named scholarship in your organization's name",
+        "PLACEHOLDER — e.g. presenting sponsor of one tournament",
+        "PLACEHOLDER — e.g. logo on the court banner for the season",
+        "PLACEHOLDER — e.g. a short feature in the annual report"
+      ]
+    },
+    {
+      "published": true,
+      "order": 5,
+      "id": "tier-presenting",
+      "name": "PLACEHOLDER — Presenting Partner",
+      "amount": null,
+      "frequency": "yearly",
+      "summary": "PLACEHOLDER — one line on who this tier suits.",
+      "benefits": [
+        "PLACEHOLDER — everything in the tier below, plus:",
+        "PLACEHOLDER — e.g. season presenting rights, named in every announcement",
+        "PLACEHOLDER — e.g. a named program, not just a named scholarship",
+        "PLACEHOLDER — e.g. a seat at the table for the annual planning meeting",
+        "PLACEHOLDER — e.g. co-branded press release"
+      ]
+    }
+  ]
+}

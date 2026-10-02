@@ -1,47 +1,49 @@
-[
-  {
-    "published": true,
-    "order": 1,
-    "id": "check-by-mail",
-    "title": "Check by mail",
-    "body": "PLACEHOLDER — make checks payable to Ty’s Future Stars Foundation and post them to the address below.",
-    "detail": "PLACEHOLDER — mailing address, Smyrna, TN. Confirm the exact postal address before publishing.",
-    "icon": "mail"
-  },
-  {
-    "published": true,
-    "order": 2,
-    "id": "employer-matching",
-    "title": "Employer matching",
-    "body": "PLACEHOLDER — many employers match employee donations, often dollar for dollar. Check with your HR team.",
-    "detail": "PLACEHOLDER — what the donor should send us so we can complete a match request.",
-    "icon": "building"
-  },
-  {
-    "published": true,
-    "order": 3,
-    "id": "donor-advised-fund",
-    "title": "Donor-advised fund",
-    "body": "PLACEHOLDER — recommend a grant to us through your donor-advised fund.",
-    "detail": "PLACEHOLDER — the legal name and EIN a DAF sponsor will ask for.",
-    "icon": "bank"
-  },
-  {
-    "published": true,
-    "order": 4,
-    "id": "stock",
-    "title": "Gifts of stock",
-    "body": "PLACEHOLDER — giving appreciated securities can be more tax-efficient than giving cash.",
-    "detail": "PLACEHOLDER — brokerage name, DTC number, and account number. Confirm before publishing.",
-    "icon": "chart"
-  },
-  {
-    "published": true,
-    "order": 5,
-    "id": "in-kind",
-    "title": "In-kind supplies",
-    "body": "PLACEHOLDER — donate equipment, gear, or supplies the programs need.",
-    "detail": "PLACEHOLDER — the current needs list and where to drop items off.",
-    "icon": "box"
-  }
-]
+{
+  "items": [
+    {
+      "published": true,
+      "order": 1,
+      "id": "check-by-mail",
+      "title": "Check by mail",
+      "body": "PLACEHOLDER — make checks payable to Ty’s Future Stars Foundation and post them to the address below.",
+      "detail": "PLACEHOLDER — mailing address, Smyrna, TN. Confirm the exact postal address before publishing.",
+      "icon": "mail"
+    },
+    {
+      "published": true,
+      "order": 2,
+      "id": "employer-matching",
+      "title": "Employer matching",
+      "body": "PLACEHOLDER — many employers match employee donations, often dollar for dollar. Check with your HR team.",
+      "detail": "PLACEHOLDER — what the donor should send us so we can complete a match request.",
+      "icon": "building"
+    },
+    {
+      "published": true,
+      "order": 3,
+      "id": "donor-advised-fund",
+      "title": "Donor-advised fund",
+      "body": "PLACEHOLDER — recommend a grant to us through your donor-advised fund.",
+      "detail": "PLACEHOLDER — the legal name and EIN a DAF sponsor will ask for.",
+      "icon": "bank"
+    },
+    {
+      "published": true,
+      "order": 4,
+      "id": "stock",
+      "title": "Gifts of stock",
+      "body": "PLACEHOLDER — giving appreciated securities can be more tax-efficient than giving cash.",
+      "detail": "PLACEHOLDER — brokerage name, DTC number, and account number. Confirm before publishing.",
+      "icon": "chart"
+    },
+    {
+      "published": true,
+      "order": 5,
+      "id": "in-kind",
+      "title": "In-kind supplies",
+      "body": "PLACEHOLDER — donate equipment, gear, or supplies the programs need.",
+      "detail": "PLACEHOLDER — the current needs list and where to drop items off.",
+      "icon": "box"
+    }
+  ]
+}

@@ -65,8 +65,12 @@ function readJson(rel) {
     return [];
   }
   try {
-    const rows = JSON.parse(fs.readFileSync(file, "utf8"));
-    if (!Array.isArray(rows)) throw new Error("must contain an array");
+    const raw = JSON.parse(fs.readFileSync(file, "utf8"));
+    /* Collections are { "items": [...] } so the CMS can attach a list
+       widget to them. Bare arrays are still read, for safety. */
+    const rows = Array.isArray(raw) ? raw
+      : (raw && Array.isArray(raw.items) ? raw.items : null);
+    if (!rows) throw new Error('must be an array, or an object with an "items" array');
     return rows;
   } catch (err) {
     console.error("ERROR  " + rel + ": " + err.message);

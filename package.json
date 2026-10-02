@@ -2,18 +2,25 @@
   "name": "tys-future-stars-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Static marketing site for Ty's Future Stars Foundation. Donations hand off to Givebutter; there is no build step.",
+  "description": "Static marketing site for Ty's Future Stars Foundation. Donations hand off to Givebutter; content is edited through Sveltia CMS at /admin.",
   "scripts": {
     "dev": "npx serve .",
     "start": "npx serve .",
+    "build": "node tools/build-pages.js",
+    "build:pages": "node tools/build-pages.js",
+    "check:pages": "node tools/build-pages.js --check",
     "build:head": "node tools/build-head.js",
     "check:head": "node tools/build-head.js --check",
     "build:sitemap": "node tools/build-sitemap.js",
     "build:images": "node tools/build-images.js",
+    "build:cms": "node tools/build-cms-config.js",
+    "check:all": "node tools/build-head.js --check && node tools/build-pages.js --check",
     "lh": "node tools/run-lighthouse.js mobile",
     "lh:desktop": "node tools/run-lighthouse.js desktop"
   },
   "devDependencies": {
+    "@iarna/toml": "^2.2.5",
+    "js-yaml": "^5.4.2",
     "lighthouse": "^13.5.0",
     "sharp": "^0.35.4"
   }

@@ -1,0 +1,14 @@
+{
+  "_comment": "Page copy for where-your-money-goes.html. Edited through the CMS at /admin. tools/build-pages.js writes these values back into the HTML at deploy time, so the text stays crawlable.",
+  "hero__h1-1": "Where your money goes.",
+  "hero__p-1": "What we spend, who decides, and the documents to check us\n      against. If something here is not yet posted, it says so.",
+  "1-allocation__h2-1": "Every dollar, accounted for.",
+  "1-allocation__p-1": "Expenses split three ways, straight from our Form 990.",
+  "2-documents__h2-1": "Documents.",
+  "2-documents__p-1": "What we have is here to download. What we do not have yet is listed anyway,\n        marked clearly, so you can see the whole picture.",
+  "3-leadership__h2-1": "Leadership.",
+  "3-leadership__p-1": "Our board governs the foundation. Our staff and key volunteers run it\n        day to day.",
+  "4-legal__h2-1": "Who we are, formally.",
+  "cta__h2-1": "Ask us anything.",
+  "cta__p-1": "We would rather answer a hard question than lose your trust."
+}

@@ -1,26 +1,28 @@
-[
-  {
-    "_comment": "PLACEHOLDER impact copy. The amount is client-supplied.",
-    "published": true,
-    "order": 1,
-    "id": "level-15",
-    "amount": 15,
-    "impact": "PLACEHOLDER — one line on what $15 makes possible. Replace with approved copy."
-  },
-  {
-    "_comment": "PLACEHOLDER impact copy. The amount is client-supplied.",
-    "published": true,
-    "order": 2,
-    "id": "level-20",
-    "amount": 20,
-    "impact": "PLACEHOLDER — one line on what $20 makes possible. Replace with approved copy."
-  },
-  {
-    "_comment": "PLACEHOLDER impact copy. The amount is client-supplied.",
-    "published": true,
-    "order": 3,
-    "id": "level-30",
-    "amount": 30,
-    "impact": "PLACEHOLDER — one line on what $30 makes possible. Replace with approved copy."
-  }
-]
+{
+  "items": [
+    {
+      "_comment": "PLACEHOLDER impact copy. The amount is client-supplied.",
+      "published": true,
+      "order": 1,
+      "id": "level-15",
+      "amount": 15,
+      "impact": "PLACEHOLDER — one line on what $15 makes possible. Replace with approved copy."
+    },
+    {
+      "_comment": "PLACEHOLDER impact copy. The amount is client-supplied.",
+      "published": true,
+      "order": 2,
+      "id": "level-20",
+      "amount": 20,
+      "impact": "PLACEHOLDER — one line on what $20 makes possible. Replace with approved copy."
+    },
+    {
+      "_comment": "PLACEHOLDER impact copy. The amount is client-supplied.",
+      "published": true,
+      "order": 3,
+      "id": "level-30",
+      "amount": 30,
+      "impact": "PLACEHOLDER — one line on what $30 makes possible. Replace with approved copy."
+    }
+  ]
+}

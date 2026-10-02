@@ -9,6 +9,16 @@
 
 [build]
   publish = "."
+  # The ONE build step. The CMS commits page copy to data/pages/*.json;
+  # this writes it into the HTML so the text stays server-rendered and
+  # crawlable instead of arriving after first paint. Pure Node, no
+  # packages, so it still runs if `npm install` ever fails.
+  # If it exits non-zero the deploy fails and the PREVIOUS good version
+  # of the site stays live, which is the right way to fail.
+  command = "node tools/build-pages.js"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 # ---------------------------------------------------------------------
 # REDIRECTS
@@ -92,6 +102,18 @@
   to = "/where-your-money-goes.html"
   status = 301
 
+# The CMS. Listed before the catch-all so /admin (without a trailing
+# slash) resolves to the editor rather than the 404 page.
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
 # Everything else that does not exist gets the real 404 page WITH a
 # 404 status. Serving it as 200 would let search engines index every
 # mistyped URL as a real page.
@@ -146,6 +168,47 @@
       frame-src https://www.youtube-nocookie.com;
       upgrade-insecure-requests
     """
+
+# ---------------------------------------------------------------------
+# THE CMS AT /admin
+#
+# The site-wide CSP above is deliberately tight: script-src 'self' and
+# connect-src 'self'. The editor has to reach GitHub to read and write
+# the repository, so it gets its own policy -- scoped to /admin only,
+# so loosening it cannot affect a single public page.
+#
+# The Sveltia bundle itself is SELF-HOSTED at
+# assets/vendor/sveltia-cms-<version>.js, so script-src stays 'self'
+# here too. Only the network calls are widened.
+# ---------------------------------------------------------------------
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = """
+      default-src 'self';
+      base-uri 'self';
+      object-src 'none';
+      frame-ancestors 'none';
+      script-src 'self' 'wasm-unsafe-eval' blob:;
+      worker-src 'self' blob:;
+      style-src 'self' 'unsafe-inline';
+      font-src 'self' data:;
+      img-src 'self' data: blob: https://*.githubusercontent.com https://avatars.githubusercontent.com;
+      connect-src 'self' blob: data: https://api.github.com https://github.com https://*.githubusercontent.com https://api.netlify.com;
+      form-action 'self' https://github.com;
+      upgrade-insecure-requests
+    """
+
+# The vendored editor bundle is version-pinned in its filename, so it
+# genuinely never changes in place.
+[[headers]]
+  for = "/assets/vendor/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 # ---------------------------------------------------------------------
 # CACHE POLICY

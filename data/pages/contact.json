@@ -1,0 +1,8 @@
+{
+  "_comment": "Page copy for contact.html. Edited through the CMS at /admin. tools/build-pages.js writes these values back into the HTML at deploy time, so the text stays crawlable.",
+  "hero__h1-1": "We'd love to hear from you.",
+  "hero__p-1": "Questions about our programs, scholarships, or partnerships?\n      Send us a note and we will be in touch.",
+  "form-details__h2-1": "Send us a message",
+  "form-details__p-1": "We will only use these details to reply to you. Read our\n          <a href=\"privacy.html\">privacy policy</a>.",
+  "faq__h2-1": "Questions we get a lot."
+}

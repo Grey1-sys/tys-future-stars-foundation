@@ -1,56 +1,58 @@
-[
-  {
-    "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
-    "published": true,
-    "order": 1,
-    "id": "gallery-1",
-    "src": "assets/images/impact-illustration-1.svg",
-    "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 1.",
-    "caption": "PLACEHOLDER — caption for image 1"
-  },
-  {
-    "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
-    "published": true,
-    "order": 2,
-    "id": "gallery-2",
-    "src": "assets/images/impact-illustration-2.svg",
-    "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 2.",
-    "caption": "PLACEHOLDER — caption for image 2"
-  },
-  {
-    "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
-    "published": true,
-    "order": 3,
-    "id": "gallery-3",
-    "src": "assets/images/impact-illustration-3.svg",
-    "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 3.",
-    "caption": "PLACEHOLDER — caption for image 3"
-  },
-  {
-    "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
-    "published": true,
-    "order": 4,
-    "id": "gallery-4",
-    "src": "assets/images/impact-illustration-1.svg",
-    "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 4.",
-    "caption": "PLACEHOLDER — caption for image 4"
-  },
-  {
-    "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
-    "published": true,
-    "order": 5,
-    "id": "gallery-5",
-    "src": "assets/images/impact-illustration-2.svg",
-    "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 5.",
-    "caption": "PLACEHOLDER — caption for image 5"
-  },
-  {
-    "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
-    "published": true,
-    "order": 6,
-    "id": "gallery-6",
-    "src": "assets/images/impact-illustration-3.svg",
-    "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 6.",
-    "caption": "PLACEHOLDER — caption for image 6"
-  }
-]
+{
+  "items": [
+    {
+      "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
+      "published": true,
+      "order": 1,
+      "id": "gallery-1",
+      "src": "assets/images/impact-illustration-1.svg",
+      "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 1.",
+      "caption": "PLACEHOLDER — caption for image 1"
+    },
+    {
+      "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
+      "published": true,
+      "order": 2,
+      "id": "gallery-2",
+      "src": "assets/images/impact-illustration-2.svg",
+      "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 2.",
+      "caption": "PLACEHOLDER — caption for image 2"
+    },
+    {
+      "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
+      "published": true,
+      "order": 3,
+      "id": "gallery-3",
+      "src": "assets/images/impact-illustration-3.svg",
+      "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 3.",
+      "caption": "PLACEHOLDER — caption for image 3"
+    },
+    {
+      "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
+      "published": true,
+      "order": 4,
+      "id": "gallery-4",
+      "src": "assets/images/impact-illustration-1.svg",
+      "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 4.",
+      "caption": "PLACEHOLDER — caption for image 4"
+    },
+    {
+      "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
+      "published": true,
+      "order": 5,
+      "id": "gallery-5",
+      "src": "assets/images/impact-illustration-2.svg",
+      "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 5.",
+      "caption": "PLACEHOLDER — caption for image 5"
+    },
+    {
+      "_comment": "Illustrated placeholder. Replace with a permissioned photograph and write a real alt. NEVER a stock photo of a child.",
+      "published": true,
+      "order": 6,
+      "id": "gallery-6",
+      "src": "assets/images/impact-illustration-3.svg",
+      "alt": "Illustrated placeholder graphic in the foundation's navy and orange, standing in for photograph 6.",
+      "caption": "PLACEHOLDER — caption for image 6"
+    }
+  ]
+}

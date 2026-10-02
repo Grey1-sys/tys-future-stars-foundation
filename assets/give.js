@@ -242,8 +242,8 @@
       (GIVEBUTTER.campaignUrl
         ? '<p class="give-secure-note" id="give-unavailable">Choose an amount above.</p>'
         : '<p class="give-soon" id="give-unavailable">Online giving is not switched on yet. ' +
-          'To give today, email <a href="mailto:hello@tysfuturestars.org?subject=I%20would%20like%20to%20donate">' +
-          "hello@tysfuturestars.org</a> and we will help you right away.</p>");
+          'To give today, email <a href="mailto:tysfuturestarsfoundation@gmail.com?subject=I%20would%20like%20to%20donate">' +
+          "tysfuturestarsfoundation@gmail.com</a> and we will help you right away.</p>");
   }
 
   /* ---------------- Sync ---------------- */

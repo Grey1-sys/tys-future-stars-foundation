@@ -1,29 +1,31 @@
-[
-  {
-    "_comment": "Set unitCost to a confirmed dollar figure to switch the estimator on.",
-    "published": true,
-    "order": 1,
-    "id": "unit-1",
-    "unitCost": null,
-    "singular": "PLACEHOLDER — one unit of support",
-    "plural": "PLACEHOLDER — units of support"
-  },
-  {
-    "_comment": "Set unitCost to a confirmed dollar figure to switch the estimator on.",
-    "published": true,
-    "order": 2,
-    "id": "unit-2",
-    "unitCost": null,
-    "singular": "PLACEHOLDER — a second kind of support",
-    "plural": "PLACEHOLDER — of that second kind of support"
-  },
-  {
-    "_comment": "Set unitCost to a confirmed dollar figure to switch the estimator on.",
-    "published": true,
-    "order": 3,
-    "id": "unit-3",
-    "unitCost": null,
-    "singular": "PLACEHOLDER — a third kind of support",
-    "plural": "PLACEHOLDER — of that third kind of support"
-  }
-]
+{
+  "items": [
+    {
+      "_comment": "Set unitCost to a confirmed dollar figure to switch the estimator on.",
+      "published": true,
+      "order": 1,
+      "id": "unit-1",
+      "unitCost": null,
+      "singular": "PLACEHOLDER — one unit of support",
+      "plural": "PLACEHOLDER — units of support"
+    },
+    {
+      "_comment": "Set unitCost to a confirmed dollar figure to switch the estimator on.",
+      "published": true,
+      "order": 2,
+      "id": "unit-2",
+      "unitCost": null,
+      "singular": "PLACEHOLDER — a second kind of support",
+      "plural": "PLACEHOLDER — of that second kind of support"
+    },
+    {
+      "_comment": "Set unitCost to a confirmed dollar figure to switch the estimator on.",
+      "published": true,
+      "order": 3,
+      "id": "unit-3",
+      "unitCost": null,
+      "singular": "PLACEHOLDER — a third kind of support",
+      "plural": "PLACEHOLDER — of that third kind of support"
+    }
+  ]
+}

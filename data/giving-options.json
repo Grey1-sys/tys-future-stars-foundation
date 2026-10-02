@@ -1,26 +1,28 @@
-[
-  {
-    "_comment": "PLACEHOLDER. amount stays null until the sponsorship price is confirmed.",
-    "published": true,
-    "order": 1,
-    "id": "sponsor-a-child",
-    "title": "Sponsor a Child",
-    "summary": "PLACEHOLDER — one or two sentences on what sponsoring a child covers and what the child receives.",
-    "body": "PLACEHOLDER — a fuller explanation: how a sponsored place is allocated, what the sponsor hears back, and over what period.",
-    "amount": null,
-    "frequency": "monthly",
-    "cta": "Sponsor a child"
-  },
-  {
-    "_comment": "PLACEHOLDER. amount stays null until the sponsorship price is confirmed.",
-    "published": true,
-    "order": 2,
-    "id": "sponsor-a-program",
-    "title": "Sponsor a Program",
-    "summary": "PLACEHOLDER — one or two sentences on what sponsoring a whole program covers.",
-    "body": "PLACEHOLDER — a fuller explanation aimed at businesses and family foundations, including recognition.",
-    "amount": null,
-    "frequency": "monthly",
-    "cta": "Sponsor a program"
-  }
-]
+{
+  "items": [
+    {
+      "_comment": "PLACEHOLDER. amount stays null until the sponsorship price is confirmed.",
+      "published": true,
+      "order": 1,
+      "id": "sponsor-a-child",
+      "title": "Sponsor a Child",
+      "summary": "PLACEHOLDER — one or two sentences on what sponsoring a child covers and what the child receives.",
+      "body": "PLACEHOLDER — a fuller explanation: how a sponsored place is allocated, what the sponsor hears back, and over what period.",
+      "amount": null,
+      "frequency": "monthly",
+      "cta": "Sponsor a child"
+    },
+    {
+      "_comment": "PLACEHOLDER. amount stays null until the sponsorship price is confirmed.",
+      "published": true,
+      "order": 2,
+      "id": "sponsor-a-program",
+      "title": "Sponsor a Program",
+      "summary": "PLACEHOLDER — one or two sentences on what sponsoring a whole program covers.",
+      "body": "PLACEHOLDER — a fuller explanation aimed at businesses and family foundations, including recognition.",
+      "amount": null,
+      "frequency": "monthly",
+      "cta": "Sponsor a program"
+    }
+  ]
+}

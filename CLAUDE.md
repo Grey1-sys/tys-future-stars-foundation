@@ -14,8 +14,13 @@ prospective donor, or a 16-year-old athlete could land on it first.
 
 ## Stack & deployment
 
-Plain static HTML, CSS, and vanilla JS. **No framework, no build step, no bundler.**
+Plain static HTML, CSS, and vanilla JS. **No framework, no bundler.**
 Pages are hand-written `.html` at the repo root.
+
+**There is now exactly one build step**, and only because the CMS needed it:
+`node tools/build-pages.js` writes page copy from `data/pages/*.json` into the HTML at
+deploy time. See **Content editing (the CMS)** below for why. Nothing else is built,
+and nothing is bundled or minified.
 
 | File | Role |
 |---|---|
@@ -43,14 +48,21 @@ Pages are hand-written `.html` at the repo root.
 | `tools/build-sitemap.js` | Regenerates `/sitemap.xml` from `/data`. Run by hand, not on deploy. |
 | `tools/build-images.js` | Regenerates WebP/PNG derivatives, favicons, and the share card. |
 | `tools/run-lighthouse.js` | Runs Lighthouse over the site and prints a score table. |
+| `tools/build-pages.js` | **Runs on Netlify.** Writes `data/pages/*.json` into the HTML. |
+| `tools/extract-copy.js` | One-time: lifted page copy out of the HTML. Kept for reference. |
+| `tools/build-cms-config.js` | Generates the page-copy section of `admin/config.yml`. |
+| `admin/index.html` + `init.js` | The CMS entry point. |
+| `admin/config.yml` | Every CMS collection and field. |
+| `assets/vendor/sveltia-cms-*.js` | The CMS itself, self-hosted and version-pinned. |
 | `assets/styleguide.{css,js}` | Internal reference page only. |
 
 Load order on every page: `tokens.css` -> `styles.css`, then `site.js` -> `main.js`.
 A page that renders content adds `data.js` -> `render.js` between them.
 
 Hosted on **Netlify** at **tysfuturestars.org**. `netlify.toml` sets `publish = "."` and
-nothing else — deploys are a straight file upload, triggered automatically on push to
-**`main`**. There is no staging branch: **pushing to `main` publishes to the live site.**
+one build command, triggered automatically on push to **`main`**. There is no staging
+branch: **pushing to `main` publishes to the live site** — and so does pressing Save in
+the CMS, which commits to `main` on the director's behalf.
 
 **There are no external runtime dependencies.** Fonts are self-hosted (see below), and
 `assets/analytics.js` makes no request until a GA4 measurement ID is configured. A
@@ -200,16 +212,20 @@ you add a detail template.
 
 ---
 
-## Build tools (run by hand, never on deploy)
+## Build tools
 
-There is still **no build step**: Netlify uploads files exactly as they sit in the repo.
-These are local generators. Run them, check the diff, commit the result.
+`npm run build` (= `tools/build-pages.js`) is the **only** thing Netlify runs. Everything
+else below is a local generator: run it, check the diff, commit the result.
 
 ```bash
+npm run build            # bake data/pages/*.json into the HTML (Netlify runs this)
+npm run check:pages      # report drift between JSON and HTML, change nothing
 npm run build:head       # regenerate the <head> block on all 20 pages
 npm run check:head       # verify title/description limits, change nothing
+npm run build:cms        # regenerate the page-copy section of admin/config.yml
 npm run build:sitemap    # regenerate /sitemap.xml from /data
 npm run build:images     # regenerate WebP/PNG, favicons, share card
+npm run check:all        # head limits + page drift, for a pre-push check
 npm run lh               # Lighthouse, mobile
 npm run lh:desktop       # Lighthouse, desktop
 ```
@@ -274,6 +290,111 @@ Two sources, both fixed, both easy to reintroduce:
 
 The real fix for (2) is to inline each page's data at build time so the first render is
 synchronous. That is a larger change to the data layer and has not been made.
+
+## Content editing (the CMS)
+
+**Sveltia CMS at `/admin`.** Git-based: pressing Save commits to `main`, and Netlify
+redeploys. There is no database and no second publish step.
+
+`docs/DIRECTOR-GUIDE.md` is the director's manual. **If you change how a collection
+works, change that guide too** — it is the only documentation she has.
+
+### Why Sveltia and not Decap
+
+Same config format, markedly better on a phone, and actively maintained. The guide
+assumes she is editing at 9pm on a handset, and Decap's mobile UI is genuinely poor.
+
+### It is self-hosted
+
+`assets/vendor/sveltia-cms-0.221.1.js`, 2.1 MB, committed to the repo. Not a CDN:
+
+- the site-wide CSP stays `script-src 'self'`
+- the editor keeps working if a CDN is blocked or down
+- the version cannot change underneath us without a commit
+
+To update: download a newer `dist/sveltia-cms.js`, drop it in `assets/vendor/` under its
+version number, and change the `src` in `admin/index.html`.
+
+**The bundle does not mount itself.** `admin/init.js` calls `CMS.init()`. It is a
+separate file rather than an inline script so `/admin` can keep `script-src 'self'` —
+that page holds a GitHub token and is the last place to allow inline script.
+
+### Authentication is GitHub, through Netlify
+
+`backend: github` with no `base_url`, so Sveltia falls back to Netlify as the OAuth
+provider. Setup is one-time and documented step by step in the director guide:
+
+1. The director needs a free GitHub account, added to the repo as a **Write**
+   collaborator, and **she must accept the emailed invitation**.
+2. A GitHub OAuth app with callback `https://api.netlify.com/auth/done`, with its client
+   ID and secret pasted into Netlify under Access & security → OAuth.
+
+No secret ever enters this repository.
+
+### Every /data file is `{ "items": [ ... ] }`
+
+This changed when the CMS landed. A Sveltia file collection maps fields to **keys** in a
+file, so a bare top-level array has nothing for a list widget to attach to.
+
+`assets/data.js` and `tools/build-sitemap.js` accept **both** shapes — a bare array still
+works — so a hand-written file never blanks a page.
+
+Each collection is therefore a file collection holding one `items` list:
+
+```yaml
+- name: events
+  files:
+    - name: events
+      file: data/events.json
+      fields:
+        - name: items
+          widget: list
+          fields: [ ...the entry fields... ]
+```
+
+### Field names: no dots
+
+**A dot in a field name is read as object nesting and the CMS rejects the whole config.**
+That is why page-copy keys use a double underscore: `hero__h1-1`, not `hero.h1-1`.
+
+### Page copy, and why there is now a build step
+
+All 135 headings and paragraphs on the marketing pages live in `data/pages/*.json` and
+are editable. `privacy.html` and `terms.html` are **deliberately excluded** — legal text
+is changed by a developer, not at 9pm on a phone.
+
+Each editable element carries `data-copy="key"` in the HTML.
+
+> **The copy stays in the HTML.** `tools/build-pages.js` writes the JSON into the markup
+> at deploy time. The alternative — fetching it in the browser — would push every
+> heading on the site past first paint and give back the SEO score and the zero layout
+> shift that took real work to win. A missing or renamed key is **left alone** rather
+> than blanked, which is the safe direction to fail.
+
+Malformed JSON **fails the build**, which fails the deploy, which leaves the previous
+good version of the site live. That is the correct failure mode.
+
+### Images
+
+Uploads are auto-converted to WebP at a maximum of 2048px, quality 82, by
+`media_libraries.default.config.transformations` in `admin/config.yml`. The director can
+upload an 8 MB phone photo and never think about it.
+
+**Alt text is enforced by the site, not by the form.** `render.js` drops any image
+without a non-blank `alt`, so a photo with no description simply does not appear. Every
+image field says so in its help text.
+
+### Writing help text
+
+Every `hint:` is read by someone who has never used a CMS. Say what the field does and
+what goes wrong if it is wrong. Never assume the words "slug", "field" or "publish".
+
+### /admin has its own CSP
+
+The site-wide policy is `script-src 'self'` / `connect-src 'self'`. The editor has to
+reach `api.github.com`, so `netlify.toml` gives `/admin/*` a separate, wider policy —
+scoped so that loosening it cannot affect a single public page. `/admin` is `noindex`
+in `robots.txt`, in a meta tag, and in an `X-Robots-Tag` header.
 
 ## Analytics
 
@@ -1243,7 +1364,13 @@ them when the state changes.
   `Madison, Alabama` into new markup (see Known defects).
 - **No hardcoding content into HTML.** Programs, events, stories, posts, sponsors,
   stats, resources, and team members come from `/data/*.json` through
-  `assets/render.js`. If you are typing content into an `.html` file, stop.
+  `assets/render.js`. Page copy comes from `data/pages/*.json` through
+  `tools/build-pages.js`. If you are typing content into an `.html` file, stop.
+- **No dots in CMS field names.** The CMS reads a dot as object nesting and rejects the
+  entire config, which takes the whole editor down.
+- **Never hand-edit the generated blocks**: between `<!-- head:start -->` and
+  `<!-- head:end -->` in any page, or between the `cms:pages` markers in
+  `admin/config.yml`. Change the tool and re-run.
 - **No touching Ty's biography facts** — dates, schools, hometown, the circumstances of
   his death — without client confirmation. Gadsden and Madison, Alabama are *Ty's*
   personal history and are correct as written; they are not the foundation's location.
@@ -1277,6 +1404,15 @@ history is visible — do not re-introduce them.
 
 ### Resolved
 
+- ~~`ORG.email` was `hello@tysfuturestars.org`~~ — confirmed as
+  `tysfuturestarsfoundation@gmail.com` on 2026-10-02. It had also been **hardcoded in
+  eight places** despite ORG being documented as the single source of truth;
+  `forms.js` now reads ORG rather than keeping its own copy.
+- ~~The events CMS collection registered zero fields~~ — it carried both `file:` and an
+  empty `files: []`, and an empty array is truthy, so the restructure skipped it.
+- ~~The copy extractor captured the contact form's honeypot as editable text~~ — editing
+  it would have broken spam protection and Netlify's field discovery. Form controls and
+  screen-reader-only text are now excluded.
 - ~~Wrong service area (Madison, Alabama)~~ — now Smyrna, Tennessee sitewide.
 - ~~`donate.html` had no footer~~ — footer is injected on every page.
 - ~~Placeholder phone `(000) 000-0000`~~ — row omitted until a real number exists.
@@ -1406,10 +1542,11 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Founding year, for the homepage NGO schema (`ORG.foundingDate`)
 - [ ] A larger original of the photograph used on about.html
 - [ ] **Submit `sitemap.xml` in Google Search Console** after the first deploy
-- [ ] **Confirm `ORG.email`.** `hello@tysfuturestars.org` is currently published
-      sitewide. The only address confirmed in writing is
-      `tysfuturestarsfoundation@gmail.com`. If the `hello@` alias does not actually
-      receive mail, every page is publishing a dead address.
+- [ ] **Set up CMS access for the director** — the five steps in
+      `docs/DIRECTOR-GUIDE.md` section 1: a free GitHub account, Write collaborator,
+      **she must accept the emailed invitation**, a GitHub OAuth app, and its client ID
+      and secret pasted into Netlify. Then log in once yourself and make a test edit
+      before handing the guide over.
 - [ ] **Expense split for the allocation chart**: programs / operations / fundraising as
       whole percentages, from Form 990 Part IX, plus the fiscal year. Set `ALLOCATION`
       in `assets/money.js`. The chart stays hidden until all three are set.

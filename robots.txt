@@ -8,6 +8,11 @@
 User-agent: *
 Allow: /
 
+# The content editor. Nothing here is public, and indexing a login
+# screen helps nobody.
+Disallow: /admin/
+Disallow: /admin
+
 Disallow: /styleguide.html
 Disallow: /data-preview.html
 Disallow: /thank-you.html

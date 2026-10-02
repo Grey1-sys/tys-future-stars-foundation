@@ -1,0 +1,7 @@
+{
+  "_comment": "Page copy for 404.html. Edited through the CMS at /admin. tools/build-pages.js writes these values back into the HTML at deploy time, so the text stays crawlable.",
+  "hero__h1-1": "404 &mdash; Page not found",
+  "hero__p-1": "That page took a shot that didn't fall. Search for what you\n      needed, or pick one of the links below.",
+  "search__h2-1": "Popular pages",
+  "search__p-1": "Still stuck? <a href=\"contact.html\">Send us a message</a> and\n      we will find it for you."
+}
