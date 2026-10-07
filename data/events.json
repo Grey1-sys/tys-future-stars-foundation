@@ -2,27 +2,6 @@
   "items": [
     {
       "published": false,
-      "id": "replacement-event-test",
-      "title": "My test",
-      "date": "2026-11-05",
-      "endDate": "2026-11-06",
-      "time": "",
-      "locationName": "",
-      "address": "",
-      "description": "This is a test.",
-      "body": "",
-      "whoItIsFor": "",
-      "whatToBring": "",
-      "cost": "",
-      "category": "Fundraiser",
-      "registrationUrl": "",
-      "registrationLabel": "",
-      "metaDescription": "",
-      "image": null,
-      "featured": false
-    },
-    {
-      "published": false,
       "id": "placeholder-spring-classic",
       "title": "PLACEHOLDER — Spring Classic Fundraiser",
       "date": "2026-04-18",
