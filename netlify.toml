@@ -114,6 +114,53 @@
   to = "/admin/index.html"
   status = 200
 
+# Repository files that are not part of the website.
+#
+# `publish = "."` serves the whole repo root, so without these rules
+# every file in it is a public URL: the director guide, this config, the
+# build tools, CLAUDE.md. None of it is secret and the editor is still
+# behind GitHub OAuth, but a search result pointing at the foundation's
+# internal staff manual reads as carelessness, and these paths have no
+# reason to answer over HTTP at all. The director guide is emailed as a
+# PDF, not linked.
+#
+# These must sit above the catch-all, and they 404 rather than 301 —
+# there is nowhere honest to send someone who asked for them.
+[[redirects]]
+  from = "/docs/*"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/tools/*"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/CLAUDE.md"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+
 # Everything else that does not exist gets the real 404 page WITH a
 # 404 status. Serving it as 200 would let search engines index every
 # mistyped URL as a real page.

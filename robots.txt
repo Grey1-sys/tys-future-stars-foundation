@@ -17,6 +17,12 @@ Disallow: /styleguide.html
 Disallow: /data-preview.html
 Disallow: /thank-you.html
 
+# Repository files that are not part of the website. netlify.toml 404s
+# these, so this only saves a crawler the fetch. The director guide is
+# emailed as a PDF rather than linked, so nothing here needs a URL.
+Disallow: /docs/
+Disallow: /tools/
+
 # Query-string views of pages that already exist at a canonical URL.
 # The filtered programs index and the feed filters are useful to share
 # but are not separate pages, and each one already declares a canonical.
