@@ -1,7 +1,27 @@
 {
   "items": [
     {
-      "_comment": "PLACEHOLDER — stays published:false on purpose. An event is a DATED PROMISE: a fake venue and time on a public page can send a real family to an empty parking lot. Fill in every field, delete the PLACEHOLDER text, then set published to true.",
+      "published": true,
+      "id": "replacement-event-test",
+      "title": "Test Event",
+      "date": "2026-11-05",
+      "endDate": "2026-11-06",
+      "time": "",
+      "locationName": "",
+      "address": "",
+      "description": "This is a test.",
+      "body": "",
+      "whoItIsFor": "",
+      "whatToBring": "",
+      "cost": "",
+      "category": "Fundraiser",
+      "registrationUrl": "",
+      "registrationLabel": "",
+      "metaDescription": "",
+      "image": null,
+      "featured": true
+    },
+    {
       "published": false,
       "id": "placeholder-spring-classic",
       "title": "PLACEHOLDER — Spring Classic Fundraiser",
@@ -23,10 +43,10 @@
         "src": "assets/images/event-placeholder-spring-classic-hero.jpg",
         "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
       },
-      "featured": true
+      "featured": true,
+      "_comment": "PLACEHOLDER — stays published:false on purpose. An event is a DATED PROMISE: a fake venue and time on a public page can send a real family to an empty parking lot. Fill in every field, delete the PLACEHOLDER text, then set published to true."
     },
     {
-      "_comment": "PLACEHOLDER — a past-dated entry, so the upcoming/past split is visible in dev.",
       "published": false,
       "id": "placeholder-scholarship-night",
       "title": "PLACEHOLDER — Scholarship Awards Night",
@@ -48,7 +68,8 @@
         "src": "assets/images/event-placeholder-scholarship-night-hero.jpg",
         "alt": "PLACEHOLDER — describe this photo for someone who cannot see it."
       },
-      "featured": false
+      "featured": false,
+      "_comment": "PLACEHOLDER — a past-dated entry, so the upcoming/past split is visible in dev."
     }
   ]
 }
