@@ -1,0 +1,17 @@
+# Git on Windows is configured with core.autocrlf=true, and it guesses
+# text vs binary by looking for a NUL byte near the start of the file.
+# A reportlab PDF has none, so git classified docs/DIRECTOR-GUIDE.pdf as
+# text and would have rewritten every LF to CRLF on checkout -- which
+# corrupts the file. Images and woff2 fonts happen to carry an early NUL
+# and were never at risk, but they are listed here so nobody has to
+# rediscover why one of them is special.
+
+* text=auto
+
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.ico  binary
+*.woff2 binary
