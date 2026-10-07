@@ -48,6 +48,7 @@ and nothing is bundled or minified.
 | `tools/build-sitemap.js` | Regenerates `/sitemap.xml` from `/data`. Run by hand, not on deploy. |
 | `tools/build-images.js` | Regenerates WebP/PNG derivatives, favicons, and the share card. |
 | `tools/run-lighthouse.js` | Runs Lighthouse over the site and prints a score table. |
+| `tools/md-to-pdf.py` | Renders the director guide to `docs/DIRECTOR-GUIDE.pdf`. |
 | `tools/build-pages.js` | **Runs on Netlify.** Writes `data/pages/*.json` into the HTML. |
 | `tools/extract-copy.js` | One-time: lifted page copy out of the HTML. Kept for reference. |
 | `tools/build-cms-config.js` | Generates the page-copy section of `admin/config.yml`. |
@@ -298,6 +299,18 @@ redeploys. There is no database and no second publish step.
 
 `docs/DIRECTOR-GUIDE.md` is the director's manual. **If you change how a collection
 works, change that guide too** — it is the only documentation she has.
+
+`docs/DIRECTOR-GUIDE.pdf` is that file rendered for sending and printing. It is
+**generated** — regenerate it in the same commit as any edit to the guide, or someone
+ends up following a stale copy out of their inbox:
+
+```bash
+pip install reportlab          # once; a Python package, never a devDependency
+python tools/md-to-pdf.py docs/DIRECTOR-GUIDE.md docs/DIRECTOR-GUIDE.pdf
+```
+
+`tools/md-to-pdf.py` handles only the Markdown the guide actually uses. If the guide
+grows something it cannot render, simplify the guide rather than the converter.
 
 ### Why Sveltia and not Decap
 
