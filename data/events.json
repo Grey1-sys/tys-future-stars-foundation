@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "published": true,
+      "published": false,
       "id": "replacement-event-test",
       "title": "My test",
       "date": "2026-11-05",
