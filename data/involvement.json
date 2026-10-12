@@ -1,19 +1,18 @@
 {
   "items": [
     {
-      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing.",
       "published": true,
       "order": 1,
       "id": "volunteer",
       "icon": "users",
       "title": "Volunteer",
-      "description": "PLACEHOLDER — two sentences on what volunteers actually do day to day, and what a first shift looks like.",
-      "timeCommitment": "PLACEHOLDER — e.g. a few hours a month, seasonal",
+      "description": "Lorem Ipsum this is a test test",
+      "timeCommitment": "3 days",
       "cta": "Sign up to volunteer",
-      "interest": "volunteer"
+      "interest": "volunteer",
+      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing."
     },
     {
-      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing.",
       "published": true,
       "order": 2,
       "id": "mentor",
@@ -22,10 +21,10 @@
       "description": "PLACEHOLDER — two sentences on the mentoring relationship, how pairs are matched, and what is asked of a mentor.",
       "timeCommitment": "PLACEHOLDER — e.g. two hours every other week, one school year",
       "cta": "Apply to mentor",
-      "interest": "mentor"
+      "interest": "mentor",
+      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing."
     },
     {
-      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing.",
       "published": true,
       "order": 3,
       "id": "sponsor",
@@ -34,10 +33,10 @@
       "description": "PLACEHOLDER — two sentences on what individual sponsorship supports and what a sponsor hears back.",
       "timeCommitment": "PLACEHOLDER — e.g. no time commitment, annual or monthly giving",
       "cta": "Talk about sponsoring",
-      "interest": "sponsor"
+      "interest": "sponsor",
+      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing."
     },
     {
-      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing.",
       "published": true,
       "order": 4,
       "id": "corporate",
@@ -46,10 +45,10 @@
       "description": "PLACEHOLDER — two sentences aimed at businesses: what a partnership includes and what recognition looks like.",
       "timeCommitment": "PLACEHOLDER — e.g. annual agreement, optional staff volunteer days",
       "cta": "Start a partnership conversation",
-      "interest": "corporate"
+      "interest": "corporate",
+      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing."
     },
     {
-      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing.",
       "published": true,
       "order": 5,
       "id": "supplies",
@@ -58,10 +57,10 @@
       "description": "PLACEHOLDER — two sentences on what gear and supplies the programs need, and what condition items must be in.",
       "timeCommitment": "PLACEHOLDER — e.g. one-off drop-off or pickup",
       "cta": "Offer supplies",
-      "interest": "supplies"
+      "interest": "supplies",
+      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing."
     },
     {
-      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing.",
       "published": true,
       "order": 6,
       "id": "event",
@@ -70,10 +69,10 @@
       "description": "PLACEHOLDER — two sentences on the kinds of events the foundation can support and what hosts are responsible for.",
       "timeCommitment": "PLACEHOLDER — e.g. planning over several weeks, one event day",
       "cta": "Pitch an event",
-      "interest": "event"
+      "interest": "event",
+      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing."
     },
     {
-      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing.",
       "published": true,
       "order": 7,
       "id": "fundraise",
@@ -82,7 +81,8 @@
       "description": "PLACEHOLDER — two sentences on running your own campaign for TFSF, and the support the foundation provides.",
       "timeCommitment": "PLACEHOLDER — e.g. a few hours to set up, campaign runs as long as you like",
       "cta": "Start fundraising",
-      "interest": "fundraise"
+      "interest": "fundraise",
+      "_comment": "PLACEHOLDER description and timeCommitment. A time commitment is a promise to a volunteer -- get it approved before publishing."
     }
   ]
 }
