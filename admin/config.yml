@@ -2122,7 +2122,7 @@ collections:
             label: "Page — paragraph 2"
             widget: text
             required: false
-            hint: "Currently reads: “Tykeem D'Majh Franklin, lovingly known as \"Ty,\" was born on July 18, 1996, in Gadsden, Ala…”"
+            hint: "Currently reads: “Tykeem D'Majh Franklin, lovingly known as \"Ty,\" was born on July 18, 1996. He was a son, a…”"
           - name: "page__p-3"
             label: "Page — paragraph 3"
             widget: text
