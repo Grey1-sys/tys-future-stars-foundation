@@ -529,10 +529,22 @@ button { cursor: pointer; }
   width: var(--space-13);
   height: var(--space-13);
   flex-shrink: 0;
+  /* The global `img { max-width: 100% }` is a responsive-image default
+     and it does not belong on a fixed-size glyph: it caps the image
+     against the shrinking lockup, which drops the image's min-content
+     contribution to zero, which lets the lockup shrink further. The
+     result was a circular mark squashed to an 18px-wide oval at
+     ~1024px, where the horizontal nav is at its most crowded.
+     flex-shrink: 0 alone does NOT prevent this -- the cap does it. */
+  max-width: none;
   border-radius: var(--radius-circle);
   object-fit: contain;
   background: transparent;
 }
+/* The nav glyph is deliberately larger than the footer's: the top bar
+   is the mark people actually read the organisation by. Scoped to the
+   nav so the footer lockup keeps its 54px and stays subordinate. */
+.nav .brand-glyph { width: var(--space-16); height: var(--space-16); }
 .brand-word { display: flex; flex-direction: column; line-height: var(--leading-none); }
 .brand-word .bw-1 {
   font-family: var(--font-display);
@@ -560,6 +572,9 @@ button { cursor: pointer; }
 
 @media (max-width: 520px) {
   .brand-glyph { width: var(--space-11); height: var(--space-11); }
+  /* Must repeat the .nav scope: `.nav .brand-glyph` above outranks a
+     bare `.brand-glyph` here, media query or not. */
+  .nav .brand-glyph { width: var(--space-13); height: var(--space-13); }
   .brand-word .bw-1 { font-size: var(--text-3xl); }
   .brand-word .bw-2 { font-size: var(--text-md); }
   .brand-word .bw-3 { font-size: var(--text-2xs); letter-spacing: var(--tracking-widest); }
@@ -701,6 +716,18 @@ button { cursor: pointer; }
 }
 body.nav-open .nav-scrim { opacity: 1; visibility: visible; }
 body.nav-open { overflow: hidden; }
+
+/* The open panel has to outrank the scrim, and it CANNOT do that on its
+   own: .nav is position:sticky with a z-index, so it forms a stacking
+   context, and the panel lives inside it. Any z-index the panel sets is
+   resolved within .nav and the whole subtree still paints at --z-nav
+   (100) -- below the scrim, which is a SIBLING of .nav at 200. The
+   scrim therefore covered the panel, dimmed it, and swallowed every
+   tap: because the scrim's own handler closes the menu, tapping any
+   menu item just shut the menu instead of following the link.
+   Raising .nav itself is what fixes it. The bar stays undimmed too,
+   which is what we want -- the close button has to stay reachable. */
+body.nav-open .nav { z-index: calc(var(--z-overlay) + 1); }
 
 @media (max-width: 900px) {
   .nav-toggle { display: block; }
@@ -1472,6 +1499,30 @@ body.nav-open { overflow: hidden; }
   border-radius: var(--radius-lg);
   padding: clamp(26px, 4vw, 38px);
   border-left: 5px solid var(--color-accent);
+}
+/* The founder portrait. Filled from data/team.json by founder.js, so
+   it is one circle whether a headshot exists or only initials do —
+   swapping one for the other must not move the quote below it. */
+.founder-photo {
+  width: var(--space-20);
+  height: var(--space-20);
+  margin-bottom: var(--space-4);
+}
+.founder-portrait,
+.founder-initials {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-circle);
+  object-fit: cover;
+}
+.founder-initials {
+  display: grid;
+  place-items: center;
+  /* On the dark card, not the white page person-initials sits on. */
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
 }
 .founder-card blockquote {
   font-family: var(--font-quote);

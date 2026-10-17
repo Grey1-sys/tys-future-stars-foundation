@@ -846,7 +846,8 @@ collections:
                     required: false
     description: >-
       Shown on Where Your Money Goes. Grant reviewers look for named
-      leadership, so keep this current.
+      leadership, so keep this current. LaSonya's photo here is also the
+      portrait on the About page — set it once and both pages follow.
   - name: resources
     label: Resources
     files:
@@ -1901,7 +1902,7 @@ collections:
             label: "Mission — heading"
             widget: string
             required: false
-            hint: "Currently reads: “ROUNDTRIP TEST HEADING”"
+            hint: "Currently reads: “Empowering youth through basketball.”"
           - name: "mission__p-1"
             label: "Mission — paragraph"
             widget: text
@@ -2092,6 +2093,31 @@ collections:
             widget: text
             required: false
             hint: "Currently reads: “Lovingly known as \"Ty.\" A son, a brother, a grandson, an uncle, a loyal friend, and a gift…”"
+          - name: "memorial__div-1"
+            label: "Memorial — line"
+            widget: string
+            required: false
+            hint: "Currently reads: “1996”"
+          - name: "memorial__div-2"
+            label: "Memorial — line 2"
+            widget: string
+            required: false
+            hint: "Currently reads: “Sunrise July 18, Gadsden, AL”"
+          - name: "memorial__div-3"
+            label: "Memorial — line 3"
+            widget: string
+            required: false
+            hint: "Currently reads: “2020”"
+          - name: "memorial__div-4"
+            label: "Memorial — line 4"
+            widget: string
+            required: false
+            hint: "Currently reads: “Sunset July 16”"
+          - name: "memorial__span-1"
+            label: "Memorial — line"
+            widget: string
+            required: false
+            hint: "Currently reads: “Sunrise July 18, 1996 · Sunset July 16, 2020”"
           - name: "page__p-2"
             label: "Page — paragraph 2"
             widget: text

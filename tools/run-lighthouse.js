@@ -23,6 +23,10 @@ const BASE = process.argv[3] || "http://localhost:8080";
 
 const PAGES = [
   "index.html",
+  /* about.html fetches team.json for the founder portrait, so it has a
+     render path that can shift layout -- it belongs under watch. */
+  "about.html",
+  "ty-story.html",
   "programs.html",
   "donate.html",
   "get-involved.html",

@@ -301,6 +301,11 @@ without guessing.
 
 Change the words, press **Save**, and it is live in about a minute.
 
+**Ty's sunrise and sunset dates** are in here too, under **Ty's Story page** —
+the boxes labelled *Memorial — line*. The hint under each one shows what it
+says now, so you can tell them apart. These are the only dates on the site
+you can change yourself.
+
 **If you empty a box, the page keeps what it says now.** Clearing a box
 does not blank the page.
 
@@ -315,6 +320,18 @@ Everywhere you can add a photo:
   you never need to resize anything first.
 - **Every photo needs "Describe this photo" filled in** or it will not
   appear. One short sentence saying what is in it.
+
+### Your own photo
+
+Go to **Board & staff**, open your entry, and add **Their photo**. A square
+photo works best.
+
+That one photo appears in **two** places — beside your name on the About
+page, and in the leadership list on Where Your Money Goes. You only upload
+it once and both pages update together.
+
+Until you add one, both pages show your initials in a blue circle. That is
+deliberate, it looks intentional, and there is no rush.
 
 ### Photos of children
 

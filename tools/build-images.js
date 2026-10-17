@@ -11,10 +11,11 @@
    browser; only the generated files in assets/img/ do.
 
    WHAT IT MAKES
-     logo    1024x1024 source, displayed at 54px in the nav and footer.
-             Emits 1x/2x/3x WebP + PNG, plus real favicons. The
-             original was a 189 KB JPEG being downscaled to a 54px
-             glyph on every page load, twice.
+     logo    1024x1024 source, displayed at 64px in the nav and 54px
+             in the footer. Emits 1x/2x/3x WebP + PNG sized to the
+             larger of the two, plus real favicons. The original was a
+             189 KB JPEG being downscaled to a 54px glyph on every page
+             load, twice.
 
      ty      The photograph on about.html.
 
@@ -47,11 +48,12 @@ function report(label, file) {
 
 async function buildLogo() {
   const src = path.join(IMG, "logo.jpg");
-  console.log("\nlogo (nav + footer glyph, 54px display)");
+  console.log("\nlogo (nav glyph 64px, footer glyph 54px)");
 
-  /* 1x / 2x / 3x. A 54px glyph never needs more than 162px, and the
-     1024px original was 189 KB of that. */
-  for (const w of [54, 108, 162]) {
+  /* 1x / 2x / 3x against the LARGER of the two display sizes, the 64px
+     nav glyph, so the footer's 54px is covered by the same files
+     rather than needing a second set. The 1024px original was 189 KB. */
+  for (const w of [64, 128, 192]) {
     const webp = path.join(IMG, `logo-${w}.webp`);
     const png = path.join(IMG, `logo-${w}.png`);
     await sharp(src).resize(w, w, { fit: "cover" })

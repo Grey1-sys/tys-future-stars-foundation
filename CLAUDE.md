@@ -38,6 +38,7 @@ and nothing is bundled or minified.
 | `assets/impact.js` | Impact page: counters, story modal, testimonial rotator, gallery, video facade. |
 | `assets/happening.js` | What's Happening: the combined feed, plus the event and post detail templates. |
 | `assets/money.js` | Where Your Money Goes: allocation chart, documents, leadership, legal block. |
+| `assets/founder.js` | About page: the founder portrait, read from `team.json`. |
 | `assets/contact.js` | Contact page: the details column and the NGO JSON-LD. |
 | `assets/resources.js` | Resources: the grouped list of local links. |
 | `assets/sponsors.js` | Get Involved: the sponsor logo wall and the five tiers. |
@@ -180,7 +181,7 @@ one combined feed — see **What's Happening** below.
 |---|---|
 | `index.html` | Nav · Hero (dark) · Mission · Four Pillars (Educate/Empower/Inspire/Transform) · Ty's Story teaser · Scholarship Impact band · Founder · Motto CTA · Footer |
 | `ty-story.html` | Nav · Hero (dark) · Biography prose · A Life of Purpose (Education / Basketball / Character) · Legacy CTA · Footer |
-| `about.html` | Nav · Page hero · Mission + Vision · Purpose · Core Values (Leadership, Education, Discipline, Community, Opportunity, Legacy) · Meet LaSonya Adams · CTA · Footer |
+| `about.html` | Nav · Page hero · Mission + Vision · Purpose · Core Values (Leadership, Education, Discipline, Community, Opportunity, Legacy) · Meet LaSonya Adams (portrait from `team.json`) · CTA · Footer |
 | `programs.html` | Nav · Hero · Filters (category + age) · Four category groups from `programs.json` · FAQ · CTA · Footer |
 | `program.html?slug=` | Nav · Hero · What We Do · Who We Serve · Impact · Details · Gallery + lightbox · Get Involved · Related · Footer |
 | `get-involved.html` | Nav · Hero · Seven involvement cards · One smart form · **Sponsors** (logo wall + five tiers) · **How it works** (volunteer + family handoff) · Footer |
@@ -1142,6 +1143,22 @@ yet, so cards fall back to initials rather than requesting an image that 404s.
 address, and the two policies. A policy that does not exist yet renders
 "Available on request" with the contact email — not a dead link, and not silence.
 
+### The founder portrait on about.html
+
+`assets/founder.js` fills `#founder-photo` from the `lasonya-adams` entry in
+`team.json` — matched **by id, not by position**, so reordering the board can never
+swap out the founder's portrait.
+
+**There is deliberately no second photo field on the About page.** Her photo already
+exists under Board & staff and already feeds the leadership section on
+where-your-money-goes.html. A second field for the same portrait means uploading it
+twice and watching the two drift. One source, two pages.
+
+No approved headshot is on file yet, so it renders her initials on a brand-blue circle
+— the same fallback `money.js` uses, at the same size as the photo, so adding one later
+shifts nothing. A photo with a blank `alt` still falls back to initials: the site-wide
+rule in `render.image()` applies here too.
+
 ### Contact
 
 Two columns on desktop, stacked on mobile, **form first** so it is what a phone reaches
@@ -1417,6 +1434,24 @@ history is visible — do not re-introduce them.
 
 ### Resolved
 
+- ~~The mobile menu was dimmed and every item unclickable~~ — the scrim covered the
+  open panel and swallowed every tap, and because the scrim's handler closes the menu,
+  tapping a link just shut the menu. **Not a z-index value problem:** `.nav` is
+  `position: sticky` with a `z-index`, so it forms a stacking context, and the panel
+  lives inside it. The panel's `z-index: 201` was resolved *within* `.nav` and the whole
+  subtree painted at `--z-nav` (100), below the sibling scrim at 200 — no value on the
+  panel could ever have won. `body.nav-open .nav` now lifts the nav itself above the
+  overlay layer. Keyboard users were unaffected, which is why an earlier keyboard-only
+  walk passed it: the links were always focusable, only pointer input was blocked.
+- ~~The nav logo was squashed to an 18px-wide oval~~ — the global
+  `img { max-width: 100% }` capped the glyph against the shrinking brand lockup, which
+  dropped the image's min-content contribution to zero and let the lockup shrink
+  further. `flex-shrink: 0` does **not** prevent this; `max-width: none` does. Visible
+  from roughly 900–1100px, where the horizontal nav is most crowded.
+- ~~The memorial dates on Ty's Story could not be edited~~ — they sit in `div`/`span`,
+  and `extract-copy.js` only ever captured `h1`–`h3`, `p` and `blockquote`. Now keyed
+  with `data-copy` and exposed in the CMS; `build-cms-config.js` learned labels for
+  those two tags.
 - ~~`ORG.email` was `hello@tysfuturestars.org`~~ — confirmed as
   `tysfuturestarsfoundation@gmail.com` on 2026-10-02. It had also been **hardcoded in
   eight places** despite ORG being documented as the single source of truth;

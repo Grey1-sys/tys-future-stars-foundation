@@ -50,7 +50,13 @@ const TAG_LABELS = {
   h2: "heading",
   h3: "subheading",
   p: "paragraph",
-  blockquote: "quote"
+  blockquote: "quote",
+  /* Short standalone lines -- the memorial dates on Ty's Story, which
+     sit in div/span rather than a paragraph. "div" is not a word the
+     director should ever be shown; the hint quoting the current text
+     is what she actually recognises the field by. */
+  div: "line",
+  span: "line"
 };
 
 function titleCase(s) {

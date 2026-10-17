@@ -256,18 +256,20 @@
 
   function brandLockup() {
     return '<a href="index.html" class="brand-lockup">' +
-             /* <picture> so modern browsers take the 1.3 KB WebP and
+             /* <picture> so modern browsers take the 1.7 KB WebP and
                 everything else falls back to PNG. The old logo.jpg was
-                a 1024px, 189 KB JPEG rendered at 54px -- twice a page,
-                since the footer carries the same lockup.
+                a 1024px, 189 KB JPEG rendered at glyph size -- twice a
+                page, since the footer carries the same lockup.
+                Sized for the 64px nav glyph; the footer's CSS holds
+                the same file at 54px, so one set covers both.
                 alt="" is deliberate: the wordmark beside it and the
                 visually-hidden label below already name the link, so
                 describing the glyph would make a screen reader say the
                 organisation's name three times. */
              '<picture>' +
-               '<source type="image/webp" srcset="assets/img/logo-54.webp 1x, assets/img/logo-108.webp 2x, assets/img/logo-162.webp 3x">' +
-               '<img src="assets/img/logo-54.png" srcset="assets/img/logo-108.png 2x, assets/img/logo-162.png 3x" ' +
-                 'alt="" width="54" height="54" class="brand-glyph" decoding="async">' +
+               '<source type="image/webp" srcset="assets/img/logo-64.webp 1x, assets/img/logo-128.webp 2x, assets/img/logo-192.webp 3x">' +
+               '<img src="assets/img/logo-64.png" srcset="assets/img/logo-128.png 2x, assets/img/logo-192.png 3x" ' +
+                 'alt="" width="64" height="64" class="brand-glyph" decoding="async">' +
              '</picture>' +
              '<span class="brand-word">' +
                '<span class="bw-1">Ty\'s</span>' +
