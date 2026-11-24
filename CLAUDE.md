@@ -275,8 +275,13 @@ pointing at the full-size JPEG.
 `tools/build-images.js`. It states the organisation name and the motto and makes no claim
 about money, numbers, or people. Per-page overrides go in the `PAGES` table.
 
-> **`ty.jpg` is 308x330 in a ~560px container.** It is being upscaled and looks soft.
-> Re-encoding cannot fix that; it needs a larger original from the client.
+`assets/images/ty-james-clemens.webp` is Ty in his James Clemens jersey — the homepage
+hero and the in-prose figure on ty-story.html share the one file. It is stored at its
+**native 370x433**: upscaling it in `sharp` first would have tripled the bytes without
+adding a single pixel of detail, which is exactly what an earlier 740px version did.
+
+> **Both photographs of Ty are smaller than the boxes they sit in** and look soft.
+> Re-encoding cannot fix that; they need larger originals from the client.
 
 ### Cumulative Layout Shift
 
@@ -1457,7 +1462,11 @@ history is visible — do not re-introduce them.
 3. **CSS and JS are unminified**, and Lighthouse flags unused CSS. Deliberate: adding a
    minifier means adding a build step, and Netlify already serves gzip/brotli. The cost
    is a few Lighthouse points on mobile, not a user-visible delay.
-4. **`ty.jpg` is upscaled** — 308x330 in a ~560px container. Needs a larger original.
+4. **Both photographs of Ty are under-resolution.** `ty.jpg` is 308x330 and still runs
+   the about.html portrait, the homepage story teaser, and the ty-story hero.
+   `ty-james-clemens.webp` is 370x433 and now runs the **homepage hero**, where it is
+   upscaled about 1.34x — better than the 1.61x it replaced, but still soft. Neither can
+   be fixed by re-encoding; both need larger originals from the client.
 5. **The newsletter signup still has no backend** and shows the "not connected" message
    from `main.js`. The contact form moved onto `assets/forms.js` and Netlify Forms; the
    newsletter is the last one left.
@@ -1622,7 +1631,8 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Real social media URLs (set `ORG.social[].url` in `assets/site.js`)
 - [ ] **GA4 Measurement ID** (`G-XXXXXXXXXX`) — set `MEASUREMENT_ID` in
       `assets/analytics.js`. Analytics is completely inert until then.
-- [ ] A larger original of the photograph used on about.html
+- [ ] Larger originals of both photographs of Ty — `ty.jpg` (308x330) and the
+      James Clemens shot (370x433). Both are being upscaled.
 - [ ] **Submit `sitemap.xml` in Google Search Console** after the first deploy
 - [ ] **Set up CMS access for the director** — the five steps in
       `docs/DIRECTOR-GUIDE.md` section 1: a free GitHub account, Write collaborator,
