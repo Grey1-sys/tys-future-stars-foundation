@@ -107,6 +107,7 @@
 
   /* Orange — basketball accent, giving and CTA */
   --palette-orange-700:   #A93D0A;
+  --palette-orange-650:   #B8420B;
   --palette-orange-600:   #C5470C;
   --palette-orange-500:   #D14E10;
   --palette-orange-400:   #F26522;
@@ -162,6 +163,11 @@
      --color-text-accent is AA Large only (3.15:1) — 24px+/19px-bold. */
   --color-text-accent:         var(--palette-orange-400);
   --color-text-accent-strong:  var(--palette-orange-600);
+  /* Accent text on the pale washes. --color-text-accent-strong is
+     4.91:1 on WHITE but only 4.49:1 on --color-surface-subtle and
+     4.30:1 on --color-surface-tint, so it fails AA the moment it sits
+     on a soft section. This one measures 5.03:1 and 4.82:1. */
+  --color-text-accent-on-subtle: var(--palette-orange-650);
 
   /* Text sitting on navy surfaces */
   --color-text-on-dark:        var(--palette-slate-60);

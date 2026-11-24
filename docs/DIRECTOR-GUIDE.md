@@ -18,10 +18,11 @@ something, press **Save**. It is live in about a minute.
 6. [How to add a story — and the rule about children](#6-how-to-add-a-story)
 7. [How to change the impact numbers and the donation goal](#7-impact-numbers-and-the-donation-goal)
 8. [How to add a sponsor logo](#8-how-to-add-a-sponsor-logo)
-9. [How to change any wording or photo on any page](#9-changing-wording-and-photos)
-10. [How to hide something without deleting it](#10-hiding-something)
-11. [If something looks broken](#11-if-something-looks-broken)
-12. [What not to touch](#12-what-not-to-touch)
+9. [How to add a founder spotlight](#9-how-to-add-a-founder-spotlight)
+10. [How to change any wording or photo on any page](#10-changing-wording-and-photos)
+11. [How to hide something without deleting it](#11-hiding-something)
+12. [If something looks broken](#12-if-something-looks-broken)
+13. [What not to touch](#13-what-not-to-touch)
 
 ---
 
@@ -287,7 +288,40 @@ company's logo on our website is a public statement about their business.
 
 ---
 
-## 9. Changing wording and photos
+## 9. How to add a founder spotlight
+
+The **Founder spotlights** on the About page — an award, a feature, a
+giveaway, anything the foundation has actually done.
+
+1. **Founder spotlights** in the side list → **+**
+2. Fill it in:
+
+   | Box | What to put |
+   |---|---|
+   | Show this on the website | **Leave OFF until the rest is right** |
+   | Position in the list | `1` puts it first. Newest usually goes first. |
+   | Short name for this entry | Lowercase with dashes: `ty-turkey-giveaway` |
+   | Small label above the title | Usually `Community Spotlight` |
+   | Title | A few words: *Ty's Turkey Giveaway* |
+   | One-line summary | The line under the title |
+   | The story | The full write-up. Enter twice between paragraphs. |
+   | Photo | One good photo, and **describe it** |
+
+3. Turn **Show this on the website** ON → **Save.**
+
+The photos alternate left and right down the page on their own. You do not
+have to think about it — just add them in the order you want them read.
+
+**Only add something that really happened.** This section works because
+every item on it is true and has a photo to prove it. A spotlight for
+something planned but not yet done undoes that.
+
+**If you leave "Describe this photo" empty the photo will not appear** —
+same rule as everywhere else on the site.
+
+---
+
+## 10. Changing wording and photos
 
 ### Any wording on any page
 
@@ -342,7 +376,7 @@ right without one.
 
 ---
 
-## 10. Hiding something
+## 11. Hiding something
 
 **Every single thing on this website has a switch called "Show this on the
 website".** Turn it OFF and save. It disappears from the live site
@@ -365,7 +399,7 @@ anybody's permission to do that.
 
 ---
 
-## 11. If something looks broken
+## 12. If something looks broken
 
 Work down this list. Most things stop at step 1 or 2.
 
@@ -412,7 +446,7 @@ makes it harder to work out what went wrong.
 
 ---
 
-## 12. What not to touch
+## 13. What not to touch
 
 You genuinely cannot break the site through the editor. These are the few
 places where a change has consequences you would not expect.
@@ -464,6 +498,7 @@ Especially on the Resources page. Someone in trouble will call it.
 | Share a young person's story | **Success stories** → + (read section 6 first) |
 | Change a number | **Impact numbers** |
 | Add a sponsor | **Sponsors** → + |
+| Share an award or giveaway | **Founder spotlights** → + |
 | Change words on a page | **Page wording** → pick the page |
 | Change a photo | Open the thing the photo belongs to |
 | Hide anything | Open it → **Show this on the website** OFF → Save |

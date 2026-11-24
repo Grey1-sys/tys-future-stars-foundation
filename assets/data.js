@@ -39,7 +39,8 @@ window.TFSF = window.TFSF || {};
     "sponsors", "stats", "resources", "team",
     "giving-levels", "impact-units", "giving-options",
     "other-ways-to-give", "faq", "involvement",
-    "testimonials", "gallery", "videos", "sponsorship-tiers"
+    "testimonials", "gallery", "videos", "sponsorship-tiers",
+    "spotlights"
   ];
 
   var cache = {};

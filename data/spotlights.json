@@ -1,0 +1,44 @@
+{
+  "_comment": "Founder spotlights on about.html. Newest first is set by `order`. Every entry is a real, dated thing that happened -- a recognition, a publication, an outreach. Do not add an aspirational one.",
+  "items": [
+    {
+      "published": true,
+      "order": 1,
+      "id": "ty-turkey-giveaway-30-for-30",
+      "eyebrow": "Community Spotlight",
+      "title": "Ty's Turkey Giveaway",
+      "headline": "30 for 30 — Honoring Ty by Blessing 30 Families",
+      "body": "In celebration of Ty's milestone 30th birthday, Ty's Future Stars Foundation blessed 30 families across Alabama and Tennessee with Kroger gift cards to help with their Thanksgiving meals.\n\nOur \"30 for 30\" outreach included Rainbow Elementary School, where Ty's nephew, Rocki, attends — making this giveback especially meaningful for our family. Donations were also presented to Olive Branch Church in Murfreesboro, Tennessee, under the leadership of Pastor Dr. Vincent L. Windrow, to support families in need.\n\nTy loved his family and others wholeheartedly. This initiative carries that love forward through kindness, generosity, and community support.\n\nThank you to the school staff, Olive Branch Church, donors, and supporters who helped make this blessing possible.",
+      "image": {
+        "src": "assets/images/spotlight-turkey-giveaway.webp",
+        "alt": "LaSonya Adams with family, staff and a student at Rainbow Elementary School, several wearing Ty's Future Stars Foundation shirts, in front of the school's Rockets backdrop."
+      }
+    },
+    {
+      "published": true,
+      "order": 2,
+      "id": "cigna-group-recognition",
+      "eyebrow": "Community Spotlight",
+      "title": "Founder Recognition",
+      "headline": "Turning Love into Lasting Impact",
+      "body": "We're honored to share The Cigna Group's recognition of our Founder and President, LaSonya Adams, for her commitment to serving youth and families through Ty's Future Stars Foundation.\n\nInspired by her son Ty's legacy, LaSonya continues to turn pain into purpose through scholarships, mentorship, athletics, and community outreach. This spotlight celebrates the love behind our mission and everyone helping us carry it forward.",
+      "image": {
+        "src": "assets/images/spotlight-cigna-recognition.webp",
+        "alt": "LaSonya Adams in a Ty's Future Stars Foundation shirt, standing beside a foundation banner showing Ty in his James Clemens jersey alongside the mission and core values."
+      }
+    },
+    {
+      "published": true,
+      "order": 3,
+      "id": "published-author-moments-for-moms",
+      "eyebrow": "Community Spotlight",
+      "title": "Celebrating Our Founder as an Author",
+      "headline": "LaSonya Adams | Co-Author, Moments for Moms, Volume 5",
+      "body": "We're proud to celebrate our Founder and President, LaSonya Adams, as a published co-author of Moments for Moms, Volume 5.\n\nThrough her deeply personal story, LaSonya shares her journey through motherhood, grief, faith, and healing. Opening her heart took courage, but her hope is to encourage others who are learning to live with loss and rediscover purpose.\n\nThe same love that inspired Ty's Future Stars Foundation shines through her writing — a commitment to honoring Ty's legacy, helping others feel less alone, and turning pain into purpose.",
+      "image": {
+        "src": "assets/images/spotlight-published-author.webp",
+        "alt": "An announcement card reading \"I'm a Published Author!\" with a portrait of LaSonya Adams beside the cover of Moments for Moms, Volume 5."
+      }
+    }
+  ]
+}

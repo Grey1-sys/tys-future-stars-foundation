@@ -48,8 +48,9 @@
     hasPublicOffice: false,            // true only if there is a public office
                                        // the public may visit. Drives the map link.
     responseTime: "within 2 business days",
-    foundingDate: null,                // TODO(client): year the foundation
-                                       // was established, e.g. "2021"
+    foundingDate: "2021",              // Client-supplied 2026-11-23, in
+                                       // LaSonya's own bio. Feeds the
+                                       // homepage NGO schema.
     givebutterUrl: "https://givebutter.com/support-local-youth-through-future-stars-njiri2",
     donorPrivacyPolicyUrl: null,       // TODO(client): renders "available on request"
 

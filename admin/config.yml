@@ -773,6 +773,95 @@ collections:
       The logo wall on the Get Involved page. Only add a sponsor once the
       partnership is agreed in writing — a logo on our site is a public
       statement about someone else's business.
+  - name: spotlights
+    label: Founder spotlights
+    files:
+      - name: spotlights
+        label: All founder spotlights
+        file: data/spotlights.json
+        fields:
+          - name: items
+            label: Founder spotlights
+            label_singular: Spotlight
+            widget: list
+            required: false
+            collapsed: true
+            add_to_top: true
+            summary: '{{title}}'
+            fields:
+              - name: published
+                label: Show this on the website
+                widget: boolean
+                default: false
+                hint: >-
+                  Leave this OFF until everything else is filled in. Turn it
+                  ON and it is live on the About page in about a minute.
+              - name: order
+                label: Position in the list
+                widget: number
+                value_type: int
+                required: false
+                hint: >-
+                  1 shows first, 2 second, and so on. Newest usually goes
+                  first.
+              - name: id
+                label: Short name for this entry
+                widget: string
+                pattern:
+                  - ^[a-z0-9-]+$
+                  - Lowercase letters, numbers and dashes only
+                hint: >-
+                  Lowercase with dashes, for example ty-turkey-giveaway. It is
+                  never shown on the website.
+              - name: eyebrow
+                label: Small label above the title
+                widget: string
+                required: false
+                hint: 'Usually "Community Spotlight". Leave empty for none.'
+              - name: title
+                label: Title
+                widget: string
+                hint: >-
+                  A few words, for example "Ty's Turkey Giveaway". This is the
+                  big heading.
+              - name: headline
+                label: One-line summary
+                widget: string
+                required: false
+                hint: >-
+                  The line under the title, for example "30 for 30 — Honoring
+                  Ty by Blessing 30 Families".
+              - name: body
+                label: The story
+                widget: text
+                required: false
+                hint: >-
+                  The full write-up. Press Enter twice between paragraphs.
+              - name: image
+                label: Photo
+                widget: object
+                required: false
+                collapsed: false
+                fields:
+                  - name: src
+                    label: Image file
+                    widget: image
+                    required: false
+                    hint: >-
+                      Upload straight from your phone — big photos are shrunk
+                      automatically.
+                  - name: alt
+                    label: Describe this photo
+                    widget: string
+                    required: false
+                    hint: >-
+                      Say what is in the picture, as if to someone who cannot
+                      see it. If you leave this empty the photo will NOT
+                      appear — that is deliberate.
+    description: >-
+      The spotlight blocks on the About page: recognition, writing and
+      community outreach. Each one should be something that actually
+      happened, with a real photo.
   - name: team
     label: Board & staff
     files:
@@ -1673,16 +1762,36 @@ collections:
             widget: string
             required: false
             hint: "Currently reads: “Meet LaSonya Adams.”"
-          - name: "page__p-13"
-            label: "Page — paragraph 13"
+          - name: "founder__p-1"
+            label: "Founder — paragraph"
             widget: text
             required: false
-            hint: "Currently reads: “Ty's Future Stars Foundation was founded to carry Ty's light forward — transforming an uni…”"
-          - name: "page__p-14"
-            label: "Page — paragraph 14"
+            hint: "Currently reads: “LaSonya Adams is a wife, mother of four, proud “GiGi” to eight grandchildren, and a leader…”"
+          - name: "founder__p-2"
+            label: "Founder — paragraph 2"
             widget: text
             required: false
-            hint: "Currently reads: “Under her leadership, the foundation has awarded over $7,000 in scholarships and continues…”"
+            hint: "Currently reads: “She founded Ty's Future Stars Foundation in 2021 to honor her son, Tykeem “Ty” D'Majh Fran…”"
+          - name: "founder__p-3"
+            label: "Founder — paragraph 3"
+            widget: text
+            required: false
+            hint: "Currently reads: “With more than 20 years of healthcare leadership experience, LaSonya brings a strong backg…”"
+          - name: "founder__p-4"
+            label: "Founder — paragraph 4"
+            widget: text
+            required: false
+            hint: "Currently reads: “Her commitment also extends to supporting families through community give-back initiatives…”"
+          - name: "founder__p-5"
+            label: "Founder — paragraph 5"
+            widget: text
+            required: false
+            hint: "Currently reads: “At the heart of LaSonya's work is a simple belief: every young person deserves to feel see…”"
+          - name: "founder__p-6"
+            label: "Founder — paragraph 6"
+            widget: string
+            required: false
+            hint: "Currently reads: “Building Futures One Bounce at a Time.”"
           - name: "page__blockquote-1"
             label: "Page — quote"
             widget: text
@@ -1698,6 +1807,16 @@ collections:
             widget: text
             required: false
             hint: "Currently reads: “Whether you give, volunteer, or partner with us, there's a place for you in this mission.”"
+          - name: "spotlights__h2-1"
+            label: "Spotlights — heading"
+            widget: string
+            required: false
+            hint: "Currently reads: “Founder spotlights.”"
+          - name: "spotlights__p-1"
+            label: "Spotlights — paragraph"
+            widget: string
+            required: false
+            hint: "Currently reads: “Recognition, writing, and outreach from the work LaSonya is doing in Ty's name.”"
       - name: "contact"
         label: "Contact page (intro text)"
         file: "data/pages/contact.json"
@@ -2133,6 +2252,11 @@ collections:
             widget: text
             required: false
             hint: "Currently reads: “Ty attended Madison City Schools and graduated from James Clemens High School in 2014 with…”"
+          - name: "page__figcaption-1"
+            label: "Page — photo caption"
+            widget: string
+            required: false
+            hint: "Currently reads: “Ty playing for James Clemens High School.”"
           - name: "page__p-5"
             label: "Page — paragraph 5"
             widget: text

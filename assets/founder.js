@@ -1,5 +1,5 @@
 /* ===================================================================
-   about.html — the founder portrait
+   about.html — the founder portrait and the founder spotlights
    ===================================================================
    One image, read from data/team.json rather than typed into the page,
    so the director can change it from the CMS.
@@ -62,9 +62,59 @@ window.TFSF = window.TFSF || {};
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
+  /* ---- Founder spotlights ----
+     Alternating image/text rows from data/spotlights.json. The image
+     side is NOT decorative: each one is a photograph of real people at
+     a real event, so render.image() applies the usual alt rule and a
+     spotlight with an undescribed photo simply renders as text. */
+  function spotlightCard(s, index) {
+    var render = window.TFSF.render;
+    var esc = render.escape;
+
+    var media = render.image(s.image, "spotlight-img");
+    var body = render.paragraphs(s.body);
+
+    return '<article class="spotlight' + (index % 2 ? " flip" : "") + '">' +
+      (media ? '<div class="spotlight-media">' + media + "</div>" : "") +
+      '<div class="spotlight-body">' +
+        (s.eyebrow ? '<span class="eyebrow">' + esc(s.eyebrow) + "</span>" : "") +
+        '<h3 class="spotlight-title">' + esc(s.title) + "</h3>" +
+        (s.headline ? '<p class="spotlight-headline">' + esc(s.headline) + "</p>" : "") +
+        '<div class="spotlight-text">' + body + "</div>" +
+      "</div>" +
+    "</article>";
+  }
+
+  function initSpotlights() {
+    var host = document.getElementById("spotlights");
+    if (!host) return;
+
+    var data = window.TFSF.data;
+    var render = window.TFSF.render;
+    if (!data || !render) return;
+
+    data.load("spotlights").then(function (rows) {
+      if (!rows || !rows.length) {
+        /* Hide the whole section rather than print a heading over
+           nothing. Unlike the events feed, an empty spotlight list is
+           not news -- it is just a section that should not be there. */
+        var section = host.closest ? host.closest("section") : null;
+        if (section) section.hidden = true;
+        return;
+      }
+      rows.sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
+      host.innerHTML = rows.map(spotlightCard).join("");
+    })["catch"](function () {});
+  }
+
+  function boot() {
     init();
+    initSpotlights();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
   }
 })();

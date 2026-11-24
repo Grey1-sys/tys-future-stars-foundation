@@ -1,14 +1,17 @@
 {
   "items": [
     {
-      "_comment": "PLACEHOLDER bio. Published so the leadership section renders on where-your-money-goes.html -- a grant reviewer looks for named leadership. `photo` is null on purpose: the card falls back to initials rather than requesting an image file that does not exist. Set photo once an approved headshot is in assets/images/.",
+      "_comment": "Photo and bio supplied by LaSonya 2026-11-23 (LaSonya Website bio.docx). The bio here is the short version for the leadership card on where-your-money-goes.html; her full bio is the founder section on about.html, in data/pages/about.json.",
       "published": true,
       "order": 1,
       "id": "lasonya-adams",
       "name": "LaSonya Adams",
       "role": "President & Founder",
-      "bio": "PLACEHOLDER — approved bio, supplied by the foundation.",
-      "photo": null,
+      "bio": "LaSonya Adams founded Ty's Future Stars Foundation in 2021 to honor her son, Tykeem “Ty” D'Majh Franklin. She brings more than 20 years of healthcare leadership experience to the foundation's work in scholarships, mentorship, athletics, leadership development, and community outreach.",
+      "photo": {
+        "src": "assets/images/team-lasonya-adams-portrait.webp",
+        "alt": "LaSonya Adams, Founder and President of Ty's Future Stars Foundation."
+      },
       "boardMember": true
     },
     {

@@ -1547,6 +1547,93 @@ body.nav-open .nav { z-index: calc(var(--z-overlay) + 1); }
   margin-top: var(--space-0-5);
 }
 
+/* ---------- In-prose photograph ---------- */
+.story-figure {
+  margin: var(--space-9) 0;
+  max-width: 420px;
+}
+.story-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.story-figure figcaption {
+  margin-top: var(--space-2);
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Founder motto ---------- */
+.founder-motto {
+  font-family: var(--font-quote);
+  font-style: italic;
+  font-size: var(--text-3xl);
+  color: var(--color-text-accent-strong);
+  margin-top: var(--space-4);
+}
+
+/* ---------- Founder spotlights ---------- */
+/* A centred line runs the full container width and breaks on whatever
+   word lands at the edge. Hold it to a readable measure instead. */
+.spotlight-intro { max-width: var(--max-prose); margin-inline: auto; }
+.spotlight-list { display: grid; gap: var(--space-10); }
+.spotlight {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(20px, 4vw, 44px);
+  align-items: center;
+}
+/* Alternate the photo side so three stacked rows do not read as a
+   list of identical cards. `.flip` reverses only on desktop — on a
+   phone the image must always come first, or the text order changes
+   between rows for no reason.
+   The column WIDTHS have to be swapped too, not just the order: `order`
+   moves the element into the other column but leaves that column's
+   track sizing alone, which rendered the flipped photo at 7fr (621px)
+   against 443px for its neighbours. */
+.spotlight.flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.spotlight.flip .spotlight-media { order: 2; }
+.spotlight-media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface-tint);
+  box-shadow: var(--shadow-sm);
+}
+.spotlight-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.spotlight-body { min-width: 0; }
+.spotlight-title {
+  font-size: var(--text-5xl);
+  margin-top: var(--space-1);
+}
+.spotlight-headline {
+  font-family: var(--font-quote);
+  font-style: italic;
+  font-size: var(--text-3xl);
+  /* This sits on .section.soft, not white -- see the token comment. */
+  color: var(--color-text-accent-on-subtle);
+  margin-top: var(--space-2);
+}
+.spotlight-text p {
+  margin-top: var(--space-3);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+@media (max-width: 860px) {
+  /* `.spotlight.flip` must be reset by name: it is more specific than
+     a bare `.spotlight`, so collapsing only the latter left the
+     flipped row on two tracks and squeezed its photo to 177px. */
+  .spotlight,
+  .spotlight.flip { grid-template-columns: 1fr; }
+  .spotlight.flip .spotlight-media { order: 0; }
+}
+
 /* ---------- Long-form prose ---------- */
 .prose p {
   margin-top: 1.15em;
@@ -3404,3 +3491,7 @@ body.modal-open { overflow: hidden; }
    page, but still move the footer. A modest reservation. */
 #leadership:empty,
 #documents:empty { min-height: 40vh; }
+
+/* Three tall image rows. Always longer than a screen, so reserving a
+   screenful can only under-reserve, never over-reserve. */
+#spotlights:empty { min-height: 100vh; }

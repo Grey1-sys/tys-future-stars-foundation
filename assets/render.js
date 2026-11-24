@@ -376,6 +376,7 @@ window.TFSF = window.TFSF || {};
     escape: esc,
     safeUrl: safeUrl,
     image: img,
+    paragraphs: paragraphs,
     mount: mount
   };
 

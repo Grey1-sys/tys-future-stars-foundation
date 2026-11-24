@@ -56,7 +56,8 @@ const TAG_LABELS = {
      director should ever be shown; the hint quoting the current text
      is what she actually recognises the field by. */
   div: "line",
-  span: "line"
+  span: "line",
+  figcaption: "photo caption"
 };
 
 function titleCase(s) {

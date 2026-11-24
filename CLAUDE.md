@@ -38,7 +38,7 @@ and nothing is bundled or minified.
 | `assets/impact.js` | Impact page: counters, story modal, testimonial rotator, gallery, video facade. |
 | `assets/happening.js` | What's Happening: the combined feed, plus the event and post detail templates. |
 | `assets/money.js` | Where Your Money Goes: allocation chart, documents, leadership, legal block. |
-| `assets/founder.js` | About page: the founder portrait, read from `team.json`. |
+| `assets/founder.js` | About page: the founder portrait and the founder spotlights. |
 | `assets/contact.js` | Contact page: the details column and the NGO JSON-LD. |
 | `assets/resources.js` | Resources: the grouped list of local links. |
 | `assets/sponsors.js` | Get Involved: the sponsor logo wall and the five tiers. |
@@ -181,7 +181,7 @@ one combined feed — see **What's Happening** below.
 |---|---|
 | `index.html` | Nav · Hero (dark) · Mission · Four Pillars (Educate/Empower/Inspire/Transform) · Ty's Story teaser · Scholarship Impact band · Founder · Motto CTA · Footer |
 | `ty-story.html` | Nav · Hero (dark) · Biography prose · A Life of Purpose (Education / Basketball / Character) · Legacy CTA · Footer |
-| `about.html` | Nav · Page hero · Mission + Vision · Purpose · Core Values (Leadership, Education, Discipline, Community, Opportunity, Legacy) · Meet LaSonya Adams (portrait from `team.json`) · CTA · Footer |
+| `about.html` | Nav · Page hero · Mission + Vision · Purpose · Core Values (Leadership, Education, Discipline, Community, Opportunity, Legacy) · Meet LaSonya Adams (portrait from `team.json`) · **Founder spotlights** · CTA · Footer |
 | `programs.html` | Nav · Hero · Filters (category + age) · Four category groups from `programs.json` · FAQ · CTA · Footer |
 | `program.html?slug=` | Nav · Hero · What We Do · Who We Serve · Impact · Details · Gallery + lightbox · Get Involved · Related · Footer |
 | `get-involved.html` | Nav · Hero · Seven involvement cards · One smart form · **Sponsors** (logo wall + five tiers) · **How it works** (volunteer + family handoff) · Footer |
@@ -949,6 +949,25 @@ checks for it and renders plain text, because the point of a placeholder is that
 has verified it. A wrong number on a page a struggling family is reading is worse than
 no number at all.
 
+**`spotlights.json`** - the founder spotlights on about.html. `order` sets the
+sequence, newest first. `body` takes blank-line-separated paragraphs. The photo follows
+the same alt rule as everything else: no description, no image.
+
+```json
+{
+  "published": true,
+  "order": 1,
+  "id": "ty-turkey-giveaway-30-for-30",
+  "eyebrow": "Community Spotlight",
+  "title": "Ty's Turkey Giveaway",
+  "headline": "30 for 30 - Honoring Ty by Blessing 30 Families",
+  "body": "Paragraphs.
+
+Separated by a blank line.",
+  "image": { "src": "assets/images/spotlight-turkey-giveaway.webp", "alt": "Describe the photo." }
+}
+```
+
 **`faq.json`** - one collection, several pages. `page` selects which; the host element
 carries `data-faq-page`. Currently `donate` and `programs`.
 
@@ -1158,6 +1177,22 @@ No approved headshot is on file yet, so it renders her initials on a brand-blue 
 — the same fallback `money.js` uses, at the same size as the photo, so adding one later
 shifts nothing. A photo with a blank `alt` still falls back to initials: the site-wide
 rule in `render.image()` applies here too.
+
+### Founder spotlights
+
+Three alternating image/text rows on about.html, from `data/spotlights.json`,
+rendered by `assets/founder.js`. Each one is a real, dated thing that happened — a
+recognition, a publication, an outreach — with a real photograph. **Do not add an
+aspirational one**; the section exists because these are verifiable.
+
+`.flip` alternates which side the photo sits on. It swaps the **column widths** as well
+as the element order: `order` alone moves the element into the other track but leaves
+that track's sizing alone, which rendered the flipped photo half again as wide as its
+neighbours. Both rules are undone together below 860px, and `.spotlight.flip` has to be
+named explicitly there — it outranks a bare `.spotlight`.
+
+The section hides itself when nothing is published. Unlike the events feed, an empty
+spotlight list is not news; it is a heading over nothing.
 
 ### Contact
 
@@ -1587,7 +1622,6 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Real social media URLs (set `ORG.social[].url` in `assets/site.js`)
 - [ ] **GA4 Measurement ID** (`G-XXXXXXXXXX`) — set `MEASUREMENT_ID` in
       `assets/analytics.js`. Analytics is completely inert until then.
-- [ ] Founding year, for the homepage NGO schema (`ORG.foundingDate`)
 - [ ] A larger original of the photograph used on about.html
 - [ ] **Submit `sitemap.xml` in Google Search Console** after the first deploy
 - [ ] **Set up CMS access for the director** — the five steps in
@@ -1621,7 +1655,6 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 - [ ] Approved descriptions and time commitments for the seven involvement cards
 - [ ] Whether the newsletter signup should function, and which provider
 - [ ] Permissioned photographs of TFSF participants, with signed media releases
-- [ ] Approved photo and bio for LaSonya Adams, President & Founder
 - [ ] Office hours confirmation (currently "Mon–Fri, 9am – 5pm")
 - [ ] Reviewed Privacy Policy and Terms of Use copy (interim statements are live now)
 - [ ] **Events and updates for What's Happening.** The page is live and shows an honest
@@ -1643,6 +1676,14 @@ Add to this list whenever a request is blocked on client-supplied material. Move
 
 ### Received
 
+- **2026-11-23** — LaSonya's photograph and full bio (`LaSonya Website bio.docx`). Her
+  portrait is cropped to her face and set in `team.json`, so it renders on about.html
+  and in the leadership list. The bio replaced the two placeholder founder paragraphs on
+  about.html, one of which carried the unverified "$7,000 in scholarships" claim.
+  The bio also supplied the **founding year, 2021** — now `ORG.foundingDate`.
+- **2026-11-23** — Three founder spotlights (author, Cigna recognition, Ty's Turkey
+  Giveaway) with photographs, plus a second photograph of Ty in his James Clemens
+  jersey, now on ty-story.html.
 - **2026-09-17** — EIN `42-2398737`. Published in the footer 501(c)(3) line and in the
   donate page trust line.
 - **2026-09-22** — Public Givebutter campaign URL
